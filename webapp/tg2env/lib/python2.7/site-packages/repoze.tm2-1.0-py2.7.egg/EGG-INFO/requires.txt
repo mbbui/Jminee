@@ -1,0 +1,6 @@
+transaction
+
+[testing]
+transaction
+nose
+coverage

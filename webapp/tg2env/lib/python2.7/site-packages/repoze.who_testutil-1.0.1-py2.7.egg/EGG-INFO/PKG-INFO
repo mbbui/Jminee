@@ -1,0 +1,31 @@
+Metadata-Version: 1.0
+Name: repoze.who-testutil
+Version: 1.0.1
+Summary: Test utilities for repoze.who-powered applications
+Home-page: http://code.gustavonarea.net/repoze.who-testutil/
+Author: Gustavo Narea
+Author-email: repoze-dev@lists.repoze.org
+License: BSD-derived (http://www.repoze.org/LICENSE.txt)
+Description: **************************************************
+        Test utilities for repoze.who-powered applications
+        **************************************************
+        
+        repoze.who-testutil is a repoze.who plugin which modifies repoze.who's original
+        middleware to make it easier to forge authentication, without bypassing 
+        identification (this is, running the metadata providers).
+        
+        It's been created to ease testing of repoze.who-powered applications, in a way
+        independent of the identifiers, authenticators and challengers used originally
+        by your application, so that you won't have to update your test suite as your 
+        application grows and the authentication method changes.
+        
+Keywords: web application wsgi authentication testing tests repoze
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Security

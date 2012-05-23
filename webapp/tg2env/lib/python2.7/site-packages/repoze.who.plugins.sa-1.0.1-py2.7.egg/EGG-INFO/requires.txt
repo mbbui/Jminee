@@ -1,0 +1,2 @@
+repoze.who >= 1.0.14
+sqlalchemy >= 0.5.0

@@ -1,0 +1,2 @@
+repoze.what >= 1.0.3
+sqlalchemy >= 0.5

@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: repoze.who.plugins.sa
+Version: 1.0.1
+Summary: The repoze.who SQLAlchemy plugin
+Home-page: http://code.gustavonarea.net/repoze.who.plugins.sa/
+Author: Gustavo Narea
+Author-email: repoze-dev@lists.repoze.org
+License: BSD-derived (http://www.repoze.org/LICENSE.txt)
+Description: ********************************
+        The repoze.who SQLAlchemy plugin
+        ********************************
+        
+        This plugin provides one repoze.who authenticator and one metadata provider
+        which works with SQLAlchemy or Elixir-based models.
+        
+Keywords: web application server wsgi sql sqlalchemy elixir authentication repoze
+Platform: UNKNOWN
+Classifier: Development Status :: 6 - Mature
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Database
+Classifier: Topic :: Security

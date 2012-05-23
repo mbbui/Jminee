@@ -1,0 +1,14 @@
+Metadata-Version: 1.0
+Name: tgext.crud
+Version: 0.5
+Summary: Crud Controller Extension for TG2
+Home-page: UNKNOWN
+Author: Christopher Perkins
+Author-email: chris@percious.com
+License: MIT
+Description: 
+        
+Keywords: turbogears2.extension,TG2,REST,sprox
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: WebFlash
+Version: 0.1a9
+Summary: Portable flash messages for WSGI apps
+Home-page: http://python-rum.org/wiki/WebFlash
+Author: Alberto Valverde Gonzalez
+Author-email: alberto@python-rum.org
+License: MIT
+Description: UNKNOWN
+Keywords: wsgi flash webob
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python

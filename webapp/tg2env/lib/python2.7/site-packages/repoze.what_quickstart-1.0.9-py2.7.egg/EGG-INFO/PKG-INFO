@@ -1,0 +1,34 @@
+Metadata-Version: 1.0
+Name: repoze.what-quickstart
+Version: 1.0.9
+Summary: The repoze.what Quickstart plugin
+Home-page: http://what.repoze.org/docs/plugins/quickstart/
+Author: Gustavo Narea
+Author-email: repoze-dev@lists.repoze.org
+License: BSD-derived (http://www.repoze.org/LICENSE.txt)
+Description: *********************************
+        The repoze.what Quickstart plugin
+        *********************************
+        
+        This is an extras plugin for repoze.what.
+        
+        This plugin allows you to take advantage of a rather simple, and usual, 
+        authentication and authorization setup, in which the users' data, the groups 
+        and the permissions used in the application are all stored in a SQLAlchemy 
+        or Elixir-managed database.
+        
+        Put simply, it configures repoze.who and repoze.what in one go so that you 
+        can have an authentication and authorization system working quickly -- hence 
+        the name.
+        
+Keywords: web application wsgi server sql sqlalchemy elixir authentication authorization repoze
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Database
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Security

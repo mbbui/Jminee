@@ -1,0 +1,4 @@
+recursive-include jminee/public *
+include jminee/public/favicon.ico
+recursive-include jminee/i18n *
+recursive-include jminee/templates *

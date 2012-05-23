@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="master.html" />
+<head>
+    <title>${tmpl_context.title} - ${model} View</title>
+    <style>
+        ${Markup(tmpl_context.crud_style)}
+    </style>
+</head>
+<body class="tundra">
+  <div id="getting_started">
+&nbsp;
+<div>
+<h1>$model Listing</h1>
+</div>
+<div>
+<a href='new/'>New</a> $model
+</div>
+<br/>
+${XML(tmpl_context.widget())}
+</div>
+</body>
+</html>

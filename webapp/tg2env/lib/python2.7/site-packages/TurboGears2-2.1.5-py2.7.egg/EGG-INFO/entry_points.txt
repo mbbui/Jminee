@@ -1,0 +1,7 @@
+
+        [paste.global_paster_command]
+        tginfo = tg.commands.info:InfoCommand
+        [turbogears2.command]
+        serve = paste.script.serve:ServeCommand [Config]
+        shell = pylons.commands:ShellCommand
+    

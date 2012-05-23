@@ -1,0 +1,17 @@
+MANIFEST.in
+README.txt
+VERSION.txt
+setup.cfg
+setup.py
+repoze/__init__.py
+repoze.who.plugins.sa.egg-info/PKG-INFO
+repoze.who.plugins.sa.egg-info/SOURCES.txt
+repoze.who.plugins.sa.egg-info/dependency_links.txt
+repoze.who.plugins.sa.egg-info/entry_points.txt
+repoze.who.plugins.sa.egg-info/namespace_packages.txt
+repoze.who.plugins.sa.egg-info/not-zip-safe
+repoze.who.plugins.sa.egg-info/requires.txt
+repoze.who.plugins.sa.egg-info/top_level.txt
+repoze/who/__init__.py
+repoze/who/plugins/__init__.py
+repoze/who/plugins/sa.py

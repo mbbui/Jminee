@@ -1,0 +1,30 @@
+Metadata-Version: 1.0
+Name: repoze.what.plugins.sql
+Version: 1.0.1
+Summary: The repoze.what SQL plugin
+Home-page: http://what.repoze.org/docs/plugins/sql/
+Author: Gustavo Narea
+Author-email: repoze-dev@lists.repoze.org
+License: BSD-derived (http://www.repoze.org/LICENSE.txt)
+Description: **************************
+        The repoze.what SQL plugin
+        **************************
+        
+        This is an adapters plugin for repoze.what.
+        
+        The SQL plugin makes repoze.what support sources defined in SQLAlchemy-managed 
+        databases by providing one group adapter, one permission adapter and one 
+        utility to configure both in one go (optionally, when the group source and the 
+        permission source have a relationship).
+        
+Keywords: web application wsgi server wsgi sql sqlalchemy elixir authorization repoze
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Database
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Security
