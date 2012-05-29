@@ -15,6 +15,8 @@ convert them into boolean, for example, you should use the
 
 from tg.configuration import AppConfig
 
+from tgext.pluggable import plug
+
 import jminee
 from jminee import model
 from jminee.lib import app_globals, helpers 
@@ -62,3 +64,5 @@ base_config.sa_auth.post_login_url = '/post_login'
 # You may optionally define a page where you want users to be redirected to
 # on logout:
 base_config.sa_auth.post_logout_url = '/post_logout'
+
+plug(base_config, 'registration')
