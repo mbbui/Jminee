@@ -1,0 +1,14 @@
+[turbogears.extensions]
+turbomail = turbomail.adapters.tg1
+
+[turbomail.transports]
+debug = turbomail.transports.debug
+smtp = turbomail.transports.smtp
+
+[turbomail.extensions]
+utf8qp = turbomail.extensions.utf8qp
+
+[turbomail.managers]
+immediate = turbomail.managers.immediate
+demand = turbomail.managers.demand
+

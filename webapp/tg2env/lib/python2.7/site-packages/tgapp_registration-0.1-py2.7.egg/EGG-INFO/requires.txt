@@ -1,0 +1,2 @@
+TurboGears2 >= 2.1.4
+tgext.pluggable

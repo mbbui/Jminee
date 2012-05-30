@@ -15,4 +15,6 @@ class Globals(object):
 
     def __init__(self):
         """Do nothing, by default."""
-        pass
+        from turbomail.adapters import tm_pylons
+        tm_pylons.start_extension()
+        
