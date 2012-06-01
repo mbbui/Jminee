@@ -1,9 +1,0 @@
-#Tue May 29 22:41:39 CDT 2012
-eclipse.preferences.version=1
-encoding//jminee/config/app_cfg.py=utf-8
-encoding//jminee/controllers/root.py=utf-8
-encoding//jminee/controllers/secure.py=utf-8
-encoding//jminee/lib/app_globals.py=utf-8
-encoding//jminee/model/auth.py=utf-8
-encoding//jminee/tests/functional/test_authentication.py=utf-8
-encoding//jminee/tests/models/test_auth.py=utf-8
