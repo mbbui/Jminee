@@ -15,11 +15,11 @@ convert them into boolean, for example, you should use the
 
 from tg.configuration import AppConfig
 
-from tgext.pluggable import plug
-
 import jminee
 from jminee import model
 from jminee.lib import app_globals, helpers 
+
+from tgext.pluggable import plug
 
 base_config = AppConfig()
 base_config.renderers = []
@@ -65,4 +65,4 @@ base_config.sa_auth.post_login_url = '/post_login'
 # on logout:
 base_config.sa_auth.post_logout_url = '/post_logout'
 
-plug(base_config, 'registration')
+#plug(base_config, 'registration')

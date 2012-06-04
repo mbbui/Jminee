@@ -6,6 +6,7 @@ from tg.i18n import ugettext as _, lazy_ugettext as l_
 from jminee import model
 from repoze.what import predicates
 from jminee.controllers.secure import SecureController
+from jminee.controllers.registration import RegistrationController
 from jminee.model import DBSession, metadata
 from tgext.admin.tgadminconfig import TGAdminConfig
 from tgext.admin.controller import AdminController
@@ -32,10 +33,10 @@ class RootController(BaseController):
     """
     secc = SecureController()
     admin = AdminController(model, DBSession, config_type=TGAdminConfig)
-
+    registration = RegistrationController()
     error = ErrorController()
-
-    @expose('jminee.templates.index')
+    @expose('json')
+    #@expose('jminee.templates.index')
     def index(self):
         """Handle the front-page."""
         return dict(page='index')
