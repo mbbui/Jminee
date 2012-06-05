@@ -20,8 +20,16 @@ from jminee.lib import validators
 class RegistrationController(BaseController):
     config['renderers']=['json']
     
+    @expose('jminee.templates.error')
+    def errorhtml(self, *args, **kw):
+        return dict(message='Activation is failed')
+        
+    
     @expose('json')
     def error(self, *args, **kw):
+        if pylons.request.response_type == 'text/html':
+            return dict(message='Activation is failed')
+        
         print pylons.tmpl_context.form_errors
         error_list=pylons.tmpl_context.form_errors
         Registration.clear_expired()
@@ -33,9 +41,6 @@ class RegistrationController(BaseController):
                    password_confirm=validators.PasswordMatch('password', 'password_confirm')),                   
                error_handler=error)    
     def submit(self, *args, **kw):
-        hooks = config['hooks'].get('registration.before_registration', [])
-        for func in hooks:
-            func(kw)
         try:
             new_reg = Registration()
             new_reg.email_address = kw['email_address']
@@ -45,10 +50,6 @@ class RegistrationController(BaseController):
             DBSession.add(new_reg)
             DBSession.flush()
 
-            #hooks = config['hooks'].get('registration.after_registration', [])
-            #for func in hooks:
-            #    func(new_reg, kw)
-
             email_data = {'sender':config['registration.email_sender'],
                       'subject':_('Please confirm your registration'),
                       'body':'''
@@ -57,24 +58,21 @@ Please click on this link to confirm your registration
 %s
 ''' % (url_for(self.mount_point+'/activate', code=new_reg.code, email=new_reg.email_address, qualified=True))}
 
-            #hooks = config['hooks'].get('registration.on_complete', [])
-            #for func in hooks:
-            #    func(email_data)
-
+        
             send_email(new_reg.email_address, email_data['sender'], email_data['subject'], email_data['body'])
         except Exception as e:
             print e
             return dict(success=False)
         return dict(success=True)
-
+         
     
     @expose()
     @validate(dict(code=UnicodeString(not_empty=True),
-                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=error)
+                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=errorhtml)
     def activate(self, email, code):
         reg = Registration.get_inactive(email, code)
         if not reg:
-            return dict(success=False)
+            return redirect('/registration/errorhtml')
 
         u = User(user_name=reg.user_name,
                            display_name=reg.user_name,
