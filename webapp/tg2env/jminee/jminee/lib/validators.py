@@ -29,27 +29,23 @@ class UniqueEmailValidator(validators.String):
 
 class PasswordMatch(validators.FieldsMatch):
     messages = dict(
-        invalid=_('Passwords do not match (should be %(match)s)'),
-        invalidNoMatch=_('Passwords do not match'),
-        notDict=_('Fields should be a dictionary'))
+        invalid=_('Passwords do not match'),
+        others=_('Other exception'))
         
     def validate_python(self, value, state):    
         field_dict = request.params
         try:
             ref = field_dict[self.field_names[0]]
-        except TypeError:
-            # Generally because field_dict isn't a dict
-            raise Invalid(self.message('notDict', state), field_dict, state)
         except KeyError:
             ref = ''
+        except Exception as e:
+            print e
+            raise Invalid(self.message('others', state), field_dict, state)
+        
         errors = {}
         for name in self.field_names[1:]:
             if field_dict.get(name, '') != ref:
-                if self.show_match:
-                    errors[name] = self.message('invalid', state,
-                                                match=ref)
-                else:
-                    errors[name] = self.message('invalidNoMatch', state)
+                errors[name] = self.message('invalid', state)
         if errors:
             error_list = errors.items()
             error_list.sort()

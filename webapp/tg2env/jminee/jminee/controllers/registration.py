@@ -25,13 +25,13 @@ class RegistrationController(BaseController):
         print pylons.tmpl_context.form_errors
         error_list=pylons.tmpl_context.form_errors
         Registration.clear_expired()
-        return dict(status='error', errors=error_list)
+        return dict(success=False, errors=error_list)
    
     @expose('json')
     @validate(dict(email_address=validators.UniqueEmailValidator(),
                    user_name=validators.UniqueUserValidator(),
                    password_confirm=validators.PasswordMatch('password', 'password_confirm')),                   
-               error_handler=error)
+               error_handler=error)    
     def submit(self, *args, **kw):
         hooks = config['hooks'].get('registration.before_registration', [])
         for func in hooks:
@@ -63,62 +63,28 @@ Please click on this link to confirm your registration
 
             send_email(new_reg.email_address, email_data['sender'], email_data['subject'], email_data['body'])
         except Exception as e:
-            return dict(status='fail')
-        return dict(status='success')
+            print e
+            return dict(success=False)
+        return dict(success=True)
 
-
-    @expose('registration.templates.complete')
-    @validate(dict(code=UnicodeString(not_empty=True),
-                   email=UnicodeString(not_empty=True)), error_handler=error)
-    def complete(self, email, code):
-        reg = Registration.get_inactive(email, code)
-        if not reg:
-            flash(_('Registration not found or already activated'))
-            return redirect(self.mount_point)
-
-        email_data = {'sender':config['registration.email_sender'],
-                      'subject':_('Please confirm your registration'),
-                      'body':'''
-Please click on this link to confirm your registration
-
-%s
-''' % (url_for(self.mount_point+'/activate', code=code, email=email, qualified=True))}
-
-        hooks = config['hooks'].get('registration.on_complete', [])
-        for func in hooks:
-            func(email_data)
-
-        send_email(email, email_data['sender'], email_data['subject'], email_data['body'])
-
-        return dict(email=email, email_data=email_data)
-
+    
     @expose()
     @validate(dict(code=UnicodeString(not_empty=True),
-                   email=UnicodeString(not_empty=True)), error_handler=error)
+                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=error)
     def activate(self, email, code):
         reg = Registration.get_inactive(email, code)
         if not reg:
-            flash(_('Registration not found or already activated'))
-            return redirect(self.mount_point)
+            return dict(success=False)
 
         u = User(user_name=reg.user_name,
                            display_name=reg.user_name,
                            email_address=reg.email_address,
                            password=reg.password)
-
-        hooks = config['hooks'].get('registration.before_activation', [])
-        for func in hooks:
-            func(reg, u)
-
+     
         DBSession.add(u)
 
         reg.user = u
         reg.password = '******'
         reg.activated = datetime.now()
-
-        hooks = config['hooks'].get('registration.after_activation', [])
-        for func in hooks:
-            func(reg, u)
-
-        flash(_('Account succesfully activated'))
+               
         return redirect('/')
