@@ -14,33 +14,30 @@ from datetime import datetime
 from jminee.lib.base import BaseController
 from jminee.model import DBSession, metadata, Registration, User
 
-from formencode.validators import UnicodeString
+from formencode.validators import UnicodeString, String
 from jminee.lib import validators
 
 class RegistrationController(BaseController):
     config['renderers']=['json']
     
     @expose('jminee.templates.error')
-    def errorhtml(self, *args, **kw):
+    def errorhtml(self, *args, **kw):        
         return dict(message='Activation is failed')
         
     
     @expose('json')
     def error(self, *args, **kw):
-        if pylons.request.response_type == 'text/html':
-            return dict(message='Activation is failed')
-        
-        print pylons.tmpl_context.form_errors
         error_list=pylons.tmpl_context.form_errors
         Registration.clear_expired()
         return dict(success=False, errors=error_list)
    
     @expose('json')
-    @validate(dict(email_address=validators.UniqueEmailValidator(),
-                   user_name=validators.UniqueUserValidator(),
+    @validate(dict(email_address=validators.UniqueEmailValidator(not_empty=True),
+                   user_name=validators.UniqueUserValidator(not_empty=True),
+                   password=String(not_empty=True),
                    password_confirm=validators.PasswordMatch('password', 'password_confirm')),                   
                error_handler=error)    
-    def submit(self, *args, **kw):
+    def index(self, *args, **kw):
         try:
             new_reg = Registration()
             new_reg.email_address = kw['email_address']
