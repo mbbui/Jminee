@@ -7,6 +7,7 @@ from jminee import model
 from repoze.what import predicates
 from jminee.controllers.secure import SecureController
 from jminee.controllers.registration import RegistrationController
+from jminee.controllers.message import MessageController
 from jminee.model import DBSession, metadata
 from tgext.admin.tgadminconfig import TGAdminConfig
 from tgext.admin.controller import AdminController
@@ -34,6 +35,7 @@ class RootController(BaseController):
     secc = SecureController()
     admin = AdminController(model, DBSession, config_type=TGAdminConfig)
     registration = RegistrationController()
+    message = MessageController()
     error = ErrorController()
     @expose('json')
     #@expose('jminee.templates.index')
@@ -92,4 +94,4 @@ class RootController(BaseController):
     def testlogin(self):
         if not request.identity:
             return dict(success=False)
-        return dict(success=True)
+        return dict(success=True, user_name=request.identity['repoze.who.userid'])

@@ -52,4 +52,8 @@ class PasswordMatch(validators.FieldsMatch):
             error_message = '<br>\n'.join(
                 ['%s' % (value) for name, value in error_list])
             raise Invalid(error_message, field_dict, state, error_dict=errors)
-        
+
+#class TopicMemberValidator(ConfirmType):
+#    def validate_python(self, value, state):
+#        if value != None:
+#            super(TopicMemberValidator, self).validate_python(value, state)

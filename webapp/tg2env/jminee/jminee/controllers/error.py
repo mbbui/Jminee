@@ -2,6 +2,7 @@
 """Error controller"""
 
 from tg import request, expose
+import pylons
 
 __all__ = ['ErrorController']
 
@@ -28,3 +29,9 @@ class ErrorController(object):
                       code=request.params.get('code', resp.status_int),
                       message=request.params.get('message', default_message))
         return values
+    
+    @classmethod
+    @expose('json')
+    def error(cls, *args, **kw):
+        error_list=pylons.tmpl_context.form_errors
+        return dict(success=False, errors=error_list)
