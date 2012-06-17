@@ -1,7 +1,5 @@
 import os
 import time
-import random
-import string
 from datetime import datetime, timedelta
 import sys
 try:
@@ -20,6 +18,13 @@ from jminee.model import DeclarativeBase, metadata, DBSession
 from jminee.model.auth import User
 from jminee.model.topic import Topic
 
+#member_message_table = Table('member_message', metadata,
+#    Column('user_name', Unicode(16), ForeignKey('tg_user.user_name',
+#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True),
+#    Column('message_id', Integer, ForeignKey('message.uid',
+#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+#)
+
 class Message(DeclarativeBase):
     __tablename__ = 'message'
 
@@ -28,14 +33,15 @@ class Message(DeclarativeBase):
     subject = Column(Unicode(255), nullable=False)
     content = Column(Unicode(5000), nullable=True)
 
-    topic_id = Column(Integer, ForeignKey(Topic.__mapper__.primary_key[0]))
     #message->topic = many->one
-    topic = relation(Topic, backref=backref('topic', cascade='all'))
+    topic_id = Column(Integer, ForeignKey(Topic.__mapper__.primary_key[0]))
+    topic = relation(Topic, backref=backref('message', cascade='all'))
     
-    @classmethod
-    def add_message(cls):
-        pass
-
-    @classmethod
-    def get_messages(cls, topic_id):
-        pass
+    creator_name = Column(Unicode(16), ForeignKey(User.__mapper__.primary_key[1]))
+    creator = relation(User, backref=backref('message', cascade='all'))
+    
+#    members = relation('User', secondary=member_message_table, backref='messages') 
+    
+    def __repr__(self):
+        return ('<Message: uid=%d, time=%s, subject=%s, creator name=%d>' % (
+                self.uid, self.time, self.subject, self.creator_name)).encode('utf-8')

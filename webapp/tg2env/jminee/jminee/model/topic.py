@@ -1,7 +1,5 @@
 import os
 import time
-import random
-import string
 from datetime import datetime, timedelta
 import sys
 try:
@@ -19,16 +17,6 @@ from sqlalchemy.orm import backref, relation
 from jminee.model import DeclarativeBase, metadata, DBSession
 from jminee.model.auth import User
 
-# This is the association table for the many-to-many relationship between
-# topics and members - this is, the members of a topic.
-#member_topic = Table('member_topic', metadata,
-#    Column('user_name', Unicode(16), ForeignKey('tg_user.user_name',
-#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True),
-#    Column('topic_id', Integer, ForeignKey('topic.uid',
-#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True),
-#    Column('role', String(10), nullable=False, default='r'),
-#    Column('local_title',Unicode(255), nullable=False)                        
-#)
 class MemberTopic(DeclarativeBase):
     __tablename__ = "member_topic"
     user_name = Column(Unicode(16), ForeignKey('tg_user.user_name',
