@@ -16,27 +16,22 @@ from jminee.model import DBSession, metadata, Registration, User
 
 from formencode.validators import UnicodeString, String
 from jminee.lib import validators
+from jminee.controllers.error import ErrorController
+from jminee.lib.errorcode import ErrorCode
 
 class RegistrationController(BaseController):
     config['renderers']=['json']
     
     @expose('jminee.templates.error')
     def errorhtml(self, *args, **kw):        
-        return dict(message='Activation is failed')
+        return dict(success=False)
         
-    
-    @expose('json')
-    def error(self, *args, **kw):
-        error_list=pylons.tmpl_context.form_errors
-        Registration.clear_expired()
-        return dict(success=False, errors=error_list)
-   
     @expose('json')
     @validate(dict(email_address=validators.UniqueEmailValidator(not_empty=True),
                    user_name=validators.UniqueUserValidator(not_empty=True),
                    password=String(not_empty=True),
                    password_confirm=validators.PasswordMatch('password', 'password_confirm')),                   
-               error_handler=error)    
+               error_handler=ErrorController.failed_input_validation)    
     def index(self, *args, **kw):
         try:
             new_reg = Registration()

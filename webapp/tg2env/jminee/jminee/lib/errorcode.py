@@ -13,4 +13,5 @@ class ErrorCode(object):
     UNAUTHORIZED = 2
     INVALIDATEDINPUT = 3
     WRONGUSERPASSWORD = 4
+    FAILEDACTIVATION = 5
         

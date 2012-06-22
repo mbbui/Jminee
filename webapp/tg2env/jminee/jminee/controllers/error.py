@@ -43,3 +43,8 @@ class ErrorController(object):
     def failed_input_validation(cls, *args, **kw):
         error_list=pylons.tmpl_context.form_errors
         return dict(success=False, error_code=ErrorCode.INVALIDATEDINPUT, errors=error_list)
+    
+    @classmethod
+    @expose('json')
+    def failed_activation(cls, *args, **kw):
+        return dict(success=False, error_code=ErrorCode.FAILEDACTIVATION)
