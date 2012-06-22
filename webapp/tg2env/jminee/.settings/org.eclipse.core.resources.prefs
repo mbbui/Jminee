@@ -1,0 +1,19 @@
+#Tue Jun 19 22:52:52 CDT 2012
+eclipse.preferences.version=1
+encoding//jminee/config/app_cfg.py=utf-8
+encoding//jminee/config/environment.py=utf-8
+encoding//jminee/controllers/__init__.py=utf-8
+encoding//jminee/controllers/error.py=utf-8
+encoding//jminee/controllers/message.py=utf-8
+encoding//jminee/controllers/registration.py=utf-8
+encoding//jminee/controllers/root.py=utf-8
+encoding//jminee/controllers/secure.py=utf-8
+encoding//jminee/lib/__init__.py=utf-8
+encoding//jminee/lib/app_globals.py=utf-8
+encoding//jminee/lib/base.py=utf-8
+encoding//jminee/model/__init__.py=utf-8
+encoding//jminee/model/auth.py=utf-8
+encoding//jminee/tests/functional/test_authentication.py=utf-8
+encoding//jminee/tests/models/test_auth.py=utf-8
+encoding//jminee/websetup/bootstrap.py=utf-8
+encoding//jminee/websetup/schema.py=utf-8

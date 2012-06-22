@@ -2,6 +2,8 @@
 """Error controller"""
 
 from tg import request, expose
+from jminee.lib.errorcode import ErrorCode
+
 import pylons
 
 __all__ = ['ErrorController']
@@ -35,3 +37,9 @@ class ErrorController(object):
     def error(cls, *args, **kw):
         error_list=pylons.tmpl_context.form_errors
         return dict(success=False, errors=error_list)
+    
+    @classmethod
+    @expose('json')
+    def failed_input_validation(cls, *args, **kw):
+        error_list=pylons.tmpl_context.form_errors
+        return dict(success=False, error_code=ErrorCode.INVALIDATEDINPUT, errors=error_list)

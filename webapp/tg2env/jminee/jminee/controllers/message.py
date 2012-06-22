@@ -11,6 +11,8 @@ from sqlalchemy import sql
 
 from jminee.lib import send_email
 from datetime import datetime
+from repoze.what.predicates import not_anonymous
+
 
 from jminee.lib.base import BaseController
 from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Message
@@ -18,12 +20,12 @@ from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Mess
 from formencode.validators import UnicodeString, ConfirmType, Int
 from jminee.lib import validators
 from jminee.controllers.error import ErrorController
+from jminee.lib.errorcode import ErrorCode
 
 class MessageController(BaseController):
     config['renderers']=['json']
     
-    err_msg = dict(
-        notauthorizeduser=_('User is not authorized for this operation'))
+    allow_only = not_anonymous()
     
     @expose('json')
     #TODO: validate that members exist
@@ -32,7 +34,7 @@ class MessageController(BaseController):
     #TODO: make sure the members are unique
     @validate(dict(title=UnicodeString(not_empty=True), 
                    members=ConfirmType(type=(list, unicode))),                   
-               error_handler=ErrorController.error)
+               error_handler=ErrorController.failed_input_validation)
     def create_topic(self, *args, **kw):
         topic = Topic()
         topic.creator_name = request.identity['repoze.who.userid']
@@ -40,6 +42,7 @@ class MessageController(BaseController):
         
         user = User.by_user_name(topic.creator_name)
         if user == None:
+            #TODO: this should never happen, log this event and return only False
             raise Exception('creator %s is not in the database'%(topic.creator_name))
         
         membertopic = MemberTopic(role='c', local_title=topic.title, member=user)
@@ -146,7 +149,7 @@ class MessageController(BaseController):
     @expose('json')    
     @validate(dict(topic_id=Int(not_empty=True), 
                    subject=UnicodeString(not_empty=True)),                   
-               error_handler=ErrorController.error)
+               error_handler=ErrorController.failed_input_validation)
     def create_message(self, **kw):         
         try:
             #check if this user can create a message in this topic
@@ -156,7 +159,8 @@ class MessageController(BaseController):
                                   'role = "c" or role = "s"').\
                            first()      
             if not creator:
-                return dict(success=False, err_msg=self.err_msg['notauthorizeduser'])
+                #TODO: this should never happen, log this event and return only False
+                return dict(success=False, error_code=ErrorCode.UNAUTHORIZED)
             
             message = Message()
             message.topic_id = kw['topic_id']
@@ -175,7 +179,8 @@ class MessageController(BaseController):
             return dict(success=False)  
 
     @expose('json')
-    @validate(dict(topic_id=Int(not_empty=True)))
+    @validate(dict(topic_id=Int(not_empty=True)),
+              error_handler=ErrorController.failed_input_validation)
     def get_messages(self, **kw):
         try:
             #check if user is a member of this topic
@@ -185,7 +190,8 @@ class MessageController(BaseController):
                            first()   
             
             if not user:
-                return dict(success=False, err_msg=self.err_msg['notauthorizeduser'])
+                #TODO: this should never happen, log this event and return only False
+                return dict(success=False, error_code=ErrorCode.UNAUTHORIZED)
             
             if not kw.has_key('nums'):
                 nums = 20

@@ -14,6 +14,7 @@ from tgext.admin.controller import AdminController
 
 from jminee.lib.base import BaseController
 from jminee.controllers.error import ErrorController
+from jminee.lib.errorcode import ErrorCode
 
 __all__ = ['RootController']
 
@@ -37,12 +38,21 @@ class RootController(BaseController):
     registration = RegistrationController()
     message = MessageController()
     error = ErrorController()
-    @expose('json')
-    #@expose('jminee.templates.index')
+    #@expose('json')
+    @expose('jminee.templates.index')
     def index(self):
         """Handle the front-page."""
         return dict(page='index')
-
+    
+    @expose('json')
+    def login(self,came_from):
+        ''' This function implementation is a quick hack:
+            when user has not logined but try to access
+            page that requires login, repoze.who will
+            call this function
+        '''
+        return dict(success=False, error_code=ErrorCode.UNAUTHENTICATED)
+        
     @expose('jminee.templates.about')
     def about(self):
         """Handle the 'about' page."""
@@ -82,7 +92,9 @@ class RootController(BaseController):
         if not request.identity:
             login_counter = request.environ['repoze.who.logins'] + 1
             if login_counter > 0:
-                return dict(success="false", message="Wrong username or password", __logins=login_counter)            
+                return dict(success="false", 
+                            error_code=ErrorCode.WRONGUSERPASSWORD, 
+                            __logins=login_counter)            
         
         return dict(success=True)
    
