@@ -52,7 +52,7 @@ class MessageController(BaseController):
         #do not change the order of the following if clause
         members = []
         if isinstance(kw['members'], list):
-            members = kw['member']
+            members = kw['members']
         elif kw['members']!='' and isinstance(kw['members'], unicode):
             members = [kw['members']]
         
