@@ -1,3 +1,11 @@
 /*
  * Main Styles
  */
+
+body {
+    padding-top: 90px;
+}
+
+h2 {
+    color: #4FA7FF;
+}

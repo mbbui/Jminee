@@ -8,9 +8,9 @@ $(window).load(function() {
     }
 
     Jminee.Controllers.topicsController = Ember.ArrayProxy.create({
-        elems: [],
-        createTopic: function(title) {
+        elems       : [],
+        createTopic : function(title) {
             var topic = Jminee.Models.topic.create({ title: title });
         }
     });
-}):
+});
