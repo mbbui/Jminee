@@ -12,15 +12,14 @@
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="/javascript/ember-0.9.8.1.min.js"></script>
+        <script type="text/javascript" src="/bootstrap/js/bootstrap-modal.js"></script>
+        <script type="text/javascript" src="/bootstrap/js/bootstrap-transition.js"></script>
 
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
-        <script src="/javascript/views.js" type="text/javascript"></script>
-        <script src="/javascript/models.js" type="text/javascript"></script>
-        <script src="/javascript/controllers.js" type="text/javascript"></script>
-        <script src="/javascript/login.js" type="text/javascript"></script>
+        <script src="/javascript/creation.js" type="text/javascript"></script>
     </head>
 
-<body>
+    <body>
         <!-- navbar -->
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -76,18 +75,35 @@
                 <div class="container">
                     <form class="form-vertical">
                         <label>Email:</label>
-                        <input type="text" placeholder="Email">
+                        <input type="text" placeholder="Email" id="emailRegisterField">
+                        <label>Username:</label>
+                        <input type="text" placeholder="Username" id="userRegisterField">
                         <label>Password:</label>
-                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Password" id="passRegisterField">
                         <label>Verify it:</label>
-                        <input type="password" placeholder="Again! Again!">
+                        <input type="password" placeholder="Again! Again!" id="passVerifyRegisterField">
                         <br/>
-                        <button class="btn btn-large btn-primary" type="submit">Sign Me Up!</button>
+                        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#registrationModal" id="registerButton">Sign Me Up!</button>
                     </form>
                 </div>
             </section>
         </div>
         <!-- /login page -->
+
+        <!-- registration modal -->
+        <div class="modal hide fade" id="registrationModal" data="backdrop keyboard show">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="modal-titles">Registration Successful!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to Jminee! A confirmation email has been sent to the address you supplied us. Please check your inbox and follow the instructions in the email we sent you to complete your registration.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        <!-- /registration modal -->
     </body>
 
 </html>
