@@ -25,3 +25,4 @@ class SecureController(BaseController):
     def some_where(self):
         """Let the user know that this action is protected too."""
         return dict(page='some_where')
+

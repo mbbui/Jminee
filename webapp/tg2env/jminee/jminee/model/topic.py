@@ -19,7 +19,7 @@ from jminee.model.auth import User
 
 class MemberTopic(DeclarativeBase):
     __tablename__ = "member_topic"
-    user_name = Column(Unicode(16), ForeignKey('tg_user.user_name',
+    user_name = Column(Unicode(255), ForeignKey('tg_user.user_name',
         onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
     topic_id = Column(Integer, ForeignKey('topic.uid',
         onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
@@ -33,7 +33,7 @@ class Topic(DeclarativeBase):
     uid = Column(Integer, autoincrement=True, primary_key=True)
     time = Column(DateTime, default=datetime.now)
     title = Column(Unicode(255), nullable=False)
-    creator_name = Column(Unicode(16), ForeignKey(User.__mapper__.primary_key[1]))
+    creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))
     
     members = relation(MemberTopic, backref='topic')
     

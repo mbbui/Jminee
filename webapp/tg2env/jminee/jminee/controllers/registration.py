@@ -28,15 +28,16 @@ class RegistrationController(BaseController):
         
     @expose('json')
     @validate(dict(email_address=validators.UniqueEmailValidator(not_empty=True),
-                   user_name=validators.UniqueUserValidator(not_empty=True),
+                   #user_name=validators.UniqueUserValidator(not_empty=True),
                    password=String(not_empty=True),
-                   password_confirm=validators.PasswordMatch('password', 'password_confirm')),                   
+                   #password_confirm=validators.PasswordMatch('password', 'password_confirm')
+                   ),                   
                error_handler=ErrorController.failed_input_validation)    
     def index(self, *args, **kw):
         try:
             new_reg = Registration()
             new_reg.email_address = kw['email_address']
-            new_reg.user_name = kw['user_name']
+            new_reg.user_name = kw['email_address']
             new_reg.password = kw['password']
             new_reg.code = Registration.generate_code(kw['email_address'])
             DBSession.add(new_reg)

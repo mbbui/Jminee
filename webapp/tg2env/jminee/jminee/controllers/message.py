@@ -33,7 +33,8 @@ class MessageController(BaseController):
     #TODO: add log to debug database error
     #TODO: make sure the members are unique
     @validate(dict(title=UnicodeString(not_empty=True), 
-                   members=ConfirmType(type=(list, unicode))),                   
+                   #members=ConfirmType(type=(list, unicode))
+                   ),                   
                error_handler=ErrorController.failed_input_validation)
     def create_topic(self, *args, **kw):
         topic = Topic()
@@ -51,10 +52,11 @@ class MessageController(BaseController):
         nonexists_users = []
         #do not change the order of the following if clause
         members = []
-        if isinstance(kw['members'], list):
-            members = kw['members']
-        elif kw['members']!='' and isinstance(kw['members'], unicode):
-            members = [kw['members']]
+        if kw.has_key('member'):
+            if isinstance(kw['members'], list):
+               members = kw['members']
+            elif kw['members']!='' and isinstance(kw['members'], unicode):
+                members = [kw['members']]
         
         try:    
             for member in members:

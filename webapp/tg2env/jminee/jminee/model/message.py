@@ -37,7 +37,7 @@ class Message(DeclarativeBase):
     topic_id = Column(Integer, ForeignKey(Topic.__mapper__.primary_key[0]))
     topic = relation(Topic, backref=backref('message', cascade='all'))
     
-    creator_name = Column(Unicode(16), ForeignKey(User.__mapper__.primary_key[1]))
+    creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))
     creator = relation(User, backref=backref('message', cascade='all'))
     
 #    members = relation('User', secondary=member_message_table, backref='messages') 
