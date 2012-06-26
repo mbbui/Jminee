@@ -52,7 +52,7 @@ class MessageController(BaseController):
         nonexists_users = []
         #do not change the order of the following if clause
         members = []
-        if kw.has_key('member'):
+        if kw.has_key('members'):
             if isinstance(kw['members'], list):
                members = kw['members']
             elif kw['members']!='' and isinstance(kw['members'], unicode):
