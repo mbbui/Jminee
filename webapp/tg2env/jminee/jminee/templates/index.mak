@@ -77,9 +77,7 @@
                     <form class="form-vertical">
                         <label>Email:</label>
                         <input type="text" placeholder="Email" id="emailRegisterField">
-                        <label>Username:</label>
-                        <input type="text" placeholder="Username" id="userRegisterField">
-                        <label>Password:</label>
+                        <label>Password (6 or more characters):</label>
                         <input type="password" placeholder="Password" id="passRegisterField">
                         <label>Verify it:</label>
                         <input type="password" placeholder="Again! Again!" id="passVerifyRegisterField">
