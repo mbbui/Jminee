@@ -92,7 +92,7 @@ class RootController(BaseController):
         if not request.identity:
             login_counter = request.environ['repoze.who.logins'] + 1
             if login_counter > 0:
-                return dict(success="false", 
+                return dict(success=False, 
                             error_code=ErrorCode.WRONGUSERPASSWORD, 
                             __logins=login_counter)            
         
