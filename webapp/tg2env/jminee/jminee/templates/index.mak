@@ -17,6 +17,7 @@
 
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
         <script src="/javascript/creation.js" type="text/javascript"></script>
+        <script src="/javascript/login.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -28,12 +29,12 @@
                         Jminee
                     </a>
                     <form class="navbar-form pull-right form-inline">
-                        <input type="text" placeholder="Email" class="input-small">
-                        <input type="password" placeholder="Password" class="input-small">
+                        <input type="text" placeholder="Email" class="input-small" id="emailLogin">
+                        <input type="password" placeholder="Password" class="input-small" id="passLogin">
                         <label class="checkbox">
                             <input type="checkbox"> Remember Me
                         </label>
-                        <button type="submit" class="btn">Login</button>
+                        <button type="submit" class="btn" id="loginButton">Login</button>
                     </form>
                 </div>
             </div>
@@ -76,9 +77,7 @@
                     <form class="form-vertical">
                         <label>Email:</label>
                         <input type="text" placeholder="Email" id="emailRegisterField">
-                        <label>Username:</label>
-                        <input type="text" placeholder="Username" id="userRegisterField">
-                        <label>Password:</label>
+                        <label>Password (6 or more characters):</label>
                         <input type="password" placeholder="Password" id="passRegisterField">
                         <label>Verify it:</label>
                         <input type="password" placeholder="Again! Again!" id="passVerifyRegisterField">

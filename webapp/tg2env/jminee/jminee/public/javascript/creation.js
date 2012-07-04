@@ -14,8 +14,8 @@ $(window).load(function() {
     }
 
     // registration non-ajax verification functions
-    Jminee.Creation.checkFieldsValid = function(email, pass, user) {
-        return (email.length > 0 && pass.length > 0 && user.length > 0);
+    Jminee.Creation.checkFieldsValid = function(email, pass) {
+        return ((email.indexOf("@") != -1) && (email.indexOf(".") != -1) && (email.length > 6 && pass.length > 5));
     };
 
     Jminee.Creation.checkPasswordsMatch = function(pass, verifyPass) {
@@ -24,8 +24,8 @@ $(window).load(function() {
 
     // modal state-mutating functions
     Jminee.Creation.setModalFieldsInvalid = function() {
-        $("div.modal-body p")[0].innerHTML = "We have determined that you have entered a non-valid email, username or password. Please re-enter your email, username and password.";
-        $("h3.modal-titles")[0].innerHTML = "Invalid Username, Email or Password";
+        $("div.modal-body p")[0].innerHTML = "We have determined that you have entered a non-valid email or password. Please re-enter your email and password.";
+        $("h3.modal-titles")[0].innerHTML = "Invalid Email or Password";
     };
 
     Jminee.Creation.setModalPasswordMismatch = function() {
@@ -39,8 +39,18 @@ $(window).load(function() {
     };
 
     Jminee.Creation.setModalRegistrationSuccessful = function() {
-        $("div.modal-body p")[0].innerHTML = "Welcome to Jminee! A confirmation email has been sent to the address you supplied us. Please check your inbox and follow the instructions in the email we sent you to com plete your registration.";
+        $("div.modal-body p")[0].innerHTML = "Welcome to Jminee! A confirmation email has been sent to the address you supplied us. Please check your inbox and follow the instructions in the email we sent you to complete your registration.";
         $("h3.modal-titles")[0].innerHTML = "Registration Successful!";
+    };
+
+    Jminee.Creation.setModalEmailAlreadyTakenError = function(email) {
+        $("div.modal-body p")[0].innerHTML = "Sorry, but it appears the email \'"+email+"\' has already been taken.";
+        $("h3.modal-titles")[0].innerHTML = "Email Already in Use";
+    };
+
+    Jminee.Creation.setModalEmailInvalidError = function(email) {
+        $("div.modal-body p")[0].innerHTML = "Sorry, but it appears the email \'"+email+"\' is invalid.";
+        $("h3.modal-titles")[0].innerHTML = "Email is Invalid";
     };
 
     Jminee.Creation.setModalRegistrationPending = function() {
@@ -53,10 +63,9 @@ $(window).load(function() {
         var email      = $("#emailRegisterField").val();
         var pass       = $("#passRegisterField").val();
         var verifyPass = $("#passVerifyRegisterField").val();
-        var user       = $("#userRegisterField").val();
 
         // handle non-ajax errors
-        if (!Jminee.Creation.checkFieldsValid(email, pass, user)) {
+        if (!Jminee.Creation.checkFieldsValid(email, pass)) {
             Jminee.Creation.setModalFieldsInvalid();
             return;
         }
@@ -71,14 +80,17 @@ $(window).load(function() {
         Jminee.Creation.setModalRegistrationPending();
 
         // make a registration ajax call
-        $.getJSON("/registration?email_address="+email+"&password="+pass+"&user_name="+user+"&password_confirm="+verifyPass, function(json) {
-            if (!json.success) {
-                // handle error throwbacks here, including:
-                // 1.) username/email already used
-                // 2.) password not being long enough/not having the proper character conditions
+        $.getJSON("/registration?email_address="+email+"&password="+pass, function(json) {
+            if (json.success) {
+                Jminee.Creation.setModalRegistrationSuccessful();
                 return;
             }
-            Jminee.Creation.setModalRegistrationSuccessful();
+
+            if (json.errors.email_address === 'Email address has already been taken') {
+                Jminee.Creation.setModalEmailAlreadyTakenError(email);
+            } else {
+                Jminee.Creation.setModalEmailInvalidError(email);
+            }
         })
         .error(function() { Jminee.Creation.setModalConnectionError(); });
     };
