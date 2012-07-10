@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
 
-from tg import expose, flash, require, url, lurl, request, redirect
+from tg import expose, flash, require, url, lurl, request, redirect, https
 from tg.i18n import ugettext as _, lazy_ugettext as l_
 from jminee import model
 from repoze.what import predicates
@@ -44,6 +44,7 @@ class RootController(BaseController):
         """Handle the front-page."""
         return dict(page='index')
     
+    @https()
     @expose('json')
     def login(self,came_from):
         ''' This function implementation is a quick hack:
