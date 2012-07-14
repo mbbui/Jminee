@@ -7,6 +7,7 @@ from tg.decorators import Decoration
 from tg import expose, flash, require, url, lurl, request, redirect, validate, config
 from tg.i18n import ugettext as _, lazy_ugettext as l_
 import tw
+import logging
 
 from jminee.lib import send_email
 from datetime import datetime
@@ -19,6 +20,8 @@ from jminee.lib import validators
 from jminee.controllers.error import ErrorController
 from jminee.lib.errorcode import ErrorCode
 
+log = logging.getLogger(__name__)
+    
 class RegistrationController(BaseController):
     config['renderers']=['json']
     
@@ -32,7 +35,7 @@ class RegistrationController(BaseController):
                    password=String(not_empty=True),
                    #password_confirm=validators.PasswordMatch('password', 'password_confirm')
                    ),                   
-               error_handler=ErrorController.failed_input_validation)    
+               error_handler=ErrorController.failed_input_validation)
     def index(self, *args, **kw):
         try:
             new_reg = Registration()
@@ -54,7 +57,7 @@ Please click on this link to confirm your registration
         
             send_email(new_reg.email_address, email_data['sender'], email_data['subject'], email_data['body'])
         except Exception as e:
-            print e
+            log.exception()
             return dict(success=False)
         return dict(success=True)
          
@@ -63,19 +66,23 @@ Please click on this link to confirm your registration
     @validate(dict(code=UnicodeString(not_empty=True),
                   email=validators.UniqueEmailValidator(not_empty=True)), error_handler=errorhtml)
     def activate(self, email, code):
-        reg = Registration.get_inactive(email, code)
-        if not reg:
-            return redirect('/registration/errorhtml')
-
-        u = User(user_name=reg.user_name,
-                           display_name=reg.user_name,
-                           email_address=reg.email_address,
-                           password=reg.password)
-     
-        DBSession.add(u)
-
-        reg.user = u
-        reg.password = '******'
-        reg.activated = datetime.now()
-               
-        return redirect('/')
+        try:
+            reg = Registration.get_inactive(email, code)
+            if not reg:
+                return redirect('/registration/errorhtml')
+    
+            u = User(user_name=reg.user_name,
+                               display_name=reg.user_name,
+                               email_address=reg.email_address,
+                               password=reg.password)
+         
+            DBSession.add(u)
+    
+            reg.user = u
+            reg.password = '******'
+            reg.activated = datetime.now()
+                   
+            return redirect('/')
+        except:
+            log.exception()
+            return self.errorhtml()

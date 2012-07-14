@@ -8,6 +8,7 @@ from routes import url_for
 from tg import expose, redirect, validate, config, request
 from tg.i18n import ugettext as _
 from sqlalchemy import sql
+import logging
 
 from jminee.lib import send_email
 from datetime import datetime
@@ -22,16 +23,18 @@ from jminee.lib import validators
 from jminee.controllers.error import ErrorController
 from jminee.lib.errorcode import ErrorCode
 
+log = logging.getLogger(__name__)
+    
 class MessageController(BaseController):
     config['renderers']=['json']
     
     allow_only = not_anonymous()
     
-    @expose('json')
     #TODO: validate that members exist
     #TODO: improve error message in validating title
     #TODO: add log to debug database error
-    #TODO: make sure the members are unique
+    #TODO: make sure the members are unique    
+    @expose('json')
     @validate(dict(title=UnicodeString(not_empty=True), 
                    #members=ConfirmType(type=(list, unicode))
                    ),                   
@@ -44,8 +47,8 @@ class MessageController(BaseController):
         user = User.by_user_name(topic.creator_name)
         if user == None:
             #TODO: this should never happen, log this event and return only False
-            raise Exception('creator %s is not in the database'%(topic.creator_name))
-        
+            log.error('Creator %s is not in the database'%(topic.creator_name))
+                    
         membertopic = MemberTopic(role='c', local_title=topic.title, member=user)
         topic.members.append(membertopic)
         
@@ -80,7 +83,7 @@ class MessageController(BaseController):
                 return dict(success=True, nonexists_users=nonexists_users)
             return dict(success=True)
         except Exception as e:
-            print e
+            log.exception()
             return dict(success=False)                
     
     @expose('json')
@@ -145,7 +148,8 @@ class MessageController(BaseController):
             return dict(success=True, topics=topics)
         
         except Exception as e:
-            traceback.print_exc(file=sys.stdout)
+            #traceback.print_exc(file=sys.stdout)
+            log.exception()
             return dict(success=False)            
     
     @expose('json')    
@@ -177,7 +181,8 @@ class MessageController(BaseController):
             
             
         except:
-            traceback.print_exc(file=sys.stdout)
+            log.exception()
+            #traceback.print_exc(file=sys.stdout)
             return dict(success=False)  
 
     @expose('json')
@@ -208,5 +213,6 @@ class MessageController(BaseController):
             return dict(success=True, messages=messages)
         
         except:
-            traceback.print_exc(file=sys.stdout)
+            log.exception()
+            #traceback.print_exc(file=sys.stdout)
             return dict(success=False)  

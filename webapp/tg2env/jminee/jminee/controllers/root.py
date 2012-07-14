@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
-
+import logging
 from tg import expose, flash, require, url, lurl, request, redirect
 from tg.i18n import ugettext as _, lazy_ugettext as l_
 from jminee import model
@@ -18,6 +18,7 @@ from jminee.lib.errorcode import ErrorCode
 
 __all__ = ['RootController']
 
+log = logging.getLogger(__name__)
 
 class RootController(BaseController):
     """
@@ -37,11 +38,13 @@ class RootController(BaseController):
     admin = AdminController(model, DBSession, config_type=TGAdminConfig)
     registration = RegistrationController()
     message = MessageController()
-    error = ErrorController()
+    error = ErrorController()    
+    
     #@expose('json')
     @expose('jminee.templates.index')
     def index(self):
         """Handle the front-page."""
+        log.info("Root index")
         return dict(page='index')
     
     @expose('json')
