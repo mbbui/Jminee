@@ -44,7 +44,6 @@ class RootController(BaseController):
     @expose('jminee.templates.index')
     def index(self):
         """Handle the front-page."""
-        log.info("Root index")
         return dict(page='index')
     
     @expose('json')
