@@ -102,11 +102,14 @@ class MessageController(BaseController):
             else:
                 nums = kw['nums']
             
-            if kw.has_key('title'):
+            user = request.identity['repoze.who.userid']
+            log.info("User %s get topics %s"%(user, str(kw)))
+            
+            if kw.has_key('title'):                
                 topics = DBSession.query(Topic).\
                            join(MemberTopic).\
                            filter(Topic.title==kw['title']).\
-                           filter(MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                           filter(MemberTopic.user_name==user).\
                            order_by(Topic.time.desc()).\
                            limit(nums).\
                            all()                            
@@ -116,7 +119,7 @@ class MessageController(BaseController):
                 topics = DBSession.query(Topic).\
                        join(MemberTopic).\
                        filter(sql.between(Topic.time, min_time, max_time)).\
-                       filter(MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                       filter(MemberTopic.user_name==user).\
                        order_by(Topic.time.desc()).\
                        limit(nums).\
                        all()                                                
@@ -125,7 +128,7 @@ class MessageController(BaseController):
                 topics = DBSession.query(Topic).\
                        join(MemberTopic).\
                        filter(Topic.time<=max_time).\
-                       filter(MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                       filter(MemberTopic.user_name==user).\
                        order_by(Topic.time.desc()).\
                        limit(nums).\
                        all()
@@ -134,14 +137,14 @@ class MessageController(BaseController):
                 topics = DBSession.query(Topic).\
                        join(MemberTopic).\
                        filter(Topic.time>=min_time).\
-                       filter(MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                       filter(MemberTopic.user_name==user).\
                        order_by(Topic.time.desc()).\
                        limit(nums).\
                        all()
             else: 
                 topics = DBSession.query(Topic).\
                            join(MemberTopic).\
-                           filter(MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                           filter(MemberTopic.user_name==user).\
                            order_by(Topic.time.desc()).\
                            limit(nums).\
                            all()

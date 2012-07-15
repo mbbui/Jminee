@@ -1,7 +1,8 @@
-#Tue Jun 19 22:52:52 CDT 2012
+#Sat Jul 14 23:32:31 CDT 2012
 eclipse.preferences.version=1
 encoding//jminee/config/app_cfg.py=utf-8
 encoding//jminee/config/environment.py=utf-8
+encoding//jminee/config/middleware.py=utf-8
 encoding//jminee/controllers/__init__.py=utf-8
 encoding//jminee/controllers/error.py=utf-8
 encoding//jminee/controllers/message.py=utf-8
