@@ -14,4 +14,6 @@ class ErrorCode(object):
     INVALIDATEDINPUT = 3
     WRONGUSERPASSWORD = 4
     FAILEDACTIVATION = 5
-        
+    NORESETRECORD = 6   
+    NONEXISTEDUSER = 7
+    OTHERS = 100 

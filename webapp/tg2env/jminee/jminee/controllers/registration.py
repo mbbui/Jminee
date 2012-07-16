@@ -13,9 +13,9 @@ from jminee.lib import send_email
 from datetime import datetime
 
 from jminee.lib.base import BaseController
-from jminee.model import DBSession, metadata, Registration, User
+from jminee.model import DBSession, metadata, Registration, User, ResetPassword
 
-from formencode.validators import UnicodeString, String
+from formencode.validators import UnicodeString, String, Email
 from jminee.lib import validators
 from jminee.controllers.error import ErrorController
 from jminee.lib.errorcode import ErrorCode
@@ -31,13 +31,11 @@ class RegistrationController(BaseController):
         
     @expose('json')
     @validate(dict(email_address=validators.UniqueEmailValidator(not_empty=True),
-                   #user_name=validators.UniqueUserValidator(not_empty=True),
-                   password=String(not_empty=True),
-                   #password_confirm=validators.PasswordMatch('password', 'password_confirm')
-                   ),                   
-               error_handler=ErrorController.failed_input_validation)
+                   password=String(not_empty=True)),                   
+              error_handler=ErrorController.failed_input_validation)    
     def index(self, *args, **kw):
         try:
+            log.info('User registration: %s'%str(kw))
             new_reg = Registration()
             new_reg.email_address = kw['email_address']
             new_reg.user_name = kw['email_address']
@@ -47,7 +45,7 @@ class RegistrationController(BaseController):
             DBSession.flush()
 
             email_data = {'sender':config['registration.email_sender'],
-                      'subject':_('Please confirm your registration'),
+                      'subject':_('Message from Jminee'),
                       'body':'''
 Please click on this link to confirm your registration
 
@@ -57,16 +55,45 @@ Please click on this link to confirm your registration
         
             send_email(new_reg.email_address, email_data['sender'], email_data['subject'], email_data['body'])
         except Exception as e:
-            log.exception()
+            log.exception('Got exception')
             return dict(success=False)
         return dict(success=True)
-         
+    
+    @expose('json')
+    @validate(dict(code=UnicodeString(not_empty=True),
+                   password=String(not_empty=True),
+                   email_address=Email(not_empty=True)),
+              error_handler=ErrorController.failed_input_validation)      
+    def reset_password(self, *agrs, **kw):
+        try:
+            log.info('User reset password: %s'%str(kw))
+            ResetPassword.clear_expired_user(kw['email_address'])
+            reset = ResetPassword.get_inactive(kw['email_address'], kw['code'])
+            if not reset:
+                return dict(success=False, error_code=ErrorCode.NORESETRECORD)
+            
+            user=DBSession.query(User).filter_by(email_address=kw['email_address']).first()
+            user.password = kw['password']
+            
+            reset.email = kw['email_address'] 
+            reset.reset = datetime.now()
+        
+            DBSession.flush()
+            
+        except Exception as e:
+            log.exception('Got exception')
+            return dict(success=False, error_code=ErrorCode.OTHERS)
+        return dict(success=True)    
     
     @expose()
     @validate(dict(code=UnicodeString(not_empty=True),
-                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=errorhtml)
+                  email=validators.UniqueEmailValidator(not_empty=True)),
+              error_handler=errorhtml)
     def activate(self, email, code):
         try:
+            log.info('User activation email=%s code=%s'%(email, code))
+            Registration.clear_expired_user(email)
+            
             reg = Registration.get_inactive(email, code)
             if not reg:
                 return redirect('/registration/errorhtml')
@@ -84,5 +111,45 @@ Please click on this link to confirm your registration
                    
             return redirect('/')
         except:
-            log.exception()
+            log.exception('Got exception')
             return self.errorhtml()
+    
+    @expose('json')
+    @validate(dict(email_address=Email(not_empty=True)), 
+              error_handler=ErrorController.failed_input_validation)
+    def forget_password(self, email_address):
+        try:
+            user=DBSession.query(User).filter_by(email_address=email_address).first()
+            if not user:
+                return dict(success=False, error_code=ErrorCode.NONEXISTEDUSER)
+                                                
+            log.info("Reset password: %s"%email_address)
+            reset_pwd = ResetPassword()
+            reset_pwd.email_address=email_address
+            reset_pwd.code = Registration.generate_code(email_address)
+            
+            DBSession.add(reset_pwd)
+            DBSession.flush()
+            
+            email_data = {'sender':config['registration.email_sender'],
+                      'subject':_('Message from Jminee'),
+                      'body':'''
+Please click on this link to reset your password
+
+%s
+''' % (url_for(self.mount_point+'/confirm_reset', code=reset_pwd.code, email=reset_pwd.email_address, qualified=True))}
+
+        
+            send_email(reset_pwd.email_address, email_data['sender'], email_data['subject'], email_data['body'])
+        except Exception as e:
+            log.exception('Got exception')
+            return dict(success=False)
+        return dict(success=True)
+    
+    @expose()
+    @validate(dict(code=UnicodeString(not_empty=True),
+                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=errorhtml)
+    def confirm_reset(self, email, code):
+        return redirect('/')
+    
+    
