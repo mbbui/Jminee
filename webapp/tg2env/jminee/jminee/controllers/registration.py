@@ -117,8 +117,9 @@ Please click on this link to confirm your registration
     @expose('json')
     @validate(dict(email_address=Email(not_empty=True)), 
               error_handler=ErrorController.failed_input_validation)
-    def forget_password(self, email_address):
+    def forget_password(self, *args, **kw):
         try:
+            email_address = kw['email_address']
             user=DBSession.query(User).filter_by(email_address=email_address).first()
             if not user:
                 return dict(success=False, error_code=ErrorCode.NONEXISTEDUSER)
