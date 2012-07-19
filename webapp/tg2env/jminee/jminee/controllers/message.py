@@ -28,6 +28,8 @@ log = logging.getLogger(__name__)
 class MessageController(BaseController):
     config['renderers']=['json']
     
+    MAX_TOPIC_SIZE = 20
+    
     allow_only = not_anonymous()
     
     #TODO: validate that members exist
@@ -98,9 +100,10 @@ class MessageController(BaseController):
         """
         try:
             if not kw.has_key('nums'):
-                nums = 20
+                nums = self.MAX_TOPIC_SIZE + 1 # see: https://github.com/bachbui2/Jminee/issues/7
             else:
-                nums = kw['nums']
+                #TODO: make sure kw['num'] is an int
+                nums = kw['nums'] + 1 # see: https://github.com/bachbui2/Jminee/issues/7
             
             user = request.identity['repoze.who.userid']
             log.info("User %s get topics %s"%(user, str(kw)))
@@ -148,11 +151,14 @@ class MessageController(BaseController):
                            order_by(Topic.time.desc()).\
                            limit(nums).\
                            all()
-            return dict(success=True, topics=topics)
+            if len(topics) == nums:
+                return dict(success=True, topics=topics[:nums-1], more=True)
+            else:
+                return dict(success=True, topics=topics, more=False)
         
         except Exception as e:
             #traceback.print_exc(file=sys.stdout)
-            log.exception()
+            log.exception('Got exception')
             return dict(success=False)            
     
     @expose('json')    
@@ -184,7 +190,7 @@ class MessageController(BaseController):
             
             
         except:
-            log.exception()
+            log.exception('Got exception')
             #traceback.print_exc(file=sys.stdout)
             return dict(success=False)  
 
@@ -216,6 +222,6 @@ class MessageController(BaseController):
             return dict(success=True, messages=messages)
         
         except:
-            log.exception()
+            log.exception('Got exception')
             #traceback.print_exc(file=sys.stdout)
             return dict(success=False)  
