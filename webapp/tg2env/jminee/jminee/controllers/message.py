@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 class MessageController(BaseController):
     config['renderers']=['json']
     
-    MAX_TOPIC_SIZE = 20
+    MAX_TOPIC_SIZE = MAX_MESSAGE_SIZE = 20
     
     allow_only = not_anonymous()
     
@@ -46,15 +46,16 @@ class MessageController(BaseController):
         topic.creator_name = request.identity['repoze.who.userid']
         topic.title = kw['title']
         
-        user = User.by_user_name(topic.creator_name)
-        if user == None:
+        #user = User.by_user_name(topic.creator_name)
+        #if user == None:
             #TODO: this should never happen, log this event and return only False
-            log.error('Creator %s is not in the database'%(topic.creator_name))
-                    
-        membertopic = MemberTopic(role='c', local_title=topic.title, member=user)
+            #log.error('Creator %s is not in the database'%(topic.creator_name))
+        
+        #creator is always a member of the topic            
+        membertopic = MemberTopic(role='c', local_title=topic.title, user_name=topic.creator_name)
         topic.members.append(membertopic)
         
-        nonexists_users = []
+        
         #do not change the order of the following if clause
         members = []
         if kw.has_key('members'):
@@ -63,29 +64,39 @@ class MessageController(BaseController):
             elif kw['members']!='' and isinstance(kw['members'], unicode):
                 members = [kw['members']]
         
-        try:    
-            for member in members:
+        try:
+            # check if each member is in the User table
+            # if not add him to nonexists list
+            nonexisting_users = []
+            existing_users = DBSession.query(User.user_name).filter(User.user_name.in_(members)).all()
+            existing_users = [user[0] for user in existing_users]
+            
+            log.debug(existing_users)
+            if len(existing_users)!=len(members):
+                for user in members:
+                    if user not in existing_users:
+                        log.info("User %s is not in the database"%user)
+                        nonexisting_users.append(user)   
+            
+            for member in existing_users:
                 if member == topic.creator_name:
                     continue
-                user = User.by_user_name(member)
-                # check for user existence is done here instead of in validation because 
-                # other members may be exist
-                if user == None:
-                    print 'user %s is not in the database'%(member)
-                    nonexists_users.append(member)
-                    continue
+                
                 membertopic = MemberTopic(role='r', 
                                           local_title=topic.title, 
-                                          member=user)
+                                          user_name=member)
                 topic.members.append(membertopic)
                         
             DBSession.add(topic)
             DBSession.flush()
-            if len(nonexists_users):
-                return dict(success=True, nonexists_users=nonexists_users)
-            return dict(success=True)
+            if len(nonexisting_users):
+                return dict(success=True,
+                            topic=dict(uid=topic.uid, time=topic.time), 
+                            nonexisting_users=nonexisting_users)
+            return dict(success=True,
+                        topic=dict(uid=topic.uid, time=topic.time))
         except Exception as e:
-            log.exception()
+            log.exception("Got exception")
             return dict(success=False)                
     
     @expose('json')
@@ -103,7 +114,7 @@ class MessageController(BaseController):
                 nums = self.MAX_TOPIC_SIZE + 1 # see: https://github.com/bachbui2/Jminee/issues/7
             else:
                 #TODO: make sure kw['num'] is an int
-                nums = kw['nums'] + 1 # see: https://github.com/bachbui2/Jminee/issues/7
+                nums = int(kw['nums']) + 1 # see: https://github.com/bachbui2/Jminee/issues/7
             
             user = request.identity['repoze.who.userid']
             log.info("User %s get topics %s"%(user, str(kw)))
@@ -186,9 +197,8 @@ class MessageController(BaseController):
             
             DBSession.add(message)
             DBSession.flush()
-            return dict(success=True)
-            
-            
+            return dict(success=True, message=dict(uid=message.uid, time=message.time))
+                        
         except:
             log.exception('Got exception')
             #traceback.print_exc(file=sys.stdout)
@@ -200,17 +210,19 @@ class MessageController(BaseController):
     def get_messages(self, **kw):
         try:
             #check if user is a member of this topic
+            user_name = request.identity['repoze.who.userid']
             user = DBSession.query(MemberTopic).\
                            filter(MemberTopic.topic_id==kw['topic_id'], 
-                                  MemberTopic.user_name==request.identity['repoze.who.userid']).\
+                                  MemberTopic.user_name==user_name).\
                            first()   
             
             if not user:
-                #TODO: this should never happen, log this event and return only False
+                #This should never happen
+                log.error("User %s is not a member of topic %s"%(user_name,kw['topic_id']))
                 return dict(success=False, error_code=ErrorCode.UNAUTHORIZED)
             
             if not kw.has_key('nums'):
-                nums = 20
+                nums = self.MAX_MESSAGE_SIZE
             else:
                 nums = kw['nums']
                 
