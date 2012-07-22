@@ -11,19 +11,27 @@ except ImportError:
 __all__ = ['Message']
 
 from sqlalchemy import Table, ForeignKey, Column
-from sqlalchemy.types import Unicode, Integer, DateTime, String
+from sqlalchemy.types import Unicode, Integer, Boolean, DateTime, String
 from sqlalchemy.orm import backref, relation
 
 from jminee.model import DeclarativeBase, metadata, DBSession
 from jminee.model.auth import User
 from jminee.model.topic import Topic
 
-#member_message_table = Table('member_message', metadata,
-#    Column('user_name', Unicode(16), ForeignKey('tg_user.user_name',
-#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True),
-#    Column('message_id', Integer, ForeignKey('message.uid',
-#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
-#)
+class MemberMessage(DeclarativeBase):
+    __tablename__ = "member_message"
+
+    user_name = Column(Unicode(255), ForeignKey('tg_user.user_name',
+        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+    message_id = Column(Integer, ForeignKey('message.uid',
+        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+    read = Column(Boolean, default=False)
+    delete = Column(Boolean, default=False)                         
+    #member = relation(User, backref='member_message')
+    
+    def __repr__(self):
+        return ('<MemberMessage: user_name=%s, message_id=%s, read=%s, delete=%s>' % (
+                self.user_name, self.message_id, self.read, self.delete)).encode('utf-8')
 
 class Message(DeclarativeBase):
     __tablename__ = 'message'
@@ -40,8 +48,9 @@ class Message(DeclarativeBase):
     creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))
     creator = relation(User, backref=backref('message', cascade='all'))
     
+    #members = relation(MemberMessage, backref='message')
 #    members = relation('User', secondary=member_message_table, backref='messages') 
     
     def __repr__(self):
-        return ('<Message: uid=%d, time=%s, subject=%s, creator name=%d>' % (
+        return ('<Message: uid=%d, time=%s, subject=%s, creator name=%s>' % (
                 self.uid, self.time, self.subject, self.creator_name)).encode('utf-8')
