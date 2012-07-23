@@ -119,7 +119,7 @@ class MessageController(BaseController):
                            join(MemberTopic).\
                            filter(Topic.title==kw['title']).\
                            filter(MemberTopic.user_name==user).\
-                           order_by(Topic.time.desc()).\
+                           order_by(Topic.update_time.desc()).\
                            limit(nums).\
                            all()                            
             elif kw.has_key('max_time') and kw.has_key('min_time'): 
@@ -129,7 +129,7 @@ class MessageController(BaseController):
                        join(MemberTopic).\
                        filter(sql.between(Topic.time, min_time, max_time)).\
                        filter(MemberTopic.user_name==user).\
-                       order_by(Topic.time.desc()).\
+                       order_by(Topic.update_time.desc()).\
                        limit(nums).\
                        all()                                                
             elif kw.has_key('max_time'):
@@ -138,7 +138,7 @@ class MessageController(BaseController):
                        join(MemberTopic).\
                        filter(Topic.time<=max_time).\
                        filter(MemberTopic.user_name==user).\
-                       order_by(Topic.time.desc()).\
+                       order_by(Topic.update_time.desc()).\
                        limit(nums).\
                        all()
             elif kw.has_key('min_time'):
@@ -147,14 +147,14 @@ class MessageController(BaseController):
                        join(MemberTopic).\
                        filter(Topic.time>=min_time).\
                        filter(MemberTopic.user_name==user).\
-                       order_by(Topic.time.desc()).\
+                       order_by(Topic.update_time.desc()).\
                        limit(nums).\
                        all()
             else: 
                 topics = DBSession.query(Topic).\
                            join(MemberTopic).\
                            filter(MemberTopic.user_name==user).\
-                           order_by(Topic.time.desc()).\
+                           order_by(Topic.update_time.desc()).\
                            limit(nums).\
                            all()
             if len(topics) == nums:
