@@ -157,10 +157,22 @@ class MessageController(BaseController):
                            order_by(Topic.update_time.desc()).\
                            limit(nums).\
                            all()
+            
+            more = False
             if len(topics) == nums:
-                return dict(success=True, topics=topics[:nums-1], more=True)
-            else:
-                return dict(success=True, topics=topics, more=False)
+                topics = topics[:nums-1]
+                more = True
+            
+            for topic in topics:
+                new_msg_cnt = DBSession.query(MemberMessage).\
+                            join(Message).\
+                            filter(MemberMessage.user_name==user).\
+                            filter(Message.topic_id==topic.uid).\
+                            filter(MemberMessage.read==False).count()
+                topic.new_msg = new_msg_cnt
+                log.info(new_msg_cnt)
+                    
+            return dict(success=True, topics=topics, more=more)
         
         except Exception as e:
             #traceback.print_exc(file=sys.stdout)
