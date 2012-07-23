@@ -62,4 +62,4 @@ def init_model(engine):
 from jminee.model.auth import User, Group, Permission
 from jminee.model.registration import Registration, ResetPassword
 from jminee.model.topic import Topic, MemberTopic
-from jminee.model.message import Message
+from jminee.model.message import Message, MemberMessage

@@ -16,7 +16,7 @@ from repoze.what.predicates import not_anonymous
 
 
 from jminee.lib.base import BaseController
-from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Message
+from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Message, MemberMessage
 
 from formencode.validators import UnicodeString, ConfirmType, Int
 from jminee.lib import validators
@@ -45,11 +45,6 @@ class MessageController(BaseController):
         topic = Topic()
         topic.creator_name = request.identity['repoze.who.userid']
         topic.title = kw['title']
-        
-        #user = User.by_user_name(topic.creator_name)
-        #if user == None:
-            #TODO: this should never happen, log this event and return only False
-            #log.error('Creator %s is not in the database'%(topic.creator_name))
         
         #creator is always a member of the topic            
         membertopic = MemberTopic(role='c', local_title=topic.title, user_name=topic.creator_name)
@@ -82,10 +77,10 @@ class MessageController(BaseController):
                 if member == topic.creator_name:
                     continue
                 
-                membertopic = MemberTopic(role='r', 
+                member_topic = MemberTopic(role='r', 
                                           local_title=topic.title, 
                                           user_name=member)
-                topic.members.append(membertopic)
+                topic.members.append(member_topic)
                         
             DBSession.add(topic)
             DBSession.flush()
@@ -184,10 +179,12 @@ class MessageController(BaseController):
                                   MemberTopic.user_name==request.identity['repoze.who.userid'],
                                   'role = "c" or role = "s"').\
                            first()      
+            
             if not creator:
                 #TODO: this should never happen, log this event and return only False
                 return dict(success=False, error_code=ErrorCode.UNAUTHORIZED)
             
+            #add new message to the database
             message = Message()
             message.topic_id = kw['topic_id']
             message.subject = kw['subject']
@@ -197,6 +194,22 @@ class MessageController(BaseController):
             
             DBSession.add(message)
             DBSession.flush()
+            
+            #update member_message database
+            members = DBSession.query(MemberTopic).\
+                            filter(MemberTopic.topic_id==kw['topic_id']).all()
+            
+            for member in members:
+                if member == creator:
+                    member_msg = MemberMessage(user_name = member.user_name,
+                                           message_id = message.uid,
+                                           read = True)
+                else:
+                    member_msg = MemberMessage(user_name = member.user_name,
+                                               message_id = message.uid) 
+                message.members.append(member_msg)
+            
+            log.info("User %s creates message %s"%(creator.user_name, message))
             return dict(success=True, message=dict(uid=message.uid, time=message.time))
                         
         except:

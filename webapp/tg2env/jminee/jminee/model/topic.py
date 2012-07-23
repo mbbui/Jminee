@@ -11,7 +11,7 @@ except ImportError:
 __all__ = ['Topic', 'MemberTopic']
 
 from sqlalchemy import Table, ForeignKey, Column
-from sqlalchemy.types import Unicode, Integer, DateTime, String
+from sqlalchemy.types import Unicode, Integer, DateTime, String, Boolean     
 from sqlalchemy.orm import backref, relation
 
 from jminee.model import DeclarativeBase, metadata, DBSession
@@ -25,7 +25,8 @@ class MemberTopic(DeclarativeBase):
         onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
     role = Column(String(2), nullable=False, default='r')
     local_title = Column(Unicode(255), nullable=False)
-    member = relation(User, backref='membertopic')
+    delete = Column(Boolean, default=False)  
+    #member = relation(User, backref='member_topic')
         
 class Topic(DeclarativeBase):
     __tablename__ = 'topic'

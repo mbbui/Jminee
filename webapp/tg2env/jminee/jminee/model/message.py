@@ -32,7 +32,11 @@ class MemberMessage(DeclarativeBase):
     def __repr__(self):
         return ('<MemberMessage: user_name=%s, message_id=%s, read=%s, delete=%s>' % (
                 self.user_name, self.message_id, self.read, self.delete)).encode('utf-8')
-
+                
+    def __str__(self):
+        return ('<MemberMessage: user_name=%s, message_id=%s, read=%s, delete=%s>' % (
+                self.user_name, self.message_id, self.read, self.delete)).encode('utf-8')
+                
 class Message(DeclarativeBase):
     __tablename__ = 'message'
 
@@ -48,9 +52,13 @@ class Message(DeclarativeBase):
     creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))
     creator = relation(User, backref=backref('message', cascade='all'))
     
-    #members = relation(MemberMessage, backref='message')
+    members = relation(MemberMessage, backref='message')
 #    members = relation('User', secondary=member_message_table, backref='messages') 
     
     def __repr__(self):
-        return ('<Message: uid=%d, time=%s, subject=%s, creator name=%s>' % (
+        return ('<Message: uid=%d, time=%s, subject=%s, creator_name=%s>' % (
+                self.uid, self.time, self.subject, self.creator_name)).encode('utf-8')
+    
+    def __str__(self):
+        return ('<Message: uid=%d, time=%s, subject=%s, creator_name=%s>' % (
                 self.uid, self.time, self.subject, self.creator_name)).encode('utf-8')
