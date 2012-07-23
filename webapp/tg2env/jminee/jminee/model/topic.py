@@ -32,9 +32,10 @@ class Topic(DeclarativeBase):
     __tablename__ = 'topic'
 
     uid = Column(Integer, autoincrement=True, primary_key=True)
-    time = Column(DateTime, default=datetime.now().replace(microsecond=0))
+    time = Column(DateTime, default=datetime.now().replace(microsecond=0),nullable=False)
     title = Column(Unicode(255), nullable=False)
-    creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))    
+    creator_name = Column(Unicode(255), ForeignKey(User.__mapper__.primary_key[1]))
+    update_time = Column(DateTime, default=datetime.now().replace(microsecond=0), nullable=False)
     members = relation(MemberTopic, backref='topic')
     
     #{ Special methods

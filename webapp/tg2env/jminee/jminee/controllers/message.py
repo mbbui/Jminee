@@ -209,6 +209,10 @@ class MessageController(BaseController):
                                                message_id = message.uid) 
                 message.members.append(member_msg)
             
+            topic = DBSession.query(Topic).\
+                            filter(Topic.uid==kw['topic_id']).first()
+            topic.update_time = message.time                
+                            
             log.info("User %s creates message %s"%(creator.user_name, message))
             return dict(success=True, message=dict(uid=message.uid, time=message.time))
                         
