@@ -41,7 +41,7 @@ class Message(DeclarativeBase):
     __tablename__ = 'message'
 
     uid = Column(Integer, autoincrement=True, primary_key=True)
-    time = Column(DateTime, default=datetime.now)
+    time = Column(DateTime, default=datetime.now().replace(microsecond=0))
     subject = Column(Unicode(255), nullable=False)
     content = Column(Unicode(5000), nullable=True)
 
