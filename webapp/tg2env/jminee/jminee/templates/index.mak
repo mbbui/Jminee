@@ -18,11 +18,7 @@
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
         <script src="/javascript/creation.js" type="text/javascript"></script>
         <script src="/javascript/login.js" type="text/javascript"></script>
-<!--        <script>-->
-<!--			$(function() {-->
-<!--				$( "#accordion" ).accordion();-->
-<!--		});-->
-<!--		</script>-->
+        <script src="/javascript/views.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -54,7 +50,7 @@
 					
         		</div>
         		
-                <div class="row">
+                <div id="subject_list" class="row">
                     <div class="span3">
                     	<ul class="nav nav-pills nav-stacked">
 					       	<li> <a href="#">Practice <i class="icon-comment  pull-right"></i></a> </li>
