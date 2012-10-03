@@ -56,40 +56,16 @@
         		
                 <div class="row">
                     <div class="span3">
-                        <div class="accordion" id="accordion2">
-						  <div class="accordion-group">
-						    <div class="accordion-heading">
-						      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-						       <i class="icon-comment"></i>
-						      </a>
-						    </div>
-						    <div id="collapseOne" class="accordion-body collapse in">
-						      <div class="accordion-inner">
-							      <ul class="nav nav-pills nav-stacked">
-							        <li class="active"> <a href="#">Practice</a> </li>
-							        <li> <a href="#">Goalkeeper gloves</a> </li>
-							      </ul>
-						      </div>
-						    </div>
-						  </div>
-						  <div class="accordion-group">
-						    <div class="accordion-heading">
-						      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-						        <i class="icon-list-alt"></i>						        
-						      </a>
-						    </div>
-						    <div id="collapseTwo" class="accordion-body collapse">
-						      <div class="accordion-inner">
-						      	<ul class="nav nav-pills nav-stacked">
-							      	<li> <a href="#">Registration</a></li>								
-							    	<li> <a href="#">Expense</a></li>
-						    	</ul>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-						
+                    	<ul class="nav nav-pills nav-stacked">
+					       	<li> <a href="#">Practice <i class="icon-comment  pull-right"></i></a> </li>
+					       	<li> <a href="#">Goalkeeper gloves <i class="icon-comment pull-right"></i></a></li>
+					       	<li class="active"> <a href="#">Registration <i class="icon-comment pull-right"></i>
+					       			<i class="icon-list-alt pull-right"></i></a></li>								
+							<li> <a href="#">Expense <i class="icon-comment pull-right"></i>
+									<i class="icon-list-alt pull-right"></i></a></li>
+					    </ul>
                     </div>
+
                     <div class="span9">
                     	<div class="well  well-small">
                     	 BRING WATER. there's no water fountain as far as we know.
@@ -112,6 +88,41 @@ START 3pm (be at the field by 3pm)
 
 at OUTDOOR TURF fields (1st & stadium, champaign)
                     	</div>
+                    	
+                    	<div class="well  well-small">
+                    	<h4>Registration</h4>
+                    	<table class="table table-bordered">
+                    		<thead>
+                    			<tr>
+                    				<td>#</td>
+                    				<td>Name</td>
+                    				<td>Participate</td>
+                    			</tr>
+                    		</thead>
+ 							<tbody>
+                    			<tr class="info">
+                    				<td>1.</td>
+                    				<td>Mark</td>
+                    				<td>Yes</td>
+                    			</tr>
+                    			<tr>
+                    				<td>2.</td>
+                    				<td>Phil</td>
+                    				<td>No</td>
+                    			</tr>
+                    			<tr class="info">
+                    				<td>3.</td>
+                    				<td>Alex</td>
+                    				<td>Yes</td>
+                    			</tr>
+                    			<tr class="info">
+                    				<td>4.</td>
+                    				<td>Bach</td>
+                    				<td>Yes</td>
+                    			</tr>
+                    		</tbody>
+						</table>                 
+						</div>
                     	<div class="well  well-small">
                     	 	<form class="form-horizontal">
                     	 		<div class="control-group">
@@ -125,7 +136,8 @@ at OUTDOOR TURF fields (1st & stadium, champaign)
 							  		</div>
 							  	</div>
 							</form>
-                    	</div>                       
+                    	</div>      
+                    	
                     </div>
                 </div>
             </section>
