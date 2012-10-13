@@ -22,8 +22,8 @@
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
         <script src="/javascript/creation.js" type="text/javascript"></script>
         <script src="/javascript/login.js" type="text/javascript"></script>
-        <script src="/javascript/views.js" type="text/javascript"></script>
         <script src="/javascript/controllers.js" type="text/javascript"></script>
+        <script src="/javascript/views.js" type="text/javascript"></script>        
     </head>
 
     <body>
