@@ -6,9 +6,11 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+		
+		<link type="text/css" rel="stylesheet" href="/css/styles.css">
         <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.min.css">
-        <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+        
 
         <script type="text/javascript" src="/javascript/jquery-1.7.2.js"></script>
         <script type="text/javascript" src="/javascript/handlebars-1.0.rc.1.js"></script>
@@ -34,32 +36,17 @@
                     <a class="brand pull-left" href="#">
                         Jminee
                     </a>
-                    <form class="navbar-search pull-right">
+                   <!--  <form class="navbar-search pull-right">
 						<input type="text" class="input-medium search-query" placeholder="Search...">
-					</form>
+					</form> -->
                 </div>
             </div>
         </div>
         <!-- /navbar -->
 
-        <!-- topic page -->
-        <div class="container">
-        	<section>
-        	 	<div class="row ">
-        			<div class="span12">        				
-       					<ul class="breadcrumb">
-      						<li><a href="#">Main</a> <span class="divider">></span></li>
-  							<li class="active"><a href="#">Soccer Tournament</a> </li>
-						</ul>												
-					</div>
-					
-        		</div>
-        		
-                <div id="topic_view" class="row">
-                </div>
-            </section>
+        <div class="container" id="main_container">
+        	
         </div>
-        <!-- topic page -->
     </body>
 
 </html>
