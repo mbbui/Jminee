@@ -87,12 +87,11 @@ $(window).load(function() {
 	});
 
 	Jminee.SubjectEditView = Jminee.SubjectContentView.extend({
-		content: function(){
-			var str='\
-			<form class="form-horizontal">\
+		template: Ember.Handlebars.compile(
+			'<form class="form-horizontal">\
 		 		<div class="control-group">\
 		 			<div class="control">\
-		 				<textarea class="span8" rows="3" placeholder="Type your message"></textarea> \
+						{{view Jminee.TextArea span="span8" valueBinding="Jminee.textAreaController.text"}}\
 					</div>\
 			  	</div>\
 			  	<div class="control-group">\
@@ -100,9 +99,7 @@ $(window).load(function() {
 			  			<button  class="control" type="submit" class="btn">Submit</button>\
 			  		</div>\
 			  	</div>\
-			</form>'
-			return new Handlebars.SafeString(str);
-		}.property()
+			</form>'),
 	});
 
 	Jminee.subjectListView = Ember.View.create({
@@ -140,9 +137,7 @@ $(window).load(function() {
 												{{/view}}\
 											{{/if}}\
 											{{/each}}\
-											{{#view Jminee.SubjectEditView}}\
-												{{view.content}}\
-											{{/view}}')
+											{{view Jminee.SubjectEditView}}')
 	});
 	
 	
@@ -184,7 +179,12 @@ $(window).load(function() {
 	Jminee.composeButtonView = Ember.View.create({
 		tagName: 'button',
 		classNames: ['toolbox', 'btn', 'btn-small'],
-		template: Ember.Handlebars.compile('<img src="/images/icons/edit.png" alt="">')
+		template: Ember.Handlebars.compile('<img src="/images/icons/edit.png">'),
+		eventManager: Ember.Object.create({
+			  click: function(event, view){
+				  Jminee.editView.$().modal('show');
+			  }
+		}),
 	});
 	
 	Jminee.searchBoxView = Ember.View.create({
@@ -196,7 +196,7 @@ $(window).load(function() {
 	Jminee.composeButtonContainer = Ember.ContainerView.create({
 		tagName: 'div',
 		classNames: ['span4', 'whitesmoke' ],
-		childViews: [Jminee.composeButtonView, Jminee.searchBoxView]	
+		childViews: [Jminee.composeButtonView, Jminee.searchBoxView],
 	});
 	
 	Jminee.contentNavContainer = Ember.ContainerView.create({
@@ -206,29 +206,7 @@ $(window).load(function() {
 	});
 	
 	Jminee.contentNavContainer.appendTo("#main_container");
-	
-	/*********************************************	
-	/*		edit view
-	/*********************************************/	
-	Jminee.editView = Ember.View.create({
-		tagName: 'div',
-		classNames: ['modal', 'hide', 'fade'],
-		layout:  Ember.Handlebars.compile('<div class="modal-header">\
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-						<h3>Modal header</h3>\
-					</div>\
-					<div class="modal-body">\
-						<p>One fine body…</p>\
-					</div>\
-					<div class="modal-footer">\
-						<a href="#" class="btn">Close</a>\
-						<a href="#" class="btn btn-primary">Save changes</a>\
-					</div>') 
-	});
-	
-	 
-	
-	
+		
 	/*********************************************	
 	/*		topic view
 	/*********************************************/	
@@ -284,4 +262,17 @@ $(window).load(function() {
 //	Jminee.mainView.changeChildView([Jminee.subjectListContainer,Jminee.subjectContentListView]);
 //	Jminee.mainView.changeChildView([Jminee.topicListContainer]);
 	
-})
+	
+});
+
+function showModal(elem){
+	elem.$("input")[0].focus();
+};
+
+//$(window).ready(function(){
+//	window.Jminee.editView.$().on('show', function(){
+//		window.Jminee.editView.$('input')[0].focus();
+//	});
+//	window.Jminee.editView.$().modal('show');
+//});
+

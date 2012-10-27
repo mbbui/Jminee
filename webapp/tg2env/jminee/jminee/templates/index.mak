@@ -25,7 +25,9 @@
         <script src="/javascript/creation.js" type="text/javascript"></script>
         <script src="/javascript/login.js" type="text/javascript"></script>
         <script src="/javascript/controllers.js" type="text/javascript"></script>
-        <script src="/javascript/views.js" type="text/javascript"></script>        
+        <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
+        <script src="/javascript/views.js" type="text/javascript"></script>
+        <script src="/javascript/editviews.js" type="text/javascript"></script>        
     </head>
 
     <body>
@@ -36,16 +38,11 @@
                     <a class="brand pull-left" href="#">
                         Jminee
                     </a>
-                   <!--  <form class="navbar-search pull-right">
-						<input type="text" class="input-medium search-query" placeholder="Search...">
-					</form> -->
                 </div>
             </div>
         </div>
         <!-- /navbar -->
-
         <div class="container" id="main_container">
-        	
         </div>
     </body>
 

@@ -68,7 +68,8 @@ $(window).load(function() {
     	}
     }); 
     Jminee.topicListController = Ember.ArrayController.create({content:[Jminee.TopicController.create({title: 'Soccer Tournament'}),
-                                                                        Jminee.TopicController.create({title: 'CS431'})]});
+                                                                        Jminee.TopicController.create({title: 'CS431'}),
+                                                                        Jminee.TopicController.create({title: 'Drafts'})]});
     
     /*********************************************	
 	/*		topic nav controller
@@ -109,6 +110,7 @@ $(window).load(function() {
 //                                             Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'})]);
     Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Main', mainViewName: 'topic'}));
 //    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'}));
-
+    
+    
 });
 
