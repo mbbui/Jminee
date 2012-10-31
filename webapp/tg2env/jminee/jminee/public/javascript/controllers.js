@@ -42,8 +42,8 @@ $(window).load(function() {
     
     var content3=[Jminee.SubjectContentController.create({sender: 'Bach', createdDate:'12/01/02', message: 'Please register for this tournament'}),
                   Jminee.SubjectTblContentController.create({sender: 'Bach', createdDate:'01', message: '',
-                	  table: {title: 'Registration', header: ['#','Name','Will join'], data: [['1','Bach','Y'],['2','Alex','N']]
-               	   		}})];
+                	  table: {title: 'Registration', header: ['#','Name','Will join'], data: [['1','Bach','Y'],['2','Alex','N']]}
+                  })];
     
     Jminee.subjectListController = Jminee.SubjectListController.create();
     Jminee.subjectListController.set('content',[Jminee.SubjectController.create({title: 'Practice', createdDate:'01', including: Jminee.MSG,

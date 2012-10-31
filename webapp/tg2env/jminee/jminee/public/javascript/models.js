@@ -7,7 +7,7 @@ $(window).load(function() {
         Jminee.Models = {};
     }
 
-    Jminee.Models.user = Ember.Object.extend({
+    Jminee.Models.User = Ember.Object.extend({
         'pic'       : 'http://www.sampleurl.com/sampleimage.jpg',
         'userID'    : 'default',
         'lastName'  : 'Shmoe',
@@ -16,7 +16,8 @@ $(window).load(function() {
         }.property(),
         'firstName' : 'Joe'
     });
-
+    Jminee.user = Jminee.Models.User.create({'lastName': 'Bui', 'firstName': 'Bach'});
+    
     Jminee.Models.message = Ember.Object.extend({
         'msgID'   : '1234ABCD',
         'isRead'  : false,

@@ -6,9 +6,9 @@ $(window).load(function() {
 	/*********************************************	
 	/*		review view
 	/*********************************************/
-	Jminee.reviewView = ember.View.create({
-		
-	})
+//	Jminee.ReviewView = Jminee.SubjectTblContentView.extend({
+//		table: {header: ['#','Name']},
+//	});
 	
 	/*********************************************	
 	/*		edit view
@@ -33,12 +33,6 @@ $(window).load(function() {
 			  focusIn: function(event, view){				
 			  }, 
 		}),
-//		textChanged: function(){
-//			  var str = $.trim(this.value);
-//			  if (str.match('#[tT]able().*$')){
-//				  console.log(str);  
-//			  }
-//		  }.observes('value'), 
 	});
 	Jminee.editView = Ember.View.create({
 		tagName: 'div',
@@ -76,77 +70,5 @@ $(window).load(function() {
 				</div>'
 			)
 	});
-	Jminee.editView.appendTo("#main_container");
-	
-
-	
-	
-	/*********************************************	
-	/*		topic view
-	/*********************************************/	
-	Jminee.TopicView = Ember.View.extend({
-		tagName: 'li',
-		layout: Ember.Handlebars.compile('<a href="#" class="thumbnail">\
-				<img src="http://placehold.it/160x120" alt="">\
-				<p>{{yield}}</p></a>'),
-		classNames: ['span2'],
-		eventManager: Ember.Object.create({
-			  click: function(event, view){
-				  	view.get('controller').selected();
-			  }
-		}),
-		
-		content: function(){
-			var str=this.title;
-			return new Handlebars.SafeString(str); 
-		}.property()
-	});
-	
-	Jminee.topicListView = Ember.View.create({
-		tagName: 'ul',
-		classNames: ['thumbnails'],
-		template: Ember.Handlebars.compile('{{#each Jminee.topicListController}}\
-												{{#view Jminee.TopicView title=title controller=this}}\
-													{{view.content}}\
-												{{/view}}\
-											{{/each}}'),
-	});
-	
-	Jminee.topicListContainer = Ember.ContainerView.create({
-		tagName: 'div',
-		classNames: ['span12'],
-		childViews: [Jminee.topicListView]
-	});
-
-
-	/*********************************************	
-	/*		main view
-	/*********************************************/	
-	Jminee.currentMainViewName = 'topic';
-	Jminee.mainView = Ember.ContainerView.create({
-			tagName: 'div',
-			classNames: ['row'],
-			mainViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectListContainer,Jminee.subjectContentListView]},
-			changeChildView: function(){
-				while(this.get('childViews').popObject());
-				this.get('childViews').pushObjects(this.mainViewsDict[Jminee.topicNavController.mainViewName]); 
-			}.observes('Jminee.topicNavController.mainViewName')
-	});
-	Jminee.mainView.appendTo("#main_container");
-//	Jminee.mainView.changeChildView([Jminee.subjectListContainer,Jminee.subjectContentListView]);
-//	Jminee.mainView.changeChildView([Jminee.topicListContainer]);
-	
-	
+	Jminee.editView.appendTo("#main_container");	
 });
-
-function showModal(elem){
-	elem.$("input")[0].focus();
-};
-
-//$(window).ready(function(){
-//	window.Jminee.editView.$().on('show', function(){
-//		window.Jminee.editView.$('input')[0].focus();
-//	});
-//	window.Jminee.editView.$().modal('show');
-//});
-

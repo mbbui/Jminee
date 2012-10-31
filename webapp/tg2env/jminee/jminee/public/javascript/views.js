@@ -47,43 +47,33 @@ $(window).load(function() {
 	Jminee.SubjectContentView = Ember.View.extend({
 		tagName: 'div',
 		classNames: ['well  well-small'],
-		content: function(){
-			if (!this.viewed){
-				this.classNames = ['well  well-small'];
-			}
-			var str='';
-			str+='<a href="#">'+this.sender+'</a>: '+this.message;
-			if (this.table){
-				str+=this.tblView();
-			}
-			
-			return new Handlebars.SafeString(str);
-		}.property()
+		template: Ember.Handlebars.compile(
+			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
+				{{#if message}}{{message}}{{/if}}'),
 	});
 
 	Jminee.SubjectTblContentView = Jminee.SubjectContentView.extend({
-		tblView: function(){
-			var str='<h4>'+this.table.title+'</h4>';
-			str+='<table class="table table-bordered">';
-			str+='<thead><tr>';
-			var header = this.table.header;
-			for (i=0; i<header.length; i++){
-				str+='<td><h5>'+header[i]+'</h5></td>';			
-			}
-			str+='</tr></thead>';
-			str+='<tbody>';
-			var data = this.table.data
-			for (i=0; i<data.length; i++){
-				str+='<tr>';
-				row = data[i];
-				for (j=0; j<row.length; j++){
-					str+='<td>'+row[j]+'</td>';
-				}
-				str+='</tr>';
-			}
-			str+='</tbody></table>';
-			return str;
-		}
+		template: function(){
+			return Ember.Handlebars.compile(
+			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
+			{{#if message}}{{message}}{{/if}}\
+			{{#if table.title}}<h4>{{table.title}}</h4>{{/if}}\
+			<table class="table table-bordered">\
+			<thead><tr>\
+			{{#each header in table.header}}\
+				<td><h5>{{header}}</h5></td>\
+			{{/each}}\
+			</tr></thead>\
+			<tbody>\
+			{{#each row in table.data}}\
+				<tr>\
+					{{#each col in row}}\
+						<td>{{col}}</td>\
+					{{/each}}\
+				</tr>\
+			{{/each}}\
+			</tbody></table>'
+		)}.observes('table').property(),
 	});
 
 	Jminee.SubjectEditView = Jminee.SubjectContentView.extend({
@@ -126,20 +116,25 @@ $(window).load(function() {
 		classNames: ['span9'],
 		template: Ember.Handlebars.compile('{{#each Jminee.subjectContentListController}}\
 											{{#if table}}\
-												{{#view Jminee.SubjectTblContentView sender=sender\
-														createdDate=createdDate message=message table=table viewed=viewed}}\
-													{{view.content}}\
-												{{/view}}\
+												{{view Jminee.SubjectTblContentView}}\
 											{{else}}\
-												{{#view Jminee.SubjectContentView sender=sender\
-														createdDate=createdDate message=message viewed=viewed}}\
-													{{view.content}}\
-												{{/view}}\
+												{{view Jminee.SubjectContentView}}\
 											{{/if}}\
 											{{/each}}\
+											{{#with Jminee.reviewController}}\
+												{{view Jminee.SubjectTblContentView tableBinding="table" visibilityBinding="visibility"}}\
+											{{/with}}\
 											{{view Jminee.SubjectEditView}}')
 	});
 	
+	/*********************************************	
+	/*		review view
+	/*********************************************/
+	Jminee.ReviewView = Jminee.SubjectTblContentView.extend({
+		changeVisibility: function(){
+			this.$().style.visibility=this.visibility;
+		}.observes("visibility"),
+	});
 	
 	/*********************************************	
 	/*		topic nav view
@@ -264,15 +259,3 @@ $(window).load(function() {
 	
 	
 });
-
-function showModal(elem){
-	elem.$("input")[0].focus();
-};
-
-//$(window).ready(function(){
-//	window.Jminee.editView.$().on('show', function(){
-//		window.Jminee.editView.$('input')[0].focus();
-//	});
-//	window.Jminee.editView.$().modal('show');
-//});
-

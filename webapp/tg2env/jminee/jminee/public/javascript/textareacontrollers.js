@@ -4,16 +4,33 @@ $(window).load(function() {
     };
 	
     Jminee.FunctionStr = Ember.Object.create({
-    	functionKey: '#',
-    	functionStrs: ['[tT]able.*$'],
+    	formTypes: {table: {matchStr:'#table', preForm:['#','Members']}},
     	match: function(str){
-    		for(var i=0; i<this.functionStrs.length; i++){
-    			if (str.match(this.functionKey+this.functionStrs[i])){
-    				return true;
+    		for(type in this.formTypes){
+    			if (str.match(this.formTypes[type]['matchStr'])){
+    				return type;
     			}
     		}
     		return false;
-    	},    	
+    	},
+    	getHeader: function(type, str){
+    		var formType = this.formTypes[type];
+    		var tmpStr = str.replace(formType['matchStr']+'(', '');
+    		var matchArray = tmpStr.match('[^,)]*(?=[,)]){1}');
+    		var fields = formType['preForm'].slice();
+    		var matchStr;
+    		while (matchArray){
+    			 matchStr = matchArray[0];
+    			 fields.push(matchStr);
+    			 tmpStr = tmpStr.replace(matchStr, '');
+    			 if (tmpStr[0]==')'){
+    				 return fields;
+    			 }
+    			 tmpStr = tmpStr.replace(',', '');
+    			 matchArray = tmpStr.match('[^,)]*(?=[,)]){1}');
+    		}
+    		return fields;
+    	}
     });
     
     /*********************************************	
@@ -22,10 +39,20 @@ $(window).load(function() {
     Jminee.textAreaController = Ember.Controller.create({
 		textChanged: function(){
 			var str = $.trim(this.text);
-			if (Jminee.FunctionStr.match(str)){
-				console.log(str);  
+			var type = Jminee.FunctionStr.match(str);
+			if (type){
+				if (!Jminee.reviewController.visible)
+					Jminee.reviewController.set('visibility','show');
+				Jminee.reviewController.set('table', {header: Jminee.FunctionStr.getHeader(type, str)});
+			}
+			else{
+				Jminee.reviewController.set('visibility','hidden');
 			}
 		}.observes('text'), 
 	});
-    
+  
+    Jminee.reviewController = Ember.Controller.create({
+    	visibility: 'hidden',
+		message: 'Review'
+    });
 });
