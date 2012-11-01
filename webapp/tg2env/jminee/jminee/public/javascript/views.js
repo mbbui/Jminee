@@ -53,8 +53,7 @@ $(window).load(function() {
 	});
 
 	Jminee.SubjectTblContentView = Jminee.SubjectContentView.extend({
-		template: function(){
-			return Ember.Handlebars.compile(
+		template: Ember.Handlebars.compile(
 			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
 			{{#if message}}{{message}}{{/if}}\
 			{{#if table.title}}<h4>{{table.title}}</h4>{{/if}}\
@@ -73,7 +72,7 @@ $(window).load(function() {
 				</tr>\
 			{{/each}}\
 			</tbody></table>'
-		)}.observes('table').property(),
+		),
 	});
 
 	Jminee.SubjectEditView = Jminee.SubjectContentView.extend({
@@ -122,7 +121,7 @@ $(window).load(function() {
 											{{/if}}\
 											{{/each}}\
 											{{#with Jminee.reviewController}}\
-												{{view Jminee.SubjectTblContentView tableBinding="table" visibilityBinding="visibility"}}\
+												{{view Jminee.SubjectTblContentView tableBinding="table"}}\
 											{{/with}}\
 											{{view Jminee.SubjectEditView}}')
 	});
