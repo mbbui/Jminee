@@ -41,18 +41,17 @@ $(window).load(function() {
 			var str = $.trim(this.text);
 			var type = Jminee.FunctionStr.match(str);
 			if (type){
-				if (!Jminee.reviewController.visible)
-					Jminee.reviewController.set('visibility','show');
+				if (!Jminee.reviewController.visibility)
+					Jminee.reviewController.set('visibility',true);
 				Jminee.reviewController.set('table', {header: Jminee.FunctionStr.getHeader(type, str)});
 			}
 			else{
-				Jminee.reviewController.set('visibility','hidden');
+				
 			}
 		}.observes('text'), 
 	});
   
     Jminee.reviewController = Ember.Controller.create({
-    	visibility: 'hidden',
-		message: 'Review'
+		message: 'Review',
     });
 });
