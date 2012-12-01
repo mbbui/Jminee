@@ -27,7 +27,7 @@
         <script src="/javascript/controllers.js" type="text/javascript"></script>
         <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
         <script src="/javascript/views.js" type="text/javascript"></script>
-        <script src="/javascript/editviews.js" type="text/javascript"></script>        
+        <script src="/javascript/composeviews.js" type="text/javascript"></script>        
     </head>
 
     <body>

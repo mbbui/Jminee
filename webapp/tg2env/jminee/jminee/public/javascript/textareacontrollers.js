@@ -36,22 +36,23 @@ $(window).load(function() {
     /*********************************************	
 	/*		text area controller
 	/*********************************************/ 
-    Jminee.textAreaController = Ember.Controller.create({
-		textChanged: function(){
+    Jminee.TextAreaController = Ember.Controller.extend({
+    	textChanged: function(){
 			var str = $.trim(this.text);
 			var type = Jminee.FunctionStr.match(str);
 			if (type){
-				if (!Jminee.reviewController.visibility)
-					Jminee.reviewController.set('visibility',true);
-				Jminee.reviewController.set('table', {header: Jminee.FunctionStr.getHeader(type, str)});
+//				this.reviewController.set('table', {header: Jminee.FunctionStr.getHeader(type, str)});
+				this.set('table', {header: Jminee.FunctionStr.getHeader(type, str)});
 			}
 			else{
-				
+//				this.reviewController.set('table', null);
+				this.set('table', null);
 			}
 		}.observes('text'), 
 	});
+    
+    Jminee.commentController = Jminee.TextAreaController.create();
+    Jminee.composeController = Jminee.TextAreaController.create();
   
-    Jminee.reviewController = Ember.Controller.create({
-		message: 'Review',
-    });
+    
 });

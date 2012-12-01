@@ -55,16 +55,16 @@ $(window).load(function() {
 	Jminee.SubjectTblContentView = Jminee.SubjectContentView.extend({
 		template: Ember.Handlebars.compile(
 			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
-			{{#if message}}{{message}}{{/if}}\
-			{{#if table.title}}<h4>{{table.title}}</h4>{{/if}}\
+			{{#if view.message}}{{view.message}}{{/if}}\
+			{{#if view.table.title}}<h4>{{view.table.title}}</h4>{{/if}}\
 			<table class="table table-bordered">\
 			<thead><tr>\
-			{{#each header in table.header}}\
+			{{#each header in view.table.header}}\
 				<td><h5>{{header}}</h5></td>\
 			{{/each}}\
 			</tr></thead>\
 			<tbody>\
-			{{#each row in table.data}}\
+			{{#each row in view.table.data}}\
 				<tr>\
 					{{#each col in row}}\
 						<td>{{col}}</td>\
@@ -72,7 +72,7 @@ $(window).load(function() {
 				</tr>\
 			{{/each}}\
 			</tbody></table>'
-		),
+		)
 	});
 
 	Jminee.SubjectEditView = Jminee.SubjectContentView.extend({
@@ -80,7 +80,7 @@ $(window).load(function() {
 			'<form class="form-horizontal">\
 		 		<div class="control-group">\
 		 			<div class="control">\
-						{{view Jminee.TextArea span="span8" valueBinding="Jminee.textAreaController.text"}}\
+						{{view Jminee.TextArea spanBinding="view.textSpan" valueBinding="view.textController"}}\
 					</div>\
 			  	</div>\
 			  	<div class="control-group">\
@@ -110,30 +110,44 @@ $(window).load(function() {
 		childViews: [Jminee.subjectListView]
 	});
 	
-	Jminee.subjectContentListView = Ember.View.create({
-		tagName: 'div',
-		classNames: ['span9'],
-		template: Ember.Handlebars.compile('{{#each Jminee.subjectContentListController}}\
-											{{#if table}}\
-												{{view Jminee.SubjectTblContentView}}\
-											{{else}}\
-												{{view Jminee.SubjectContentView}}\
-											{{/if}}\
-											{{/each}}\
-											{{#with Jminee.reviewController}}\
-												{{view Jminee.SubjectTblContentView tableBinding="table"}}\
-											{{/with}}\
-											{{view Jminee.SubjectEditView}}')
+	Jminee.ComposeReviewView = Ember.ContainerView.extend({
+		reviewHidden: true,
+		changeReviewView: function(){
+			if (this.table){
+				if (this.reviewHidden){
+					this.get('childViews').insertAt(0,this.get('reviewView'));
+					this.reviewHidden = false;
+				}
+			}
+			else if (!this.reviewHidden){
+				this.get('childViews').removeAt(0,1);
+				this.reviewHidden = true;				
+			}
+		}.observes('table'),
+		reviewView: function(){
+			return Jminee.SubjectTblContentView.create({tableBinding: this.composeControllerName+".table", message: 'Review'});
+		}.property(),
+		editView: function(){
+			return Jminee.SubjectEditView.create({textSpan: this.textSpan, textControllerBinding: this.composeControllerName+".text"});
+		}.property(),
+		childViews: ['editView']
 	});
 	
-	/*********************************************	
-	/*		review view
-	/*********************************************/
-	Jminee.ReviewView = Jminee.SubjectTblContentView.extend({
-		changeVisibility: function(){
-			this.$().style.visibility=this.visibility;
-		}.observes("visibility"),
+	Jminee.subjectContentContainer = Ember.ContainerView.create({
+		classNames: ['span9'],
+		contentView: Ember.View.create({
+			template: Ember.Handlebars.compile('{{#each Jminee.subjectContentListController}}\
+													{{#if table}}\
+														{{view Jminee.SubjectTblContentView tableBinding="table"}}\
+													{{else}}\
+														{{view Jminee.SubjectContentView}}\
+													{{/if}}\
+												{{/each}}')
+		}),
+		commentView: Jminee.ComposeReviewView.create({textSpan: 'span8', composeControllerName: 'Jminee.commentController', tableBinding: 'Jminee.commentController.table' }),
+		childViews:['contentView', 'commentView'],
 	});
+	
 	
 	/*********************************************	
 	/*		topic nav view
@@ -176,7 +190,7 @@ $(window).load(function() {
 		template: Ember.Handlebars.compile('<img src="/images/icons/edit.png">'),
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
-				  Jminee.editView.$().modal('show');
+				  Jminee.composeView.$().modal('show');
 			  }
 		}),
 	});
@@ -242,19 +256,17 @@ $(window).load(function() {
 	/*********************************************	
 	/*		main view
 	/*********************************************/	
-	Jminee.currentMainViewName = 'topic';
+	
 	Jminee.mainView = Ember.ContainerView.create({
 			tagName: 'div',
 			classNames: ['row'],
-			mainViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectListContainer,Jminee.subjectContentListView]},
+			mainViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectListContainer,Jminee.subjectContentContainer]},
 			changeChildView: function(){
 				while(this.get('childViews').popObject());
 				this.get('childViews').pushObjects(this.mainViewsDict[Jminee.topicNavController.mainViewName]); 
 			}.observes('Jminee.topicNavController.mainViewName')
 	});
+	
 	Jminee.mainView.appendTo("#main_container");
-//	Jminee.mainView.changeChildView([Jminee.subjectListContainer,Jminee.subjectContentListView]);
-//	Jminee.mainView.changeChildView([Jminee.topicListContainer]);
-	
-	
+		
 });
