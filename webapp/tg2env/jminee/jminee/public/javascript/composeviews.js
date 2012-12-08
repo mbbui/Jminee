@@ -2,16 +2,9 @@ $(window).load(function() {
 	if (typeof window.Jminee === 'undefined') {
 	    window.Jminee = Ember.Application.create();
 	}
-	
+		
 	/*********************************************	
-	/*		review view
-	/*********************************************/
-//	Jminee.ReviewView = Jminee.SubjectTblContentView.extend({
-//		table: {header: ['#','Name']},
-//	});
-	
-	/*********************************************	
-	/*		edit view
+	/*		input views
 	/*********************************************/	
 	Jminee.TextField = Ember.TextField.extend({
 		classNameBindings: ['size'],
@@ -21,8 +14,8 @@ $(window).load(function() {
 			  },
 			  focusOut: function(event, view){
 				  view.set('size', 'input-mini');
-			  },
-		}),
+			  }
+		})
 	});
 	Jminee.TextArea = Ember.TextArea.extend({
 		classNameBindings: ['span'],
@@ -31,16 +24,20 @@ $(window).load(function() {
 		placeholder: 'Type your message',
 		eventManager: Ember.Object.create({
 			  focusIn: function(event, view){				
-			  }, 
-		}),
+			  } 
+		})
 	});
+	
+	/*********************************************	
+	/*		compose views
+	/*********************************************/
 	Jminee.composeView = Ember.ContainerView.create({
 		classNames: ['editmodal', 'hide'],
 		eventManager: Ember.Object.create({
 			  focusIn: function(event, view){
 				  view.$('input')[0].focus();
 				  
-			  },
+			  }
 		}),
 		headerView: Ember.View.create({
 			tagName: 'div',
@@ -61,11 +58,11 @@ $(window).load(function() {
 		
 		bodyView: Ember.ContainerView.create({
 			classNames: ['editmodal-body'],
-			commentView: Jminee.ComposeReviewView.create({textSpan: 'span12', composeControllerName: 'Jminee.composeController', tableBinding: 'Jminee.composeController.table' }),
+			commentView: Jminee.MessageReviewView.create({textSpan: 'span12', composeControllerName: 'Jminee.composeController', tableBinding: 'Jminee.composeController.table' }),
 //			editView: Jminee.EditReviewView.create({textSpan: "span12"}),
 			childViews: ['commentView']
 		}),
 		childViews: ['headerView', 'bodyView'],
 	});
-	Jminee.composeView.appendTo("#main_container");	
+	
 });

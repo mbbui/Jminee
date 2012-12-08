@@ -26,8 +26,14 @@
         <script src="/javascript/login.js" type="text/javascript"></script>
         <script src="/javascript/controllers.js" type="text/javascript"></script>
         <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
-        <script src="/javascript/views.js" type="text/javascript"></script>
-        <script src="/javascript/composeviews.js" type="text/javascript"></script>        
+        <script src="/javascript/messageviews.js" type="text/javascript"></script>
+        <script src="/javascript/topicviews.js" type="text/javascript"></script>
+        <script src="/javascript/topicnavviews.js" type="text/javascript"></script>
+        <script src="/javascript/subjectnavviews.js" type="text/javascript"></script>
+        <script src="/javascript/subjectviews.js" type="text/javascript"></script>
+        <script src="/javascript/composeviews.js" type="text/javascript"></script>
+        <script src="/javascript/views.js" type="text/javascript"></script>        
+                
     </head>
 
     <body>
