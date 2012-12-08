@@ -108,7 +108,7 @@ $(window).load(function() {
     
 //    Jminee.topicNavController.set('content',[Jminee.TopicItemNavController.create({title: 'Main', mainViewName: 'topic'}),
 //                                             Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'})]);
-    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Main', mainViewName: 'topic'}));
+    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Topics', mainViewName: 'topic'}));
 //    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'}));
     
     
