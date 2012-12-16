@@ -35,8 +35,7 @@ $(window).load(function() {
 		classNames: ['editmodal', 'hide'],
 		eventManager: Ember.Object.create({
 			  focusIn: function(event, view){
-				  view.$('input')[0].focus();
-				  
+				  view.$('input')[0].focus();				  
 			  }
 		}),
 		headerView: Ember.View.create({
@@ -49,7 +48,7 @@ $(window).load(function() {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
 						<h5>Compose: </h5>\
 						<div class="input-prepend">\
-							{{#each headerView.headerData}}\
+							{{#each view.headerData}}\
 								<span class="add-on"><img width=20px height=15px {{bindAttr src="iconUrl"}}></span>\
 								{{view Jminee.TextField size="input-mini" placeholderBinding="placeholder" valueBinding="value"}}\
 							{{/each}}\

@@ -40,16 +40,16 @@
         <!-- navbar -->
         <div class="navbar navbar-fixed-top navbar-inverse">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container" id="navbar_container">
                     <a class="brand pull-left" href="#">
                         Jminee
-                    </a>
+                    </a>                    
                 </div>
             </div>
         </div>
         <!-- /navbar -->
-        <div class="container" id="main_container">
-        </div>
+        <div class="container" id="main_container"> </div>
+		
     </body>
 
 </html>
