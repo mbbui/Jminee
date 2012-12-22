@@ -64,7 +64,7 @@ $(window).load(function() {
 	/*********************************************/ 
     Jminee.TopicController = Ember.Controller.extend({
     	selected: function(){
-    		Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: this.title, mainViewName: 'subject'}));
+    		Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: this.title, contentType: 'subject'}));
     	}
     }); 
     Jminee.topicListController = Ember.ArrayController.create({content:[Jminee.TopicController.create({title: 'Soccer Tournament'}),
@@ -75,7 +75,7 @@ $(window).load(function() {
 	/*		topic nav controller
 	/*********************************************/ 
     Jminee.topicNavController = Ember.ArrayController.create({
-    	mainViewNameBinding: 'currentCrumb.mainViewName',
+    	contentTypeBinding: 'currentCrumb.contentType',
     	content: [],
     	delCrumbUntil: function(crumb){
     		if (this.currentCrumb){
@@ -106,10 +106,10 @@ $(window).load(function() {
     	parent: Jminee.topicNavController
     });
     
-//    Jminee.topicNavController.set('content',[Jminee.TopicItemNavController.create({title: 'Main', mainViewName: 'topic'}),
-//                                             Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'})]);
-    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Topics', mainViewName: 'topic'}));
-//    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Soccer Tournament', mainViewName: 'subject'}));
+//    Jminee.topicNavController.set('content',[Jminee.TopicItemNavController.create({title: 'Main', contentType: 'topic'}),
+//                                             Jminee.TopicItemNavController.create({title: 'Soccer Tournament', contentType: 'subject'})]);
+    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Topics', contentType: 'topic'}));
+//    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Soccer Tournament', contentType: 'subject'}));
     
     
 });
