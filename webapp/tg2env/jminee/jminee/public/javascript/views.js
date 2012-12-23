@@ -23,7 +23,14 @@ $(window).load(function() {
 //	Jminee.composeView.appendTo("#main_container");	
 //	Jminee.contentNavContainer.appendTo("#main_container");
 //	Jminee.contentView.appendTo("#main_container");
-	Jminee.loginView.appendTo("#main_container");
 	
-//	Jminee.mainView.appendTo("#main_container");
+	Jminee.reopen({changeView: function(){
+		if (!Jminee.isLogin)
+			Jminee.loginView.appendTo("#main_container");
+		else
+			Jminee.mainView.appendTo("#main_container");
+	}.observes('isLogin')});
+	
+	Jminee.set('isLogin',false);
+	
 });

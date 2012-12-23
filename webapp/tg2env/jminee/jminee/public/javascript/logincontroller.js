@@ -10,7 +10,6 @@ $(window).load(function() {
     	},
     	email: function(view){
     		email = $.trim(view.value);
-//    		return true;
     		if (email==null || email.match('^[^@]+@[^@\.]+\.[^@\.]+$')==null){
     			if (this.alertView)
     				this.alertView.show(view,'Wrong email format!');
@@ -31,22 +30,29 @@ $(window).load(function() {
     
     Jminee.loginController = Ember.Controller.create({
     	keepLogIn: false,
-//    	isEmailValid: false,
-//    	isPasswordValid: false,
+    	isEmailValid: false,
+    	isPasswordValid: false,
     	login: function(){
-    		if (!this.isEmailValid || !this.isPasswordValid){
-    			console.log('Not valid inputs');
-    			return;
-    		}
+    		if (!this.isEmailValid || !this.isPasswordValid) return;
+    		if (Jminee.loginAlertView.relatedView==Jminee.loginView)
+				  Jminee.loginAlertView.removeFromParent();
     		$.ajax({
 		     	url: '/login_handler',
-		     	data: {login: this.email, password: this.password, remember: this.keepLogIn},
+//		     	data: {login: this.email, password: this.password, remember: this.keepLogIn},
+		     	data: {login: 'testuser', password: 'testuser'},
     			dataType: 'json',
     			success: function(resp){
-    				return resp.data;
+    				if (!resp.success)
+    					//TODO: change error message
+    					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code);
+    				else {
+    					Jminee.loginView.removeFromParent();
+    					Jminee.set('isLogin',true);
+    				}	
+    				return resp;
     			},
     			error: function(resp){
-    				Jminee.loginAlertView.show('Error connecting server!');
+    				Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!');
     			} 
 		    });
     	}
