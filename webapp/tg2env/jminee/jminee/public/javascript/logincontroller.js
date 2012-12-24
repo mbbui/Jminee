@@ -52,8 +52,9 @@ $(window).load(function() {
     					//TODO: update account info
     					Jminee.userInfo.setInfo(Jminee.loginController);
     					Jminee.loginController.set('email', null);
-    					Jminee.loginController.set('password', null);
+    					Jminee.loginController.set('password', null);    					
     					Jminee.set('isLogin',true);
+//    					Jminee.topicListController.reload();    					
     				}	
     				return resp;
     			},

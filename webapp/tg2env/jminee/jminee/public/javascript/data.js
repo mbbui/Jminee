@@ -24,17 +24,5 @@ $(window).load(function() {
         'content' : 'Some sample text.'
     });
 
-    Jminee.Models.topic = Ember.Object.extend({
-        'title'       : 'sample title',
-        'msgIDs'      : [],
-        'topicID'     : '123',
-        'numMessages' : 0,
-        'addMessages' : function(msgIDs) {
-            var i;
-            for (i = 0; i < msgIDs.length; i+=1) {
-                this.get('msgIDs')[numMessages + i] = msgIDs[i];
-            }
-            this.set('numMessages', this.get('numMessages') + msgIDs.length);
-        }
-    });
+    Jminee.Topic = Ember.Object.extend();
 });

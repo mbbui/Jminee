@@ -8,35 +8,28 @@ $(window).load(function() {
 	/*********************************************/	
 	Jminee.TopicView = Ember.View.extend({
 		tagName: 'li',
-		layout: Ember.Handlebars.compile('<a href="#" class="thumbnail">\
-				<img src="http://placehold.it/160x120" alt="">\
-				<p>{{yield}}</p></a>'),
 		classNames: ['span2'],
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
 				  	view.get('controller').selected();
 			  }
 		}),
-		
-		content: function(){
-			var str=this.title;
-			return new Handlebars.SafeString(str); 
-		}.property()
+		template: Ember.Handlebars.compile(
+				'<a href="#" class="thumbnail">\
+				<img src="http://placehold.it/160x120" alt="">\
+				<p>{{title}}</p></a>'),
 	});
 	
-	Jminee.topicListView = Ember.View.create({
-		tagName: 'ul',
-		classNames: ['thumbnails'],
-		template: Ember.Handlebars.compile('{{#each Jminee.topicListController}}\
-												{{#view Jminee.TopicView title=title controller=this}}\
-													{{view.content}}\
-												{{/view}}\
-											{{/each}}')
-	});
-	
-	Jminee.topicListContainer = Ember.ContainerView.create({
+	Jminee.topicListContainer = Ember.View.create({
 		tagName: 'div',
 		classNames: ['span12'],
-		childViews: [Jminee.topicListView]
+		template: Ember.Handlebars.compile(
+				'<ul class="thumbnails">\
+					{{#each Jminee.topicListController}}\
+						{{view Jminee.TopicView title=title controller=this}}\
+					{{/each}}\
+				</ul>'
+				)
 	});
-})
+	
+});

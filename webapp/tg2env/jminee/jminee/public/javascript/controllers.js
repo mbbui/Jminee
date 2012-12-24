@@ -58,59 +58,6 @@ $(window).load(function() {
     Jminee.subjectContentListController = Ember.ArrayController.create();
     
     Jminee.subjectListController.setActive(Jminee.subjectListController.get('content')[0]);
-    
-    /*********************************************	
-	/*		topic list controller
-	/*********************************************/ 
-    Jminee.TopicController = Ember.Controller.extend({
-    	selected: function(){
-    		Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: this.title, contentType: 'subject'}));
-    	}
-    }); 
-    Jminee.topicListController = Ember.ArrayController.create({content:[Jminee.TopicController.create({title: 'Soccer Tournament'}),
-                                                                        Jminee.TopicController.create({title: 'CS431'}),
-                                                                        Jminee.TopicController.create({title: 'Drafts'})]});
-    
-    /*********************************************	
-	/*		topic nav controller
-	/*********************************************/ 
-    Jminee.topicNavController = Ember.ArrayController.create({
-    	contentTypeBinding: 'currentCrumb.contentType',
-    	content: [],
-    	delCrumbUntil: function(crumb){
-    		if (this.currentCrumb){
-    			this.currentCrumb.set('active', false);
-    		}
-    		while(crumb!=this.content[this.content.length-1]){
-    			this.content.popObject();
-    		}
-    		this.set('currentCrumb', this.content[this.content.length-1]);
-    	},
-    
-	    addCrumb: function(crumb){
-			if (this.currentCrumb){
-				this.currentCrumb.set('active', false);
-			}
-			this.content.pushObject(crumb);
-			this.set('currentCrumb', this.content[this.content.length-1]);
-			this.currentCrumb.set('active', true);
-		}
-    });
-    
-    Jminee.TopicItemNavController = Ember.Controller.extend({
-    	selected: function(){
-    		if (this!=this.parent.get('currentCrumb')){
-    			this.parent.delCrumbUntil(this);
-    		}
-    	}.observes('active'),
-    	parent: Jminee.topicNavController
-    });
-    
-//    Jminee.topicNavController.set('content',[Jminee.TopicItemNavController.create({title: 'Main', contentType: 'topic'}),
-//                                             Jminee.TopicItemNavController.create({title: 'Soccer Tournament', contentType: 'subject'})]);
-    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Topics', contentType: 'topic'}));
-//    Jminee.topicNavController.addCrumb(Jminee.TopicItemNavController.create({title: 'Soccer Tournament', contentType: 'subject'}));
-    
-    
+        
 });
 
