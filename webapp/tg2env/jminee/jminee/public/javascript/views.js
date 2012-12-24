@@ -51,6 +51,6 @@ $(window).load(function() {
 		}			
 	}.observes('isLogin')});
 	
-	Jminee.set('isLogin',true);
+	Jminee.set('isLogin',false);
 	
 });
