@@ -34,7 +34,7 @@
         <script src="/javascript/composeviews.js" type="text/javascript"></script>
         <script src="/javascript/loginviews.js" type="text/javascript"></script>       
         <script src="/javascript/views.js" type="text/javascript"></script>        
-                
+        <script src="/javascript/data.js" type="text/javascript"></script>        
     </head>
 
     <body>
@@ -44,7 +44,8 @@
                 <div class="container" id="navbar_container">
                     <a class="brand pull-left" href="#">
                         Jminee
-                    </a>                    
+                    </a>
+                            
                 </div>
             </div>
         </div>

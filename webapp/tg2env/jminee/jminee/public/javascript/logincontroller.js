@@ -9,6 +9,7 @@ $(window).load(function() {
     		else if (view.type=='password') return this.password(view);
     	},
     	email: function(view){
+//    		return true;
     		email = $.trim(view.value);
     		if (email==null || email.match('^[^@]+@[^@\.]+\.[^@\.]+$')==null){
     			if (this.alertView)
@@ -18,6 +19,7 @@ $(window).load(function() {
     		return true;
     	},
     	password: function(view){
+//    		return true;
     		password = $.trim(view.value);
     		if (password==null || password==''){
     			if (this.alertView)
@@ -38,7 +40,8 @@ $(window).load(function() {
 				  Jminee.loginAlertView.removeFromParent();
     		$.ajax({
 		     	url: '/login_handler',
-//		     	data: {login: this.email, password: this.password, remember: this.keepLogIn},
+//		     	data: {login: Jminee.loginController.email, password: Jminee.loginController.password, 
+//		     			remember: Jminee.loginController.keepLogIn},
 		     	data: {login: 'testuser', password: 'testuser'},
     			dataType: 'json',
     			success: function(resp){
@@ -46,7 +49,10 @@ $(window).load(function() {
     					//TODO: change error message
     					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code);
     				else {
-    					Jminee.loginView.removeFromParent();
+    					//TODO: update account info
+    					Jminee.userInfo.setInfo(Jminee.loginController);
+    					Jminee.loginController.set('email', null);
+    					Jminee.loginController.set('password', null);
     					Jminee.set('isLogin',true);
     				}	
     				return resp;
@@ -55,7 +61,27 @@ $(window).load(function() {
     				Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!');
     			} 
 		    });
-    	}
+    	},
+	    logout: function(){
+			//TODO: check if use already login
+			$.ajax({
+		     	url: '/logout_handler',
+				dataType: 'json',
+				success: function(resp){
+					if (!resp.success)
+						//TODO: change error message
+						Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code);
+					else {
+						Jminee.userInfo.clearInfo();
+						Jminee.set('isLogin',false);
+					}	
+					return resp;
+				},
+				error: function(resp){
+					Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!');
+				} 
+		    });
+		}
     });
     
    

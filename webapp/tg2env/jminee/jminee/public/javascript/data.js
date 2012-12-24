@@ -7,16 +7,15 @@ $(window).load(function() {
         Jminee.Models = {};
     }
 
-    Jminee.Models.User = Ember.Object.extend({
-        'pic'       : 'http://www.sampleurl.com/sampleimage.jpg',
-        'userID'    : 'default',
-        'lastName'  : 'Shmoe',
-        'fullName'  : function() {
-            return this.get('firstName') + ' ' + this.get('lastName');
-        }.property(),
-        'firstName' : 'Joe'
+    Jminee.UserInfo = Ember.Object.extend({
+    	clearInfo: function(){
+    		this.set('email', null);
+    	},
+    	setInfo: function(info){
+    		this.set('email', info.email);
+    	}
     });
-    Jminee.user = Jminee.Models.User.create({'lastName': 'Bui', 'firstName': 'Bach'});
+    Jminee.userInfo = Jminee.UserInfo.create();
     
     Jminee.Models.message = Ember.Object.extend({
         'msgID'   : '1234ABCD',
