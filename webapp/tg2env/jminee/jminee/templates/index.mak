@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Jminee - Notifications Simplified</title>
+        <title>Jminee - Do what emails don't</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
