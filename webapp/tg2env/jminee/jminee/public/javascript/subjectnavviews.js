@@ -8,7 +8,6 @@ $(window).load(function() {
 	/*********************************************/
 	Jminee.SubjectNavItemView = Ember.View.extend({
 		tagName: 'li',
-		layout: Ember.Handlebars.compile('<a href="#">{{yield}}</a>'),
 		classNameBindings: ['active'],
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
@@ -16,23 +15,34 @@ $(window).load(function() {
 			  }
 		}),
 		template: Ember.Handlebars.compile(
-			'{{title}}\
-				{{#if withMsg}}\
-					<i class="icon-comment  pull-right"></i>\
-				{{/if}}\
-				{{#if withTbl}}\
-					<i class="icon-list-alt  pull-right"></i>\
-				{{/if}}'
+			'<a href="#">{{title}}\
+			{{#if withMsg}}\
+				<i class="icon-comment  pull-right"></i>\
+			{{/if}}\
+			{{#if withTbl}}\
+				<i class="icon-list-alt  pull-right"></i>\
+			{{/if}}</a>'
 		)
 	});
-
+	
+	Jminee.AddSubjectTitleView = Jminee.SubjectNavItemView.extend({
+		template: Ember.Handlebars.compile(
+			'<input type="text" placeholder="Create a subject">'
+		)
+	});
+	
+	
 	Jminee.subjectNavView = Ember.View.create({
 		  tagName: 'ul',
 		  classNames: ['nav', 'nav-pills', 'nav-stacked'],
 		  template: Ember.Handlebars.compile(
 				  '{{#each Jminee.subjectListController}}\
-				  	{{view Jminee.SubjectNavItemView activeBinding="active"}}\
-				  {{/each}}')	
+				  		{{#unless input}}\
+				  			{{view Jminee.SubjectNavItemView activeBinding="active"}}\
+				  		{{else}}\
+				  			{{view Jminee.AddSubjectTitleView activeBinding="active"}}\
+				  		{{/unless}}\
+				  {{/each}}')				  	
 	});
 	
 	Jminee.subjectNavContainer = Ember.ContainerView.create({
@@ -40,4 +50,4 @@ $(window).load(function() {
 		classNames: ['span3'],
 		childViews: [Jminee.subjectNavView]
 	});
-})
+});

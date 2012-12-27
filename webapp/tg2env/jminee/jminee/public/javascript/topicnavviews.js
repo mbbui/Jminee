@@ -8,11 +8,8 @@ $(window).load(function() {
 	/*********************************************/
 	Jminee.TopicNavItemView = Ember.View.extend({
 		tagName: 'li',
-		layout: Ember.Handlebars.compile('<a href="#">{{yield}}</a><span class="divider">></span>'),
-		content: function(){
-			var str=this.title;
-			return new Handlebars.SafeString(str);
-		}.property(),
+		template: Ember.Handlebars.compile(
+				'<a href="#">{{title}}</a><span class="divider">></span>'),
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
 				  	view.set('active', true);
@@ -24,10 +21,8 @@ $(window).load(function() {
 		classNames: ['breadcrumb'],
 		template: Ember.Handlebars.compile(
 				  '{{#each Jminee.topicNavController}}\
-					  	{{#view Jminee.TopicNavItemView title=title activeBinding="active"\
-								viewList=viewList}}\
-							{{view.content}}\
-						{{/view}}\
+					  	{{view Jminee.TopicNavItemView title=title activeBinding="active"\
+							viewList=viewList}}\
 				  {{/each}}'
 				)
 	});

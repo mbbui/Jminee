@@ -7,7 +7,7 @@ from jminee import model
 from repoze.what import predicates
 from jminee.controllers.secure import SecureController
 from jminee.controllers.registration import RegistrationController
-from jminee.controllers.message import MessageController
+from jminee.controllers.topic import TopicController
 from jminee.model import DBSession, metadata
 from tgext.admin.tgadminconfig import TGAdminConfig
 from tgext.admin.controller import AdminController
@@ -37,7 +37,7 @@ class RootController(BaseController):
     secc = SecureController()
     admin = AdminController(model, DBSession, config_type=TGAdminConfig)
     registration = RegistrationController()
-    message = MessageController()
+    topic = TopicController()
     error = ErrorController()    
     
     #@expose('json')
@@ -98,7 +98,9 @@ class RootController(BaseController):
                             error_code=ErrorCode.WRONGUSERPASSWORD, 
                             __logins=login_counter)            
         
-        return dict(success=True)
+        user=request.identity['user']
+        return dict(success=True, userInfo=dict(id=user.user_id, name=user.user_name
+                                           , email=user.email_address))
    
     @expose('json')
     def post_logout(self, came_from=lurl('/')):

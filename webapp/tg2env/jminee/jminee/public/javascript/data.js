@@ -9,13 +9,18 @@ $(window).load(function() {
 
     Jminee.UserInfo = Ember.Object.extend({
     	clearInfo: function(){
+    		this.set('id', null);
+    		this.set('name', null);
     		this.set('email', null);
     	},
     	setInfo: function(info){
+    		this.set('id', info.id);
+    		this.set('name', info.name);
     		this.set('email', info.email);
     	}
     });
     Jminee.userInfo = Jminee.UserInfo.create();
+    Jminee.topicInfo = Ember.Object.create();
     
     Jminee.Models.message = Ember.Object.extend({
         'msgID'   : '1234ABCD',

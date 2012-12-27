@@ -8,7 +8,7 @@ $(window).load(function() {
 	/*********************************************/	
 	Jminee.contentView = Ember.ContainerView.create({
 			classNames: ['row'],
-			contentViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectNavContainer,Jminee.subjectContentContainer]},
+			contentViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectNavContainer, Jminee.subjectContentContainer]},
 			contentTypeBinding: 'Jminee.topicNavController.contentType',
 			changeChildView: function(){
 				while(this.get('childViews').popObject());
@@ -26,7 +26,7 @@ $(window).load(function() {
 		template: Ember.Handlebars.compile(
 				'<li class="dropdown pull-right">\
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">\
-						{{Jminee.userInfo.email}} <b class="caret"></b>\
+						{{Jminee.userInfo.name}} <b class="caret"></b>\
 					</a>\
 					<ul class="dropdown-menu">\
 						<li><a {{action "showAccount"}} href="#">Account</a></li>\
@@ -51,6 +51,6 @@ $(window).load(function() {
 		}			
 	}.observes('isLogin')});
 	
-	Jminee.set('isLogin',false);
+	Jminee.set('isLogin',true);
 	
 });

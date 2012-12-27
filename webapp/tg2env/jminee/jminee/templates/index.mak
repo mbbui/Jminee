@@ -23,7 +23,9 @@
 
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
         <script src="/javascript/creation.js" type="text/javascript"></script>
+        <script src="/javascript/subjectcontrollers.js" type="text/javascript"></script>
         <script src="/javascript/topiccontrollers.js" type="text/javascript"></script>
+        <script src="/javascript/topicnavcontrollers.js" type="text/javascript"></script>
         <script src="/javascript/controllers.js" type="text/javascript"></script>
         <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
         <script src="/javascript/logincontroller.js" type="text/javascript"></script>

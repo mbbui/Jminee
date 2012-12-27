@@ -17,7 +17,10 @@ $(window).load(function() {
 													{{/if}}\
 												{{/each}}')
 		}),
-		commentView: Jminee.MessageReviewView.create({textSpan: 'span8', composeControllerName: 'Jminee.commentController', tableBinding: 'Jminee.commentController.table' }),
+		commentView: function(){
+			return Jminee.MessageReviewView.create({textSpan: 'span8', composeControllerName: 'Jminee.commentController', 
+				tableBinding: 'Jminee.commentController.table' });
+		}.property(),
 		childViews:['contentView', 'commentView']
 	});
 });

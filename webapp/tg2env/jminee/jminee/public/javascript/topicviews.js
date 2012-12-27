@@ -9,15 +9,10 @@ $(window).load(function() {
 	Jminee.TopicView = Ember.View.extend({
 		tagName: 'li',
 		classNames: ['span2'],
-		eventManager: Ember.Object.create({
-			  click: function(event, view){
-				  	view.get('controller').selected();
-			  }
-		}),
 		template: Ember.Handlebars.compile(
-				'<a href="#" class="thumbnail">\
+				'<a href="#" class="thumbnail" {{action "selected" target="controller"}}>\
 				<img src="http://placehold.it/160x120" alt="">\
-				<p>{{title}}</p></a>'),
+				<p>{{topicInfo.title}}</p></a>'),
 	});
 	
 	Jminee.topicListContainer = Ember.View.create({
@@ -26,7 +21,7 @@ $(window).load(function() {
 		template: Ember.Handlebars.compile(
 				'<ul class="thumbnails">\
 					{{#each Jminee.topicListController}}\
-						{{view Jminee.TopicView title=title controller=this}}\
+						{{view Jminee.TopicView topicInfo=topicInfo controller=this}}\
 					{{/each}}\
 				</ul>'
 				)

@@ -50,7 +50,7 @@ $(window).load(function() {
     					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code);
     				else {
     					//TODO: update account info
-    					Jminee.userInfo.setInfo(Jminee.loginController);
+    					Jminee.userInfo.setInfo(resp.userInfo);
     					Jminee.loginController.set('email', null);
     					Jminee.loginController.set('password', null);    					
     					Jminee.set('isLogin',true);

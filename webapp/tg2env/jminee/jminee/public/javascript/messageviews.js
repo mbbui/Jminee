@@ -10,13 +10,13 @@ $(window).load(function() {
 		classNames: ['well  well-small'],
 		template: Ember.Handlebars.compile(
 				'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
-					{{#if message}}{{message}}{{/if}}'),
+					{{#if content}}{{content}}{{/if}}'),
 	});
 
 	Jminee.TableMessageView = Jminee.MessageView.extend({
 		template: Ember.Handlebars.compile(
 			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
-			{{#if view.message}}{{view.message}}{{/if}}\
+			{{#if view.content}}{{view.content}}{{/if}}\
 			{{#if view.table.title}}<h4>{{view.table.title}}</h4>{{/if}}\
 			<table class="table table-bordered">\
 			<thead><tr>\
