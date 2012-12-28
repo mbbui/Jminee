@@ -39,28 +39,28 @@ class MemberSubject(DeclarativeBase):
         return ('<MemberSubject: user_name=%s, subject_id=%s, read=%s, muted=%s>' % (
                 self.user_name, self.subject_id, self.last_read, self.muted)).encode('utf-8')
 
-class CommentSubject(DeclarativeBase):
-    __tablename__ = "comment_subject"
-
-    comment_id = Column(Integer, ForeignKey('comment.uid',
-        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
-    subject_id = Column(Integer, ForeignKey('subject.uid',
-        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
-    deleted = Column(Boolean, default=False, nullable=False)
-    
-    def __repr__(self):
-        return ('<CommentSubject: comment_id=%s, subject_id=%s, deleted=%s>' % (
-                self.comment_id, self.subject_id, self.deleted)).encode('utf-8')
-                
-    def __str__(self):
-        return ('<CommentSubject: comment_id=%s, subject_id=%s, deleted=%s>' % (
-                self.comment_id, self.subject_id, self.deleted)).encode('utf-8')
+#class CommentSubject(DeclarativeBase):
+#    __tablename__ = "comment_subject"
+#
+#    comment_id = Column(Integer, ForeignKey('comment.uid',
+#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+#    subject_id = Column(Integer, ForeignKey('subject.uid',
+#        onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+#    deleted = Column(Boolean, default=False, nullable=False)
+#    
+#    def __repr__(self):
+#        return ('<CommentSubject: comment_id=%s, subject_id=%s, deleted=%s>' % (
+#                self.comment_id, self.subject_id, self.deleted)).encode('utf-8')
+#                
+#    def __str__(self):
+#        return ('<CommentSubject: comment_id=%s, subject_id=%s, deleted=%s>' % (
+#                self.comment_id, self.subject_id, self.deleted)).encode('utf-8')
                                 
 class Subject(DeclarativeBase):
     __tablename__ = 'subject'
 
     uid = Column(Integer, autoincrement=True, primary_key=True)
-    time = Column(DateTime, default=datetime.now().replace(microsecond=0), nullable=False)
+    time = Column(DateTime, default=datetime.now, nullable=False)
     title = Column(Unicode(255), nullable=False)
 
     #subject->topic = many->one
@@ -71,7 +71,7 @@ class Subject(DeclarativeBase):
     creator = relation(User, backref=backref('subject', cascade='all'))
     
     members = relation(MemberSubject, backref='subject')
-    comments = relation(CommentSubject, backref='subject')
+#    comments = relation(CommentSubject, backref='subject')
 #    members = relation('User', secondary=member_subject_table, backref='subjects') 
     
     def __repr__(self):

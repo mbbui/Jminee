@@ -12,6 +12,8 @@ $(window).load(function() {
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
 				  	view.set('active', true);
+				  	if (Jminee.subjectAlertView.isVisible)
+				  		Jminee.subjectAlertView.removeFromParent();
 			  }
 		}),
 		template: Ember.Handlebars.compile(
@@ -25,10 +27,16 @@ $(window).load(function() {
 		)
 	});
 	
-	Jminee.AddSubjectTitleView = Jminee.SubjectNavItemView.extend({
-		template: Ember.Handlebars.compile(
-			'<input type="text" placeholder="Create a subject">'
-		)
+	Jminee.AddSubjectTitleView = Ember.TextField.extend({
+		classNameBindings: ['active'],
+		placeholder:"Create a subject...",
+		eventManager: Ember.Object.create({
+			  click: function(event, view){
+				  	view.set('active', true);
+				  	if (Jminee.subjectAlertView.isVisible)
+				  		Jminee.subjectAlertView.removeFromParent();
+			  }
+		})
 	});
 	
 	
@@ -37,10 +45,10 @@ $(window).load(function() {
 		  classNames: ['nav', 'nav-pills', 'nav-stacked'],
 		  template: Ember.Handlebars.compile(
 				  '{{#each Jminee.subjectListController}}\
-				  		{{#unless input}}\
+				  		{{#unless newSubject}}\
 				  			{{view Jminee.SubjectNavItemView activeBinding="active"}}\
 				  		{{else}}\
-				  			{{view Jminee.AddSubjectTitleView activeBinding="active"}}\
+				  			{{view Jminee.AddSubjectTitleView activeBinding="active" valueBinding="title"}}\
 				  		{{/unless}}\
 				  {{/each}}')				  	
 	});

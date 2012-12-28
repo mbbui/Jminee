@@ -11,7 +11,7 @@ $(window).load(function() {
 		classNames: ['span2'],
 		template: Ember.Handlebars.compile(
 				'<a href="#" class="thumbnail" {{action "selected" target="controller"}}>\
-				<img src="http://placehold.it/160x120" alt="">\
+				<img {{bindAttr src="topicInfo.logourl"}} alt="">\
 				<p>{{topicInfo.title}}</p></a>'),
 	});
 	

@@ -20,10 +20,12 @@ $(window).load(function() {
 	Jminee.TextArea = Ember.TextArea.extend({
 		classNameBindings: ['span'],
 		attributeBindings: ['placeholder', 'rows'],
-		rows: '12',
+		valueBinding: 'controller.text',
+		rows: '6',
 		placeholder: 'Type your message',
 		eventManager: Ember.Object.create({
-			  focusIn: function(event, view){				
+			  focusIn: function(event, view){	
+				  view.controller.focusIn(event, view);
 			  } 
 		})
 	});

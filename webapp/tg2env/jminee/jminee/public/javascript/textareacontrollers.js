@@ -36,7 +36,7 @@ $(window).load(function() {
     /*********************************************	
 	/*		text area controller
 	/*********************************************/ 
-    Jminee.TextAreaController = Ember.Controller.extend({
+    Jminee.CreateSubjectController = Ember.Controller.extend({
     	textChanged: function(){
 			var str = $.trim(this.text);
 			var type = Jminee.FunctionStr.match(str);
@@ -48,11 +48,72 @@ $(window).load(function() {
 //				this.reviewController.set('table', null);
 				this.set('table', null);
 			}
-		}.observes('text'), 
+		}.observes('text'),
+		
+		focusIn: function(){
+			if (Jminee.subjectAlertView.isVisible && Jminee.subjectAlertView.relatedView==this)
+				Jminee.subjectAlertView.removeFromParent();
+			if (!this.subject || !this.subject.title)
+				Jminee.subjectAlertView.show(this, 'Subject musts have a title!');
+		},
+		
+		submit: function(){
+			if (!this.subject || !this.subject.title){
+				Jminee.subjectAlertView.show(this, 'Subject musts have a title!');
+			}
+			else if (this.text.match('^\s*$')){
+				Jminee.subjectAlertView.show(this, 'You are submitting nothing!');
+			}
+			else{
+				if (this.subject.newSubject){
+					$.ajax({
+				     	url: '/topic/create_subject',
+				     	data: {topic_id: Jminee.topicInfo.uid, title: this.subject.title, content: this.text},
+		    			dataType: 'json',
+		    			success: function(resp){
+		    				if (!resp.success)
+		    					//TODO: change error message
+		    					//TODO: create subjectAlertView
+		    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
+		    				else {
+		    					Jminee.subjectListController.reload();	    					
+		    				}
+		    				
+		    				return resp;
+		    			},
+		    			error: function(resp){
+		    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
+		    			} 
+				    });
+				}
+				else{
+					$.ajax({
+				     	url: '/topic/create_comment',
+				     	data: {topic_id: Jminee.topicInfo.uid, subject_id: this.subject.uid, content: this.text},
+		    			dataType: 'json',
+		    			success: function(resp){
+		    				if (!resp.success)
+		    					//TODO: change error message
+		    					//TODO: create subjectAlertView
+		    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
+		    				else {
+		    					Jminee.commentController.set('text', '');
+		    					Jminee.subjectListController.loadComments();
+		    				}
+		    				
+		    				return resp;
+		    			},
+		    			error: function(resp){
+		    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
+		    			} 
+				    });
+				}
+			}
+		}
 	});
     
-    Jminee.commentController = Jminee.TextAreaController.create();
-    Jminee.composeController = Jminee.TextAreaController.create();
+    Jminee.commentController = Jminee.CreateSubjectController.create();
+    Jminee.composeController = Jminee.CreateSubjectController.create();
   
     
 });

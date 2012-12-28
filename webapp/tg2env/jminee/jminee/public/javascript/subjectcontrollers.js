@@ -8,7 +8,7 @@ $(window).load(function() {
     
     Jminee.SubjectItemController = Ember.Controller.extend({
     	selected: function(){
-    		if (this!=this.parent.get('activeSubject')){
+    		if (this.get('active')==true){
     			this.parent.setActive(this);
     		}
     	}.observes('active')
@@ -16,42 +16,62 @@ $(window).load(function() {
     
     Jminee.subjectListController = Ember.ArrayController.create({
     	content: [],
+    	
+    	initContentInfo: function(){
+    		Jminee.subjectContentListController.set('content', []);
+    		Jminee.commentController.set('text', '');
+			Jminee.commentController.set('subject', this.activeSubject);
+    	},
+    	
     	setActive: function(subject){
-    		if (this.activeSubject){
+    		if (this.activeSubject && this.activeSubject!=subject){
     			this.activeSubject.set('active', false);
     		}
     		this.set('activeSubject', subject);
-    		if (!subject.input)
-    			this.loadComments(subject);
-    		else
-    			Jminee.subjectContentListController.set('content', []);
+    		this.initContentInfo();
+			//if subject is creating it has no comment to be loaded
+    		this.loadComments();  
     	},
-    	loadComments: function(subject){
-    		$.ajax({
-		     	url: '/topic/get_comments',
-		     	data: {subject_id: subject.uid},
-    			dataType: 'json',
-    			success: function(resp){
-    				var commentList=[];
-    				if (!resp.success)
-    					//TODO: change error message
-    					//TODO: create subjectAlertView
-    					Jminee.commentAlertView.show(null, 'Error code '+resp.error_code);
-    				else {
-    					//TODO: check if res.topics always an array
-    					var comments = resp.comments;    					
-    					for (var i=0; i<comments.length; i++){
-    						commentList.push(Jminee.SubjectContentController.create(comments[i]));       						
-    					}    					    					    					
-    					Jminee.subjectContentListController.set('content', commentList);    					
-    				}	
-    				return resp;
-    			},
-    			error: function(resp){
-    				Jminee.commentAlertView.show(null, 'Error connecting server!');
-    			} 
-		    });
+    	
+    	//load comments for a subject
+    	//comments is loaded from the server
+    	loadComments: function(){
+    		var subject=this.activeSubject;
+    		if (!subject.newSubject)
+	    		$.ajax({
+			     	url: '/topic/get_comments',
+			     	data: {topic_id: Jminee.topicInfo.uid, subject_id: subject.uid},
+	    			dataType: 'json',
+	    			success: function(resp){
+	    				var commentList=[];
+	    				if (!resp.success)
+	    					//TODO: change error message
+	    					//TODO: create subjectAlertView
+	    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
+	    				else {
+	    					//TODO: check if res.topics always an array
+	    					var comments = resp.comments;    					
+	    					for (var i=0; i<comments.length; i++){
+	    						commentList.push(Jminee.SubjectContentController.create(comments[i]));    						
+	    					}    			
+//	    					var item=Jminee.SubjectContentController.create({input: true, subject: subject});
+//	    					commentList.push(item);
+	    					Jminee.subjectContentListController.set('content', commentList);
+//	    					Jminee.reviewView.reopen({subject: subject});
+	    				}	
+	    				return resp;
+	    			},
+	    			error: function(resp){
+	    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
+	    			} 
+			    });       		
+    		else{
+//    			var item = Jminee.SubjectContentController.create({input: true, subject: subject});
+//    	    	Jminee.subjectContentListController.set('content', [item]);
+//    			Jminee.reviewView.reopen({subject: subject});
+    		}    		
     	},
+    	//reload the subject list
     	reload: function(){
     		$.ajax({
 		     	url: '/topic/get_subjects',
@@ -59,6 +79,7 @@ $(window).load(function() {
     			dataType: 'json',
     			success: function(resp){
     				var subjectList=[];
+    				Jminee.subjectAlertView.reopen({parent: Jminee.subjectNavContainer});
     				if (!resp.success)
     					//TODO: change error message
     					//TODO: create subjectAlertView
@@ -67,22 +88,25 @@ $(window).load(function() {
     					//TODO: check if res.topics always an array
     					var subjects = resp.subjects;
     					var item;
-    					for (var i=0; i<subjects.length; i++){
+    					//add creating subject title controller
+    					item = Jminee.SubjectItemController.create({parent: Jminee.subjectListController, newSubject: true});
+						subjectList.push(item);
+    					
+						for (var i=0; i<subjects.length; i++){
     						item=Jminee.SubjectItemController.create(subjects[i]);
     						item.set('parent', Jminee.subjectListController);
     						subjectList.push(item);       						
     					}
-    					//add create subject title controller
-    					item=Jminee.SubjectItemController.create();
-						item.set('parent', Jminee.subjectListController);
-						item.set('input', true);
-						subjectList.push(item);       					
+    					       					
 						
     					Jminee.subjectListController.set('content', subjectList);
-    					if (subjectList.length>0)
+    					if (subjects.length>0)
+    						subjectList[1].set('active',true);
+    					else
     						subjectList[0].set('active',true);
     					//reset content to empty to remove old content
-    					Jminee.subjectContentListController.set('content', []);
+    					//Jminee.subjectContentListController.set('content', []);
+    					
     				}	
     				return resp;
     			},

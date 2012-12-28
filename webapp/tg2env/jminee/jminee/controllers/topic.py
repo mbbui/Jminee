@@ -3,6 +3,7 @@
 from types import NoneType
 import pylons
 import traceback, sys
+import re
 
 from routes import url_for
 from tg import expose, redirect, validate, config, request
@@ -16,7 +17,7 @@ from repoze.what.predicates import not_anonymous
 
 
 from jminee.lib.base import BaseController
-from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Subject, MemberSubject, CommentSubject, Comment
+from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Subject, MemberSubject, Comment
 
 from formencode.validators import UnicodeString, ConfirmType, Int
 from jminee.lib import validators
@@ -205,6 +206,7 @@ class TopicController(BaseController):
             DBSession.add(subject)
             DBSession.flush()
             
+            
             comment = Comment()
             comment.subject_id = subject.uid
             comment.creator_id = request.identity['user'].user_id
@@ -213,17 +215,12 @@ class TopicController(BaseController):
             DBSession.add(comment)
             DBSession.flush()
             
-            comment_subject = CommentSubject(comment_id = comment.uid,
-                                         subject_id = subject.uid,
-                                         deleted = False)
-            subject.comments.append(comment_subject)
-            
             #update member_subject database
             members = DBSession.query(MemberTopic).\
                             filter(MemberTopic.topic_id==kw['topic_id']).all()
             
             for member in members:
-                if member == creator:
+                if member==creator:
                     member_subject = MemberSubject(member_id = member.member_id,
                                            subject_id = subject.uid,
                                            last_read = comment.uid)
@@ -235,6 +232,7 @@ class TopicController(BaseController):
             
             topic = DBSession.query(Topic).\
                             filter(Topic.uid==kw['topic_id']).first()
+            #TODO: need to rename/rethink this time vars
             topic.update_time = subject.time                
                             
             log.info("User %s creates subject %s"%(creator.member_id, subject))
@@ -281,14 +279,15 @@ class TopicController(BaseController):
             return dict(success=False)  
         
     @expose('json')
-    @validate(dict(subject_id=Int(not_empty=True)),
+    @validate(dict(topic_id=Int(not_empty=True),
+                   subject_id=Int(not_empty=True)),
               error_handler=ErrorController.failed_input_validation)
     def get_comments(self, **kw):
         try:
             #check if user is a member of this topic
             user_id = request.identity['user'].user_id
             user = DBSession.query(MemberSubject).\
-                           filter(MemberSubject.subject_id==kw['subject_id'], 
+                           filter(MemberTopic.topic_id==kw['topic_id'], 
                                   MemberTopic.member_id==user_id).\
                            first()   
             
@@ -305,12 +304,52 @@ class TopicController(BaseController):
                 
             comments = DBSession.query(Comment).\
                            filter(Comment.subject_id == kw['subject_id']).\
-                           order_by(Comment.time.desc()).\
+                           order_by(Comment.time).\
                            limit(nums).\
                            all()
             return dict(success=True, comments=comments)
         
         except:
             log.exception('Got exception')
+            #traceback.print_exc(file=sys.stdout)
+            return dict(success=False)  
+    
+     
+    @expose('json')    
+    @validate(dict(topic_id=Int(not_empty=True),
+                   subject_id=Int(not_empty=True), 
+                   content=UnicodeString(not_empty=True)),                   
+               error_handler=ErrorController.failed_input_validation)
+    def create_comment(self, **kw):         
+        try:
+            #check if this user can create a comment in this topic
+            #for now every member of the topic can create a comment
+            creator = DBSession.query(MemberTopic).\
+                           filter(MemberTopic.topic_id==kw['topic_id'], 
+                                  MemberTopic.member_id==request.identity['user'].user_id).\
+                           first()      
+            
+            if not creator:
+                #TODO: this should never happen, log this event and return only False
+                return dict(success=False, error_code=ErrorCode.UNAUTHORIZED)
+            
+            comment = Comment()
+            comment.subject_id = kw['subject_id']
+            comment.creator_id = request.identity['user'].user_id
+            comment.content = kw['content']
+            
+            DBSession.add(comment)
+            DBSession.flush()
+            
+            topic = DBSession.query(Topic).\
+                            filter(Topic.uid==kw['topic_id']).first()
+            #TODO: need to rethink this time var, how about subject update_time
+            topic.update_time = comment.time                
+                            
+            log.info("User %s creates comment %s"%(comment.creator_id, comment))
+            return dict(success=True, comment=dict(uid=comment.uid, time=comment.time))
+                        
+        except Exception as e:
+            log.exception('Got exception %s'%e)
             #traceback.print_exc(file=sys.stdout)
             return dict(success=False)  

@@ -39,11 +39,12 @@ class Topic(DeclarativeBase):
     __tablename__ = 'topic'
 
     uid = Column(Integer, autoincrement=True, primary_key=True)
-    time = Column(DateTime, default=datetime.now().replace(microsecond=0),nullable=False)
+    time = Column(DateTime, default=datetime.now,nullable=False)
     title = Column(Unicode(255), nullable=False)
+    logourl = Column(Unicode(255), nullable=True)
 #    creator_name = Column(Unicode(255), ForeignKey('tg_user.user_name'))
     creator_id = Column(Integer, ForeignKey('tg_user.user_id'), nullable=False)
-    update_time = Column(DateTime, default=datetime.now().replace(microsecond=0), nullable=False)
+    update_time = Column(DateTime, default=datetime.now, nullable=False)
     members = relation(MemberTopic, backref='topic')
     
     #{ Special methods

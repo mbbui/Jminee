@@ -6,6 +6,9 @@ $(window).load(function() {
 	/*********************************************	
 	/*		subject views
 	/*********************************************/
+	Jminee.reviewView = Jminee.MessageReviewView.create({tableBinding: 'Jminee.commentController.table', 
+														controller: Jminee.commentController}),
+														
 	Jminee.subjectContentContainer = Ember.ContainerView.create({
 		classNames: ['span9'],
 		contentView: Ember.View.create({
@@ -17,10 +20,7 @@ $(window).load(function() {
 													{{/if}}\
 												{{/each}}')
 		}),
-		commentView: function(){
-			return Jminee.MessageReviewView.create({textSpan: 'span8', composeControllerName: 'Jminee.commentController', 
-				tableBinding: 'Jminee.commentController.table' });
-		}.property(),
-		childViews:['contentView', 'commentView']
+		reviewView: Jminee.reviewView,
+		childViews:['contentView', 'reviewView']
 	});
 });

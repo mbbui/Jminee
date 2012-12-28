@@ -22,7 +22,8 @@ class Comment(DeclarativeBase):
     __tablename__ = 'comment'
 
     uid = Column(Integer, autoincrement=True, primary_key=True)
-    time = Column(DateTime, default=datetime.now().replace(microsecond=0), nullable=False)
+    time = Column(DateTime, default=datetime.now, nullable=False)
+    deleted = Column(Boolean, default=False, nullable=False)
     content = Column(Unicode(5000), nullable=False)
 
     #comment->subject = many->one
@@ -38,4 +39,4 @@ class Comment(DeclarativeBase):
     
     def __str__(self):
         return ('<Comment: uid=%d, time=%s, content=%s, creator_id=%s>' % (
-                self.uid, self.time, self.content, self.creator_i)).encode('utf-8')
+                self.uid, self.time, self.content, self.creator_id)).encode('utf-8')

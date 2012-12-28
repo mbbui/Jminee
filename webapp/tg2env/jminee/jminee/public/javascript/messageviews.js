@@ -39,19 +39,23 @@ $(window).load(function() {
 	Jminee.MessageInputView = Jminee.MessageView.extend({
 		template: Ember.Handlebars.compile(
 			'<form class="form-horizontal">\
-		 		<div class="control-group">\
-		 			<div class="control">\
-						{{view Jminee.TextArea spanBinding="view.textSpan" valueBinding="view.textController"}}\
-					</div>\
-			  	</div>\
-			  	<div class="control-group">\
-		 			<div class="control">\
-			  			<button  class="control" type="submit" class="btn">Submit</button>\
-			  		</div>\
-			  	</div>\
+				{{#with controller}}\
+					<div class="control-group">\
+			 			<div class="control">\
+							{{view Jminee.TextArea spanBinding="view.textSpan" controller=this}}\
+						</div>\
+				  	</div>\
+				  	<div class="control-group">\
+			 			<div class="control">\
+				  			<button  class="control btn" type="submit" {{action "submit" target="controller"}}>Submit</button>\
+				  		</div>\
+				  	</div>\
+				{{/with}}\
 			</form>')
 	});
-
+	
+	Jminee.commentView = Jminee.MessageInputView.create({textSpan: 'span8'}),
+		
 	Jminee.MessageReviewView = Ember.ContainerView.extend({
 		reviewHidden: true,
 		changeReviewView: function(){
@@ -69,10 +73,25 @@ $(window).load(function() {
 		reviewView: function(){
 			return Jminee.TableMessageView.create({tableBinding: this.composeControllerName+".table", message: 'Review'});
 		}.property(),
-		editView: function(){
-			return Jminee.MessageInputView.create({textSpan: this.textSpan, textControllerBinding: this.composeControllerName+".text"});
-		}.property(),
-		childViews: ['editView']
+		commentView: Jminee.commentView.reopen({controller: this.controller}),
+					
+		childViews: ['commentView']
 	});
 	
+	Jminee.AlertView = Ember.View.extend({
+		show: function(relatedView, text){
+			if (this.isVisible)
+				this.removeFromParent();
+			this.relatedView=relatedView;		
+			this.set('text',text);
+			this.parent.get('childViews').pushObject(this);						
+		},
+		template: Ember.Handlebars.compile(
+			'<div type"input" class="alert alert-error">\
+				{{view.text}}\
+			</div>'
+		),		
+	});
+	
+	Jminee.subjectAlertView = Jminee.AlertView.create({});
 });
