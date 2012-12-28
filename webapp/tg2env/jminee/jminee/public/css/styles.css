@@ -74,3 +74,15 @@ h2 {
   padding: 15px;
   overflow-y: hidden;
 }
+
+.topic_img {
+	height: 120px;
+}
+.topic_title {
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}

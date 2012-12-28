@@ -11,8 +11,8 @@ $(window).load(function() {
 		classNames: ['span2'],
 		template: Ember.Handlebars.compile(
 				'<a href="#" class="thumbnail" {{action "selected" target="controller"}}>\
-				<img {{bindAttr src="topicInfo.logourl"}} alt="">\
-				<p>{{topicInfo.title}}</p></a>'),
+				<img class="topic_img" {{bindAttr src="topicInfo.logourl"}} alt="">\
+				<p class="topic_title">{{topicInfo.title}}</p></a>'),
 	});
 	
 	Jminee.topicListContainer = Ember.View.create({
