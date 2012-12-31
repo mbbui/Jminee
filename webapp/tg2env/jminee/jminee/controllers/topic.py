@@ -17,7 +17,7 @@ from repoze.what.predicates import not_anonymous
 
 
 from jminee.lib.base import BaseController
-from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Subject, MemberSubject, Comment
+from jminee.model import DBSession, Registration, User, Topic, MemberTopic, Subject, MemberSubject, Comment, CommentUser
 
 from formencode.validators import UnicodeString, ConfirmType, Int
 from jminee.lib import validators
@@ -301,13 +301,21 @@ class TopicController(BaseController):
                 nums = self.MAX_MESSAGE_SIZE
             else:
                 nums = kw['nums']
-                
-            comments = DBSession.query(Comment).\
-                           filter(Comment.subject_id == kw['subject_id']).\
+            
+            comments = DBSession.query(Comment,User.user_name).\
+                           filter(Comment.subject_id == kw['subject_id'], Comment.deleted == False).\
+                           join("creator").\
                            order_by(Comment.time).\
                            limit(nums).\
                            all()
-            return dict(success=True, comments=comments)
+            
+            #TODO: there should be a better way to do this
+            new_comments = []
+            for comment in comments:
+                new_comments.append(comment[0])
+                new_comments[-1].creator_name = comment[1]
+                
+            return dict(success=True, comments=new_comments)
         
         except:
             log.exception('Got exception')

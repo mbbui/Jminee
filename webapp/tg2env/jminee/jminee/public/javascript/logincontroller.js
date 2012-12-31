@@ -53,8 +53,7 @@ $(window).load(function() {
     					Jminee.userInfo.setInfo(resp.userInfo);
     					Jminee.loginController.set('email', null);
     					Jminee.loginController.set('password', null);    					
-    					Jminee.set('isLogin',true);
-//    					Jminee.topicListController.reload();    					
+    					Jminee.set('isLogin',true);    					    				
     				}	
     				return resp;
     			},

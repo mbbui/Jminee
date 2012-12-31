@@ -38,19 +38,18 @@ $(window).load(function() {
 				</li>')
 	});  
 	
-	Jminee.reopen({changeView: function(){
-		if (!Jminee.isLogin){
-			Jminee.mainView.removeFromParent();
-			Jminee.accountView.removeFromParent();
-			Jminee.loginView.appendTo("#main_container");
-		}
-		else{
-			Jminee.loginView.removeFromParent();
-			Jminee.mainView.appendTo("#main_container");
-			Jminee.accountView.appendTo("#navbar_container");
-		}			
-	}.observes('isLogin')});
-	
-	Jminee.set('isLogin',false);
-	
+//	Jminee.reopen({
+//			changeView: function(){
+//				if (!Jminee.isLogin){
+//					Jminee.mainView.removeFromParent();
+//					Jminee.accountView.removeFromParent();
+//					Jminee.loginView.appendTo("#main_container");
+//				}
+//				else{
+//					Jminee.loginView.removeFromParent();
+//					Jminee.mainView.appendTo("#main_container");
+//					Jminee.accountView.appendTo("#navbar_container");
+//				}			
+//			}.observes('isLogin')
+//	});	
 });

@@ -42,10 +42,14 @@ $(window).load(function() {
     			} 
 		    });    		
     	},
-    	afterLogin: function(){
-    		if (Jminee.isLogin)
-    			this.reload();
-    	}.observes('Jminee.isLogin')
+//    	afterLogin: function(){
+//    		if (Jminee.isLogin){
+//    			this.reload();
+//    			Jminee.topicNavController.pushCrumb(Jminee.TopicItemNavController.create(
+//    		    		{title: 'Topics', contentType: 'topic', contentController: Jminee.topicListController}));
+//    		}
+//    			
+//    	}.observes('Jminee.isLogin')
     });
         
 });

@@ -29,7 +29,7 @@
         <script src="/javascript/controllers.js" type="text/javascript"></script>
         <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
         <script src="/javascript/logincontroller.js" type="text/javascript"></script>
-        <script src="/javascript/messageviews.js" type="text/javascript"></script>
+        <script src="/javascript/commentviews.js" type="text/javascript"></script>
         <script src="/javascript/topicviews.js" type="text/javascript"></script>
         <script src="/javascript/topicnavviews.js" type="text/javascript"></script>
         <script src="/javascript/subjectnavviews.js" type="text/javascript"></script>

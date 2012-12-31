@@ -40,8 +40,7 @@ $(window).load(function() {
     	parent: Jminee.topicNavController
     });
     
-    Jminee.topicNavController.pushCrumb(Jminee.TopicItemNavController.create(
-    		{title: 'Topics', contentType: 'topic', contentController: Jminee.topicListController}));
+    
     
 });
 

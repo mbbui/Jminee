@@ -41,12 +41,12 @@ h2 {
           border-radius: 4px 0px 0px 4px;
 }
 
-.editmodal {
+.composemodal {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 55%;
   z-index: 1050;
-  width: 1000px;
+  width: 830px;
   margin: -300px 0 0 -500px;
   overflow: auto;
   background-color: #ffffff;
@@ -64,12 +64,12 @@ h2 {
           background-clip: padding-box;
 }
 
-.editmodal-header {
+.composemodal-header {
   padding: 9px 15px;
   border-bottom: 1px solid #eee;
 }
 
-.editmodal-body {
+.composemodal-body {
   max-height: 1000px;
   padding: 15px;
   overflow-y: hidden;

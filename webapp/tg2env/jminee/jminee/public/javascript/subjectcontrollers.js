@@ -123,30 +123,7 @@ $(window).load(function() {
 
     Jminee.SubjectTblContentController = Ember.Controller.extend({
     });
-//      
-//    var content1=[Jminee.SubjectContentController.create({sender: 'Bach', createdDate:'01', message: 'hello'}),
-//              Jminee.SubjectContentController.create({sender: 'Giang', createdDate:'01', message: 'bye'}),
-//              Jminee.SubjectContentController.create({sender: 'Alex', createdDate:'01', message: 'hello'}),
-//              Jminee.SubjectContentController.create({sender: 'Bach', createdDate:'01', message: 'bye'}),
-//              Jminee.SubjectTblContentController.create({sender: 'Bach', createdDate:'01', message: 'hello',
-//           	   table: {title: 'Registration', header: ['#','Name','Will join'], data: [['1','Bach','Y'],['2','Alex','N']]
-//           	   		}})];
-//    
-//    var content3=[Jminee.SubjectContentController.create({sender: 'Bach', createdDate:'12/01/02', message: 'Please register for this tournament'}),
-//                  Jminee.SubjectTblContentController.create({sender: 'Bach', createdDate:'01', message: '',
-//                	  table: {title: 'Registration', header: ['#','Name','Will join'], data: [['1','Bach','Y'],['2','Alex','N']]}
-//                  })];
-    
-//    Jminee.subjectListController = Jminee.SubjectController.create();
-//    Jminee.subjectListController.set('content',[Jminee.SubjectItemController.create({title: 'Practice', createdDate:'01', withMsg:true,
-//    																			active: true, parent: Jminee.subjectListController, content: content1}),
-//                                                Jminee.SubjectItemController.create({title: 'Goalkeeper gloves', createdDate:'02', withMsg:true, 
-//                    															active: false, parent: Jminee.subjectListController}),
-//                                                Jminee.SubjectItemController.create({title: 'Registration', createdDate:'02', withMsg:true, withTbl:true, 
-//                                                								active: false, parent: Jminee.subjectListController, content: content3}),
-//                                                Jminee.SubjectItemController.create({title: 'Expense', createdDate:'02', withMsg:true, 
-//                    															active: false, parent: Jminee.subjectListController})]);
-    
+
     Jminee.subjectContentListController = Ember.ArrayController.create();
     
     

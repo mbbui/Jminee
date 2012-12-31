@@ -36,10 +36,11 @@ $(window).load(function() {
 	Jminee.composeButtonView = Ember.View.create({
 		tagName: 'button',
 		classNames: ['toolbox', 'btn', 'btn-small'],
-		template: Ember.Handlebars.compile('<img src="/images/icons/edit.png">'),
+		template: Ember.Handlebars.compile('<img width=25 src="/images/icons/addtopic.png">'),
+//		template: Ember.Handlebars.compile('Create topic'),
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
-				  Jminee.composeView.$().modal('show');
+				  Jminee.composeView.$().modal('show');				 
 			  }
 		}),
 	});

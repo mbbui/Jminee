@@ -9,13 +9,13 @@ $(window).load(function() {
 	Jminee.MessageView = Ember.View.extend({
 		classNames: ['well  well-small'],
 		template: Ember.Handlebars.compile(
-				'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
+				'{{#if creator_name}}<a href="#">{{creator_name}} </a>:{{/if}}\
 					{{#if content}}{{content}}{{/if}}'),
 	});
 
 	Jminee.TableMessageView = Jminee.MessageView.extend({
 		template: Ember.Handlebars.compile(
-			'{{#if sender}}<a href="#">{{sender}} </a>:{{/if}}\
+			'{{#if creator_name}}<a href="#">{{creator_name}} </a>:{{/if}}\
 			{{#if view.content}}{{view.content}}{{/if}}\
 			{{#if view.table.title}}<h4>{{view.table.title}}</h4>{{/if}}\
 			<table class="table table-bordered">\
@@ -53,9 +53,7 @@ $(window).load(function() {
 				{{/with}}\
 			</form>')
 	});
-	
-	Jminee.commentView = Jminee.MessageInputView.create({textSpan: 'span8'}),
-		
+			
 	Jminee.MessageReviewView = Ember.ContainerView.extend({
 		reviewHidden: true,
 		changeReviewView: function(){
@@ -70,12 +68,13 @@ $(window).load(function() {
 				this.reviewHidden = true;				
 			}
 		}.observes('table'),
-		reviewView: function(){
-			return Jminee.TableMessageView.create({tableBinding: this.composeControllerName+".table", message: 'Review'});
-		}.property(),
-		commentView: Jminee.commentView.reopen({controller: this.controller}),
-					
-		childViews: ['commentView']
+//		setInfo: function(info){
+//			this.inputView.set('controller', info.inputController);
+////			this.inputView.set('textSpan', info.inputSpan);
+//		},
+		reviewView: Jminee.TableMessageView.create(),
+//		inputView: Jminee.MessageInputView.create(),
+		childViews: ['inputView']
 	});
 	
 	Jminee.AlertView = Ember.View.extend({

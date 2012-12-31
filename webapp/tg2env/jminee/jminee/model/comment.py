@@ -10,6 +10,7 @@ except ImportError:
              'Please install it. Example: easy_install hashlib')
 __all__ = ['Comment']
 
+import sqlalchemy as sql
 from sqlalchemy import Table, ForeignKey, Column
 from sqlalchemy.types import Unicode, Integer, Boolean, DateTime, String
 from sqlalchemy.orm import backref, relation
@@ -40,3 +41,7 @@ class Comment(DeclarativeBase):
     def __str__(self):
         return ('<Comment: uid=%d, time=%s, content=%s, creator_id=%s>' % (
                 self.uid, self.time, self.content, self.creator_id)).encode('utf-8')
+
+class CommentUser():
+    pass
+

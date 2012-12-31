@@ -63,4 +63,4 @@ from jminee.model.auth import User, Group, Permission
 from jminee.model.registration import Registration, ResetPassword
 from jminee.model.topic import Topic, MemberTopic
 from jminee.model.subject import Subject, MemberSubject
-from jminee.model.comment import Comment
+from jminee.model.comment import Comment, CommentUser
