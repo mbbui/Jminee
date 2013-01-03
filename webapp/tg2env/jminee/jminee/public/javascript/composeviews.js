@@ -103,6 +103,11 @@ $(window).load(function() {
 						<div class="input-prepend">\
 							<span class="add-on"><img width=20px height=15px src="/images/icons/folder.png"></span>\
 							{{view Jminee.AddMembersView class="input-xxlarge" valueBinding="Jminee.composeView.members"}}\
+						</div>\
+						<div class="input-prepend">\
+							<span class="add-on"><img width=20px height=15px src="/images/icons/folder.png"></span>\
+							{{view Ember.TextField class="input-xxlarge" placeholder="Logo URL..."\
+								valueBinding="Jminee.composeView.logourl"}}\
 						</div>')
 		}),
 		footerView: Ember.ContainerView.create({
@@ -139,7 +144,7 @@ $(window).load(function() {
 		
 		submit: function(event){
 			this.controller.submit({title: this.topic, members: this.members, 
-				 subject: this.subject, message: this.message});
+				logourl: this.logourl, subject: this.subject, message: this.message});
 //			if (this.message && this.subject && 
 //					!this.message.match(/^\s*$/) && 
 //					!this.subject.match(/^\s*$/)){

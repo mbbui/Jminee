@@ -46,7 +46,7 @@ class TopicController(BaseController):
         topic = Topic()
         topic.creator_id = request.identity['user'].user_id
         topic.title = kw['title']
-        
+        topic.logourl = kw['logourl']
         #creator is always a member of the topic            
         membertopic = MemberTopic(role='c', local_title=topic.title, member_id=topic.creator_id)
         topic.members.append(membertopic)
