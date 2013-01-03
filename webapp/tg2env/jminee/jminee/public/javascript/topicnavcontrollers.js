@@ -11,24 +11,28 @@ $(window).load(function() {
     	contentTypeBinding: 'topCrumb.contentType',
     	content: [],
     	delCrumbUntil: function(crumb){
-    		this.topCrumb.set('active', false);
+    		crumb.contentController.reload();
     		while(crumb!=this.content[this.content.length-1]){
     			this.content.popObject();
     		}
     		this.set('topCrumb', this.content[this.content.length-1]);    		
-    		this.topCrumb.set('active', true);
-    		this.topCrumb.contentController.reload();
     	},
     
 	    pushCrumb: function(crumb){
-			if (this.topCrumb){
-				this.topCrumb.set('active', false);
-			}
+	    	crumb.contentController.reload();
 			this.content.pushObject(crumb);
 			this.set('topCrumb', this.content[this.content.length-1]);
-			this.topCrumb.set('active', true);
-			this.topCrumb.contentController.reload();
-		}
+		},
+    	
+    	showTopicContent: function(topicInfo){
+    		while (this.content.length>1)
+    			this.content.popObject();
+    		
+    		Jminee.topicInfo.reopen(topicInfo);
+    		this.pushCrumb(Jminee.TopicItemNavController.create(
+    				{title: topicInfo.title, contentType: 'subject',
+    					contentController: Jminee.subjectListController}));
+    	}
     });
     
     Jminee.TopicItemNavController = Ember.Controller.extend({
@@ -36,7 +40,7 @@ $(window).load(function() {
     		if (this!=this.parent.topCrumb){
     			this.parent.delCrumbUntil(this);
     		}
-    	}.observes('active'),
+    	},
     	parent: Jminee.topicNavController
     });
     

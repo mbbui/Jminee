@@ -8,10 +8,11 @@ $(window).load(function() {
 	/*********************************************/ 
     Jminee.TopicItemController = Ember.Controller.extend({
     	selected: function(){
-    		Jminee.topicInfo.reopen(this.topicInfo);
-    		Jminee.topicNavController.pushCrumb(Jminee.TopicItemNavController.create(
-    				{title: this.topicInfo.title, contentType: 'subject',
-    					contentController: Jminee.subjectListController}));
+    		Jminee.topicNavController.showTopicContent(this.topicInfo);
+//    		Jminee.topicInfo.reopen(this.topicInfo);
+//    		Jminee.topicNavController.pushCrumb(Jminee.TopicItemNavController.create(
+//    				{title: this.topicInfo.title, contentType: 'subject',
+//    					contentController: Jminee.subjectListController}));
     	},
     }); 
 

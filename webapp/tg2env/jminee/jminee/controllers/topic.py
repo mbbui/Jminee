@@ -85,12 +85,24 @@ class TopicController(BaseController):
                         
             DBSession.add(topic)
             DBSession.flush()
+            
+            main_res = dict()
+            #if there is subject to be created, then create it, return error_code if failed
+            if kw.has_key('subject'):
+                res=self.create_subject(topic_id=topic.uid, title=kw['subject'], content=kw['message'])
+                if res['success']==False:
+                    main_res['error_code'] = ErrorCode.CREATSUBJECTFAILED
+                
             if len(nonexisting_users):
-                return dict(success=True,
+                main_res.upadte(dict(success=True,
                             topic=dict(uid=topic.uid, time=topic.time), 
-                            nonexisting_users=nonexisting_users)
-            return dict(success=True,
-                        topic=dict(uid=topic.uid, time=topic.time))
+                            nonexisting_users=nonexisting_users))
+            else:
+                main_res.update(dict(success=True,
+                        topic=dict(uid=topic.uid, time=topic.time, 
+                                   creator_id=topic.creator_id, update_time=topic.time,
+                                   title=topic.title, logourl=topic.logourl)))
+            return main_res
         except Exception as e:
             log.exception("Got exception: %s"%e)
             return dict(success=False)                

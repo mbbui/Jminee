@@ -9,13 +9,11 @@ $(window).load(function() {
 	Jminee.SubjectNavItemView = Ember.View.extend({
 		tagName: 'li',
 		classNameBindings: ['active'],
-		eventManager: Ember.Object.create({
-			  click: function(event, view){
-				  	view.set('active', true);
-				  	if (Jminee.subjectAlertView.isVisible)
-				  		Jminee.subjectAlertView.removeFromParent();
-			  }
-		}),
+		click: function(event){
+		  	if (Jminee.subjectAlertView.isVisible)
+		  		Jminee.subjectAlertView.removeFromParent();
+		  	this.set('active', true);
+		},
 		template: Ember.Handlebars.compile(
 			'<a href="#">{{title}}\
 			{{#if withMsg}}\
@@ -27,16 +25,14 @@ $(window).load(function() {
 		)
 	});
 	
-	Jminee.AddSubjectTitleView = Ember.TextField.extend({
-		classNameBindings: ['active'],
+	
+	
+	Jminee.AddSubjectTitleView = Ember.TextField.extend(Jminee.viewWithAlert, {
+//		classNameBindings: ['active'],
 		placeholder:"Create a subject...",
-		eventManager: Ember.Object.create({
-			  click: function(event, view){
-				  	view.set('active', true);
-				  	if (Jminee.subjectAlertView.isVisible)
-				  		Jminee.subjectAlertView.removeFromParent();
-			  }
-		})
+		alertView: Jminee.subjectAlertView,
+		alertText: 'Subject musts have a title!',
+		alertType: 'alert-error'
 	});
 	
 	
@@ -45,10 +41,11 @@ $(window).load(function() {
 		  classNames: ['nav', 'nav-pills', 'nav-stacked'],
 		  template: Ember.Handlebars.compile(
 				  '{{#each Jminee.subjectListController}}\
-				  		{{#unless newSubject}}\
+				  		{{#unless addSubject}}\
 				  			{{view Jminee.SubjectNavItemView activeBinding="active"}}\
 				  		{{else}}\
-				  			{{view Jminee.AddSubjectTitleView activeBinding="active" valueBinding="title"}}\
+				  			{{view Jminee.AddSubjectTitleView activeBinding="active"\
+				  				valueBinding="title"}}\
 				  		{{/unless}}\
 				  {{/each}}')				  	
 	});
@@ -58,4 +55,6 @@ $(window).load(function() {
 		classNames: ['span3'],
 		childViews: [Jminee.subjectNavView]
 	});
+	
+	Jminee.subjectAlertView.reopen({parent: Jminee.subjectNavContainer, type: 'alert-error'});
 });

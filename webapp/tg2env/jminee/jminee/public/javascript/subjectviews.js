@@ -6,8 +6,8 @@ $(window).load(function() {
 	/*********************************************	
 	/*		subject views
 	/*********************************************/
-//	Jminee.subjectCommentView = Jminee.MessageReviewView.create({tableBinding: 'Jminee.commentController.table',
-//		inputView: Jminee.MessageInputView.create({textSpan: 'span8', controller: Jminee.commentController})});
+//	Jminee.subjectCommentView = Jminee.CommentReviewView.create({tableBinding: 'Jminee.commentController.table',
+//		inputView: Jminee.CommentInputView.create({textSpan: 'span8', controller: Jminee.commentController})});
     
 	Jminee.subjectContentContainer = Ember.ContainerView.create({
 		classNames: ['span9'],
@@ -20,8 +20,8 @@ $(window).load(function() {
 													{{/if}}\
 												{{/each}}')
 		}),
-		commentView: Jminee.MessageReviewView.create({tableBinding: 'Jminee.commentController.table',
-			inputView: Jminee.MessageInputView.create({textSpan: 'span8', controller: Jminee.commentController})}),
+		commentView: Jminee.CommentReviewView.create({tableBinding: 'Jminee.commentController.table',
+			inputView: Jminee.CommentInputView.create({textSpan: 'span8', controller: Jminee.commentController})}),
 		childViews:['contentView', 'commentView']
 	});
 });

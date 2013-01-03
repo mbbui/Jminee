@@ -16,4 +16,6 @@ class ErrorCode(object):
     FAILEDACTIVATION = 5
     NORESETRECORD = 6   
     NONEXISTEDUSER = 7
+    CREATSUBJECTFAILED = 8
     OTHERS = 100 
+    

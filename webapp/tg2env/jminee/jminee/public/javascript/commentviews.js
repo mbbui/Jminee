@@ -35,26 +35,37 @@ $(window).load(function() {
 			</tbody></table>'
 		)
 	});
-
-	Jminee.MessageInputView = Jminee.MessageView.extend({
+	
+	Jminee.CommentTextArea = Ember.TextArea.extend({
+		classNameBindings: ['span'],
+		attributeBindings: ['placeholder', 'rows'],
+		placeholder: 'Type your message...',
+	});
+	
+	Jminee.CommentInputView = Jminee.MessageView.extend({
+		submit: function(){
+			this.controller.submit();
+		},
 		template: Ember.Handlebars.compile(
 			'<form class="form-horizontal">\
 				{{#with controller}}\
 					<div class="control-group">\
 			 			<div class="control">\
-							{{view Jminee.TextArea spanBinding="view.textSpan" controller=this}}\
+							{{view Jminee.CommentTextArea spanBinding="view.textSpan"\
+								valueBinding="controller.text" rows="6"}}\
 						</div>\
 				  	</div>\
 				  	<div class="control-group">\
 			 			<div class="control">\
-				  			<button  class="control btn" type="submit" {{action "submit" target="controller"}}>Submit</button>\
+				  			<button  class="control btn" type="submit"\
+								{{action "submit" target="view"}}>Submit</button>\
 				  		</div>\
 				  	</div>\
 				{{/with}}\
 			</form>')
 	});
 			
-	Jminee.MessageReviewView = Ember.ContainerView.extend({
+	Jminee.CommentReviewView = Ember.ContainerView.extend({
 		reviewHidden: true,
 		changeReviewView: function(){
 			if (this.table){
@@ -68,12 +79,7 @@ $(window).load(function() {
 				this.reviewHidden = true;				
 			}
 		}.observes('table'),
-//		setInfo: function(info){
-//			this.inputView.set('controller', info.inputController);
-////			this.inputView.set('textSpan', info.inputSpan);
-//		},
 		reviewView: Jminee.TableMessageView.create(),
-//		inputView: Jminee.MessageInputView.create(),
 		childViews: ['inputView']
 	});
 	
@@ -91,6 +97,4 @@ $(window).load(function() {
 			</div>'
 		),		
 	});
-	
-	Jminee.subjectAlertView = Jminee.AlertView.create({});
 });

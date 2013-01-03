@@ -28,8 +28,6 @@ $(window).load(function() {
 			if (Jminee.isLogin){
 				Jminee.topicNavController.pushCrumb(Jminee.TopicItemNavController.create(
 			    		{title: 'Topics', contentType: 'topic', contentController: Jminee.topicListController}));
-//				Jminee.topicListController.reload();
-				
 				Jminee.loginView.removeFromParent();
 				Jminee.mainView.appendTo("#main_container");
 				Jminee.accountView.appendTo("#navbar_container");

@@ -37,7 +37,7 @@ $(window).load(function() {
     	//comments is loaded from the server
     	loadComments: function(){
     		var subject=this.activeSubject;
-    		if (!subject.newSubject)
+    		if (!subject.addSubject)
 	    		$.ajax({
 			     	url: '/topic/get_comments',
 			     	data: {topic_id: Jminee.topicInfo.uid, subject_id: subject.uid},
@@ -78,8 +78,7 @@ $(window).load(function() {
 		     	data: {topic_id: Jminee.topicInfo.uid},
     			dataType: 'json',
     			success: function(resp){
-    				var subjectList=[];
-    				Jminee.subjectAlertView.reopen({parent: Jminee.subjectNavContainer});
+    				var subjectList=[];    				
     				if (!resp.success)
     					//TODO: change error message
     					//TODO: create subjectAlertView
@@ -88,8 +87,9 @@ $(window).load(function() {
     					//TODO: check if res.topics always an array
     					var subjects = resp.subjects;
     					var item;
-    					//add creating subject title controller
-    					item = Jminee.SubjectItemController.create({parent: Jminee.subjectListController, newSubject: true});
+    					
+    					//add creating-subject-title controller
+    					item = Jminee.SubjectItemController.create({parent: Jminee.subjectListController, addSubject: true});
 						subjectList.push(item);
     					
 						for (var i=0; i<subjects.length; i++){

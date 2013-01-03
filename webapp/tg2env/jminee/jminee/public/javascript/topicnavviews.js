@@ -12,7 +12,7 @@ $(window).load(function() {
 				'<a href="#">{{title}}</a><span class="divider">></span>'),
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
-				  	view.set('active', true);
+				  view.controller.selected();
 			  }
 		}),
 	});
@@ -21,8 +21,8 @@ $(window).load(function() {
 		classNames: ['breadcrumb'],
 		template: Ember.Handlebars.compile(
 				  '{{#each Jminee.topicNavController}}\
-					  	{{view Jminee.TopicNavItemView title=title activeBinding="active"\
-							viewList=viewList}}\
+					  	{{view Jminee.TopicNavItemView title=title\
+							viewList=viewList controller=this}}\
 				  {{/each}}'
 				)
 	});

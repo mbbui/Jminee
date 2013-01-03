@@ -51,10 +51,7 @@ $(window).load(function() {
 		}.observes('text'),
 		
 		focusIn: function(){
-			if (Jminee.subjectAlertView.isVisible && Jminee.subjectAlertView.relatedView==this)
-				Jminee.subjectAlertView.removeFromParent();
-			if (!this.subject || !this.subject.title)
-				Jminee.subjectAlertView.show(this, 'Subject musts have a title!');
+			
 		},
 		
 		submit: function(){
@@ -65,7 +62,7 @@ $(window).load(function() {
 				Jminee.subjectAlertView.show(this, 'You are submitting nothing!');
 			}
 			else{
-				if (this.subject.newSubject){
+				if (this.subject.addSubject){
 					$.ajax({
 				     	url: '/topic/create_subject',
 				     	data: {topic_id: Jminee.topicInfo.uid, title: this.subject.title, content: this.text},
