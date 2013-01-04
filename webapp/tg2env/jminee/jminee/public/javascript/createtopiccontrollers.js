@@ -16,7 +16,7 @@ $(window).load(function() {
     				else {
     					//reload topic list
     					Jminee.topicNavController.showTopicContent(resp.topic);    					
-    					Jminee.composeView.$().modal('hide');    					
+    					Jminee.composeView.hide();    					
     				}	
     				return resp;
     			},

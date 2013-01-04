@@ -45,12 +45,19 @@ class TopicController(BaseController):
     def create_topic(self, *args, **kw):
         topic = Topic()
         topic.creator_id = request.identity['user'].user_id
-        topic.title = kw['title']
-        topic.logourl = kw['logourl']
+        
+        if kw.has_key('title'):
+            topic.title = kw['title'] 
+        else:
+            #TODO: create topic named after all member
+            return dict(success=False)
+                    
+        if kw.has_key('logourl'):
+            topic.logourl = kw['logourl']
+            
         #creator is always a member of the topic            
         membertopic = MemberTopic(role='c', local_title=topic.title, member_id=topic.creator_id)
         topic.members.append(membertopic)
-        
         
         #do not change the order of the following if clause
         members = []
@@ -64,7 +71,7 @@ class TopicController(BaseController):
             # check if each member is in the User table
             # if not add him to nonexists list
             nonexisting_users = []
-            existing_users = DBSession.query(User.user_id).filter(User.user_id.in_(members)).all()
+            existing_users = DBSession.query(User.user_id).filter(User.email_address.in_(members)).all()
             existing_users = [user[0] for user in existing_users]
             
             log.debug(existing_users)
@@ -78,7 +85,7 @@ class TopicController(BaseController):
                 if member_id == topic.creator_id:
                     continue
                 
-                member_topic = MemberTopic(role='r', 
+                member_topic = MemberTopic(role='c', 
                                           local_title=topic.title, 
                                           member_id=member_id)
                 topic.members.append(member_topic)
@@ -89,12 +96,16 @@ class TopicController(BaseController):
             main_res = dict()
             #if there is subject to be created, then create it, return error_code if failed
             if kw.has_key('subject'):
-                res=self.create_subject(topic_id=topic.uid, title=kw['subject'], content=kw['message'])
+                if kw.has_key('message'):
+                    res=self.create_subject(topic_id=topic.uid, title=kw['subject'], content=kw['message'])
+                else:
+                    res=self.create_subject(topic_id=topic.uid, title=kw['subject'])
+                    
                 if res['success']==False:
                     main_res['error_code'] = ErrorCode.CREATSUBJECTFAILED
                 
             if len(nonexisting_users):
-                main_res.upadte(dict(success=True,
+                main_res.update(dict(success=True,
                             topic=dict(uid=topic.uid, time=topic.time), 
                             nonexisting_users=nonexisting_users))
             else:
@@ -218,14 +229,14 @@ class TopicController(BaseController):
             DBSession.add(subject)
             DBSession.flush()
             
+            if kw.has_key('content'):
+                comment = Comment()
+                comment.subject_id = subject.uid
+                comment.creator_id = request.identity['user'].user_id
+                comment.content = kw['content']
             
-            comment = Comment()
-            comment.subject_id = subject.uid
-            comment.creator_id = request.identity['user'].user_id
-            comment.content = kw['content']
-            
-            DBSession.add(comment)
-            DBSession.flush()
+                DBSession.add(comment)
+                DBSession.flush()
             
             #update member_subject database
             members = DBSession.query(MemberTopic).\

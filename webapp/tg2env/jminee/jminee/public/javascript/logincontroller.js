@@ -40,9 +40,9 @@ $(window).load(function() {
 				  Jminee.loginAlertView.removeFromParent();
     		$.ajax({
 		     	url: '/login_handler',
-//		     	data: {login: Jminee.loginController.email, password: Jminee.loginController.password, 
+		     	data: {login: Jminee.loginController.email, password: Jminee.loginController.password}, 
 //		     			remember: Jminee.loginController.keepLogIn},
-		     	data: {login: 'testuser', password: 'testuser'},
+//		     	data: {login: 'testuser', password: 'testuser'},
     			dataType: 'json',
     			success: function(resp){
     				if (!resp.success)

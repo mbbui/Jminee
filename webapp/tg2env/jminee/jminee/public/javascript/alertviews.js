@@ -7,9 +7,10 @@ $(window).load(function() {
 		classNameBindings: ['alert', 'type', 'pull'],
 		alert: true,
 		pull: 'pull-left',
+		type: 'alert-error',
 		show: function(relatedView, text, type){
 			if (type)
-				this.set('type', type);
+				newType = type;
 			if (this.isVisible)
 				this.removeFromParent();
 			this.relatedView=relatedView;		
@@ -19,19 +20,22 @@ $(window).load(function() {
 		template: Ember.Handlebars.compile(
 			'{{view.text}}'
 		),		
+		didInsertElement: function(){
+			this.set('type', newType);
+		}
 	});
 	
 	Jminee.viewWithAlert = Ember.Mixin.create({
 		focusOut: function(event){
 			if (this.value.match(/^\s*$/)){
-				this.alertView.show(this, this.alertText, this.alertType);
+				this.alertView.show(this, this.alertText, this.alertType);				
 			}
 		},
 		focusIn: function(event){
-			if (this.alertView.isVisible && this.alertView.relatedView==this){
+			if (this.alertView.isVisible && (this.alertView.relatedView==this
+					||this.alertView.relatedView==null)){
 				this.alertView.removeFromParent();
 			}
-			this.set('active', true);
 		}
 	});
 	

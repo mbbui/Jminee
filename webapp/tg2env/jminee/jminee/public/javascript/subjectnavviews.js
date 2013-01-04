@@ -32,7 +32,11 @@ $(window).load(function() {
 		placeholder:"Create a subject...",
 		alertView: Jminee.subjectAlertView,
 		alertText: 'Subject musts have a title!',
-		alertType: 'alert-error'
+		alertType: 'alert-error',
+		focusIn: function(){
+			this.set('active',true);
+			this._super();
+		}
 	});
 	
 	
@@ -41,20 +45,23 @@ $(window).load(function() {
 		  classNames: ['nav', 'nav-pills', 'nav-stacked'],
 		  template: Ember.Handlebars.compile(
 				  '{{#each Jminee.subjectListController}}\
-				  		{{#unless addSubject}}\
-				  			{{view Jminee.SubjectNavItemView activeBinding="active"}}\
-				  		{{else}}\
+				  		{{#if addSubject}}\
 				  			{{view Jminee.AddSubjectTitleView activeBinding="active"\
-				  				valueBinding="title"}}\
-				  		{{/unless}}\
+	  							valueBinding="title"}}\
+				  		{{else}}\
+				  			{{view Jminee.SubjectNavItemView activeBinding="active"}}\
+				  		{{/if}}\
 				  {{/each}}')				  	
 	});
 	
 	Jminee.subjectNavContainer = Ember.ContainerView.create({
 		tagName: 'div',
 		classNames: ['span3'],
-		childViews: [Jminee.subjectNavView]
+		childViews: [Jminee.subjectNavView],
+		didInsertElement: function(){
+			this.get('childViews').removeObject(Jminee.subjectAlertView);
+		}
 	});
 	
-	Jminee.subjectAlertView.reopen({parent: Jminee.subjectNavContainer, type: 'alert-error'});
+	Jminee.subjectAlertView.reopen({parent: Jminee.subjectNavContainer});
 });

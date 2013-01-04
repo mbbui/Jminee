@@ -7,6 +7,7 @@ $(window).load(function() {
 	/*		login/signin views
 	/*********************************************/
 	Jminee.LogInField = Ember.TextField.extend({
+		attributeBindings: ['autofocus'],	    	    
 		eventManager: Ember.Object.create({
 			  focusIn: function(event, view){
 				  if (Jminee.loginAlertView.relatedView==view)
@@ -39,7 +40,8 @@ $(window).load(function() {
 		classNames: ['well', 'span4', 'offset6', 'form-horizontal'],	
 		template: Ember.Handlebars.compile(
 			'{{#with Jminee.loginController}} <div class="control-group">\
-				{{view Jminee.LogInField placeholder="Email" type="email" valueBinding="email" isValidBinding="isEmailValid"}}\
+				{{view Jminee.LogInField placeholder="Email" type="email" autofocus="autofocus"\
+					valueBinding="email" isValidBinding="isEmailValid"}}\
 			</div>\
 			<div class="control-group">\
 				{{view Jminee.LogInField type="password" placeholder="Password" valueBinding="password" isValidBinding="isPasswordValid"}}\

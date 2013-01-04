@@ -108,12 +108,15 @@ $(window).load(function() {
 							<span class="add-on"><img width=20px height=15px src="/images/icons/folder.png"></span>\
 							{{view Ember.TextField class="input-xxlarge" placeholder="Logo URL..."\
 								valueBinding="Jminee.composeView.logourl"}}\
-						</div>')
+						</div>'),
+			focus: function(){
+				this.$('input')[0].focus();
+			}
 		}),
 		footerView: Ember.ContainerView.create({
 			classNames: ['modal-footer'],
 			alertView: Ember.ContainerView.create({
-				classNames: ['span8']
+				classNames: ['span8']				
 			}),
 			button: Ember.View.create({
 				template: Ember.Handlebars.compile('\
@@ -142,17 +145,55 @@ $(window).load(function() {
 		
 		childViews: ['headerView', 'bodyView', 'footerView'],
 		
-		submit: function(event){
-			this.controller.submit({title: this.topic, members: this.members, 
-				logourl: this.logourl, subject: this.subject, message: this.message});
-//			if (this.message && this.subject && 
-//					!this.message.match(/^\s*$/) && 
-//					!this.subject.match(/^\s*$/)){
-//				this.controller.submit({topic: this.topic, subject: this.subject, 
-//					members: this.members, content: this.content});
-//			}
+		submit: function(){
+			if (Jminee.empty(this.topic) && Jminee.empty(this.members)
+					&& Jminee.empty(this.logourl) && Jminee.empty(this.subject)
+					&& Jminee.empty(this.message)){
+				Jminee.createTopicAlertView.show(null, "There is nothing to submit!", "alert-error");
+				return;
+			}				
+			
+			if (Jminee.empty(this.subject) && !Jminee.empty(this.message)){
+				Jminee.createTopicAlertView.show(null, "Please enter a subject title or remove the message!", "alert-error");
+				return;
+			}
+			
+			var content = {title: this.topic};
+			
+			if (!Jminee.empty(this.members))
+				content.members = this.members;
+			
+			if (!Jminee.empty(this.logourl))
+				content.logourl = this.logourl;
+			
+			if (!Jminee.empty(this.subject))
+				content.subject = this.subject;
+						
+			if (!Jminee.empty(this.message))
+				content.message = this.message;
+			
+			this.controller.submit(content);
+		},		
+		
+		show: function(){
+			this.footerView.alertView.get('childViews').removeObject(Jminee.createTopicAlertView);
+			this.$().modal('show');
+			this.headerView.focus();
+		},
+		
+		hide: function(){
+			this.$().modal('hide');
+			this.set('topic', '');
+			this.set('members', '');
+			this.set('logoutl', '');
+			this.set('subject', '');
+			this.set('message', '');			
 		}
 	});
+	
+	Jminee.empty = function(str){
+		return (!str || str.match(/^\s*$/));
+	};
 	
 	Jminee.createTopicAlertView.reopen({parent: Jminee.composeView.footerView.alertView});
 });

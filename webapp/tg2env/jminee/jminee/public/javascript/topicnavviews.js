@@ -40,7 +40,7 @@ $(window).load(function() {
 //		template: Ember.Handlebars.compile('Create topic'),
 		eventManager: Ember.Object.create({
 			  click: function(event, view){
-				  Jminee.composeView.$().modal('show');				 
+				  Jminee.composeView.show();				 
 			  }
 		}),
 	});
