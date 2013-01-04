@@ -25,9 +25,14 @@ class MemberSubject(DeclarativeBase):
         onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
     subject_id = Column(Integer, ForeignKey('subject.uid',
         onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
-    #this is the id of the user last read comment 
-    last_read = Column(Integer, ForeignKey('comment.uid',
-        onupdate="CASCADE", ondelete="CASCADE"), nullable=False) 
+    
+    #this is the id of the user last read comment
+    #cannot make it a ForeignKey because we support subject with no comment in it
+    last_read = Column(Integer, nullable=False) 
+#    last_read = Column(Integer, ForeignKey('comment.uid',
+#        onupdate="CASCADE", ondelete="CASCADE"), nullable=False) 
+
+
     #member can select to not follow a subject
     muted = Column(Boolean, default=False, nullable=False)                         
     

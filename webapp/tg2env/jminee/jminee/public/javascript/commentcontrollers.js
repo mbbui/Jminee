@@ -55,57 +55,68 @@ $(window).load(function() {
 		},
 		
 		submit: function(){
-			if (!this.subject || !this.subject.title){
-				Jminee.subjectAlertView.show(this, 'Subject musts have a title!');
+			var data = {topic_id: Jminee.topicInfo.uid};
+			if (this.subject.addSubject){
+				if (Jminee.empty(this.subject.title)){
+					Jminee.subjectAlertView.show(this, 'Subject musts have a title!');
+					return;
+				}
+				data.title=this.subject.title;
+				if (!Jminee.empty(this.text)){
+					data.content = this.text;
+				}
 			}
-			else if (this.text.match('^\s*$')){
-				Jminee.subjectAlertView.show(this, 'You are submitting nothing!');
+			else {
+				if (Jminee.empty(this.text)){
+					return;
+				}
+				data.content = this.text;
+				data.subject_id = this.subject.uid;
+			}
+						
+			if (this.subject.addSubject){
+				$.ajax({
+			     	url: '/topic/create_subject',
+			     	data: data,
+	    			dataType: 'json',
+	    			success: function(resp){
+	    				if (!resp.success)
+	    					//TODO: change error message
+	    					//TODO: create subjectAlertView
+	    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
+	    				else {
+	    					Jminee.subjectListController.reload();	    					
+	    				}
+	    				
+	    				return resp;
+	    			},
+	    			error: function(resp){
+	    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
+	    			} 
+			    });
 			}
 			else{
-				if (this.subject.addSubject){
-					$.ajax({
-				     	url: '/topic/create_subject',
-				     	data: {topic_id: Jminee.topicInfo.uid, title: this.subject.title, content: this.text},
-		    			dataType: 'json',
-		    			success: function(resp){
-		    				if (!resp.success)
-		    					//TODO: change error message
-		    					//TODO: create subjectAlertView
-		    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
-		    				else {
-		    					Jminee.subjectListController.reload();	    					
-		    				}
-		    				
-		    				return resp;
-		    			},
-		    			error: function(resp){
-		    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
-		    			} 
-				    });
-				}
-				else{
-					$.ajax({
-				     	url: '/topic/create_comment',
-				     	data: {topic_id: Jminee.topicInfo.uid, subject_id: this.subject.uid, content: this.text},
-		    			dataType: 'json',
-		    			success: function(resp){
-		    				if (!resp.success)
-		    					//TODO: change error message
-		    					//TODO: create subjectAlertView
-		    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
-		    				else {
-		    					Jminee.commentController.set('text', '');
-		    					Jminee.subjectListController.loadComments();
-		    				}
-		    				
-		    				return resp;
-		    			},
-		    			error: function(resp){
-		    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
-		    			} 
-				    });
-				}
-			}
+				$.ajax({
+			     	url: '/topic/create_comment',
+			     	data: data,
+	    			dataType: 'json',
+	    			success: function(resp){
+	    				if (!resp.success)
+	    					//TODO: change error message
+	    					//TODO: create subjectAlertView
+	    					Jminee.subjectAlertView.show(null, 'Error code '+resp.error_code);
+	    				else {
+	    					Jminee.commentController.set('text', '');
+	    					Jminee.subjectListController.loadComments();
+	    				}
+	    				
+	    				return resp;
+	    			},
+	    			error: function(resp){
+	    				Jminee.subjectAlertView.show(null, 'Error connecting server!');
+	    			} 
+			    });
+			}	
 		}
 	});
     

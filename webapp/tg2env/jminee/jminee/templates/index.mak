@@ -27,7 +27,7 @@
         <script src="/javascript/topiccontrollers.js" type="text/javascript"></script>
         <script src="/javascript/topicnavcontrollers.js" type="text/javascript"></script>
         <script src="/javascript/controllers.js" type="text/javascript"></script>
-        <script src="/javascript/textareacontrollers.js" type="text/javascript"></script>
+        <script src="/javascript/commentcontrollers.js" type="text/javascript"></script>
         <script src="/javascript/logincontroller.js" type="text/javascript"></script>
         <script src="/javascript/createtopiccontrollers.js" type="text/javascript"></script>
         <script src="/javascript/alertviews.js" type="text/javascript"></script>

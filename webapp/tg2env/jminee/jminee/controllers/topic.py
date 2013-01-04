@@ -228,7 +228,8 @@ class TopicController(BaseController):
             
             DBSession.add(subject)
             DBSession.flush()
-            
+        
+            comment = None
             if kw.has_key('content'):
                 comment = Comment()
                 comment.subject_id = subject.uid
@@ -243,7 +244,7 @@ class TopicController(BaseController):
                             filter(MemberTopic.topic_id==kw['topic_id']).all()
             
             for member in members:
-                if member==creator:
+                if member==creator and comment:
                     member_subject = MemberSubject(member_id = member.member_id,
                                            subject_id = subject.uid,
                                            last_read = comment.uid)
