@@ -8,6 +8,7 @@ $(window).load(function() {
 		alert: true,
 		pull: 'pull-left',
 		type: 'alert-error',
+		
 		show: function(relatedView, text, type){
 			if (type)
 				newType = type;
@@ -18,7 +19,7 @@ $(window).load(function() {
 			this.parent.get('childViews').pushObject(this);						
 		},
 		template: Ember.Handlebars.compile(
-			'{{view.text}}'
+			'{{{view.text}}}'
 		),		
 		didInsertElement: function(){
 			this.set('type', newType);
@@ -26,10 +27,14 @@ $(window).load(function() {
 	});
 	
 	Jminee.viewWithAlert = Ember.Mixin.create({
+		//default validatFunction
+		isValid: function(value){
+			return !Jminee.empty(value);
+		},
 		focusOut: function(event){
-			if (this.value.match(/^\s*$/)){
-				this.alertView.show(this, this.alertText, this.alertType);				
-			}
+			if (!this.isValid(this.value)){
+				this.alertView.show(this, this.alertText, this.alertType);
+			}			
 		},
 		focusIn: function(event){
 			if (this.alertView.isVisible && (this.alertView.relatedView==this
@@ -41,4 +46,5 @@ $(window).load(function() {
 	
 	Jminee.subjectAlertView = Jminee.AlertView.create();
 	Jminee.createTopicAlertView = Jminee.AlertView.create();
+	Jminee.loginAlertView = Jminee.AlertView.create();
 });

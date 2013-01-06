@@ -48,17 +48,15 @@ class Registration(DeclarativeBase):
 
     @classmethod
     def clear_expired(cls):
-        expired = DBSession.query(cls).filter_by(activated=None)\
-                                      .filter(Registration.time<datetime.now()-timedelta(7)).delete()
+        expired = DBSession.query(cls).filter(Registration.time<datetime.now()-timedelta(7)).delete()
     @classmethod
     def clear_expired_user(cls, email_address):
-        expired = DBSession.query(cls).filter_by(reset=None)\
-                                        .filter_by(email_address=email_address)\
+        expired = DBSession.query(cls).filter_by(email_address=email_address)\
                                         .filter(Registration.time<datetime.now()-timedelta(7)).delete()
     
     @classmethod
     def get_inactive(cls, email_address, code):
-        return DBSession.query(Registration).filter_by(activated=None)\
+        return DBSession.query(cls).filter_by(activated=None)\
                                             .filter_by(code=code)\
                                             .filter_by(email_address=email_address).first()
 

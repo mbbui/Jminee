@@ -26,8 +26,8 @@ class RegistrationController(BaseController):
     config['renderers']=['json']
     
     @expose('jminee.templates.error')
-    def errorhtml(self, *args, **kw):        
-        return dict(success=False)
+    def error(self, *args, **kw):        
+        return dict(kw)
         
     @expose('json')
     @validate(dict(email_address=validators.UniqueEmailValidator(not_empty=True),
@@ -57,7 +57,7 @@ Please click on this link to confirm your registration
         except Exception as e:
             log.exception('Got exception')
             return dict(success=False)
-        return dict(success=True)
+        return dict(success=True, email=kw['email_address'])
     
     @expose('json')
     @validate(dict(code=UnicodeString(not_empty=True),
@@ -85,10 +85,26 @@ Please click on this link to confirm your registration
             return dict(success=False, error_code=ErrorCode.OTHERS)
         return dict(success=True)    
     
-    @expose()
-    @validate(dict(code=UnicodeString(not_empty=True),
-                  email=validators.UniqueEmailValidator(not_empty=True)),
-              error_handler=errorhtml)
+    @expose('json')
+    @validate(dict(email=Email(not_empty=True)))      
+    def email_exist(self, *agrs, **kw):
+        try:
+            log.info('Check email existence: %s'%str(kw))
+            
+            user=DBSession.query(User).filter_by(email_address=kw['email']).first()
+            if user:
+                return dict(success=True, email_exist=True)
+            return dict(success=True, email_exist=False)
+        
+        except Exception as e:
+            log.exception('Got exception')
+            return dict(success=False, error_code=ErrorCode.OTHERS)
+        return dict(success=True)   
+    
+    @expose('jminee.templates.index')
+#    @validate(dict(code=UnicodeString(not_empty=True),
+#                  email=validators.UniqueEmailValidator(not_empty=True)),
+#              error_handler=errorhtml)
     def activate(self, email, code):
         try:
             log.info('User activation email=%s code=%s'%(email, code))
@@ -96,7 +112,11 @@ Please click on this link to confirm your registration
             
             reg = Registration.get_inactive(email, code)
             if not reg:
-                return redirect('/registration/errorhtml')
+                user=DBSession.query(User).filter_by(email_address=email).first()
+                if user:
+                    return dict()
+                else:
+                    return redirect('/registration/error')
     
             u = User(user_name=reg.user_name,
                                display_name=reg.user_name,
@@ -108,11 +128,12 @@ Please click on this link to confirm your registration
             reg.user = u
             reg.password = '******'
             reg.activated = datetime.now()
-                   
-            return redirect('/')
+            return dict()        
         except:
             log.exception('Got exception')
-            return self.errorhtml()
+            #TODO return error page
+            return redirect('/registration/error', message='Sorry your account cannot be activated. Please send email to ...')
+#            return redirect('/registration/errorhtml')
     
     @expose('json')
     @validate(dict(email_address=Email(not_empty=True)), 
@@ -149,7 +170,7 @@ Please click on this link to reset your password
     
     @expose()
     @validate(dict(code=UnicodeString(not_empty=True),
-                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=errorhtml)
+                  email=validators.UniqueEmailValidator(not_empty=True)), error_handler=error)
     def confirm_reset(self, email, code):
         return redirect('/')
     

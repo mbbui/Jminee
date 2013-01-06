@@ -29,9 +29,12 @@ $(window).load(function() {
 				this.set('subjectOnOff', true);				
 			}
 			else{
-				this.$('a')[0].innerHTML='<i class="icon-plus-sign"></i> Add subject';
-				this.set('subjectOnOff', false);
+				this.close();
 			}
+		},
+		close: function(){
+			this.$('a')[0].innerHTML='<i class="icon-plus-sign"></i> Add subject';
+			this.set('subjectOnOff', false);
 		},
 		template: Ember.Handlebars.compile(
 				'<ul class="nav nav-pills">\
@@ -101,11 +104,11 @@ $(window).load(function() {
 							{{view Jminee.AddTopicTitleView class="input-xxlarge" valueBinding="Jminee.composeView.topic"}}\
 						</div>\
 						<div class="input-prepend">\
-							<span class="add-on"><img width=20px height=15px src="/images/icons/folder.png"></span>\
+							<span class="add-on"><img width=20px height=15px src="/images/icons/members.png"></span>\
 							{{view Jminee.AddMembersView class="input-xxlarge" valueBinding="Jminee.composeView.members"}}\
 						</div>\
 						<div class="input-prepend">\
-							<span class="add-on"><img width=20px height=15px src="/images/icons/folder.png"></span>\
+							<span class="add-on"><img width=20px height=15px src="/images/icons/logo.png"></span>\
 							{{view Ember.TextField class="input-xxlarge" placeholder="Logo URL..."\
 								valueBinding="Jminee.composeView.logourl"}}\
 						</div>'),
@@ -128,7 +131,7 @@ $(window).load(function() {
 		bodyView: Ember.ContainerView.create({
 			classNames: ['composemodal-body'],
 			subjectOnOffBinding: 'this.addSubjectBtn.subjectOnOff',
-			changeInput: function(event){
+			subjectInputOnOff: function(event){
 				if(this.subjectOnOff){
 					this.get('childViews').pushObject(this.commentView);
 				}
@@ -175,13 +178,26 @@ $(window).load(function() {
 			this.controller.submit(content);
 		},		
 		
+		didInsertElement: function() {
+	        this.$().bind('hidden', this, function(event){
+	        	modal = event.data;
+	        	modal.bodyView.addSubjectBtn.close();
+				modal.set('topic', '');
+				modal.set('members', '');
+				modal.set('logoutl', '');
+				modal.set('subject', '');
+				modal.set('message', '');
+	        });
+	    },
+		
 		show: function(){
-			this.footerView.alertView.get('childViews').removeObject(Jminee.createTopicAlertView);
 			this.$().modal('show');
 			this.headerView.focus();
 		},
 		
 		hide: function(){
+			this.bodyView.addSubjectBtn.close();
+			this.footerView.alertView.get('childViews').removeObject(Jminee.createTopicAlertView);
 			this.$().modal('hide');
 			this.set('topic', '');
 			this.set('members', '');

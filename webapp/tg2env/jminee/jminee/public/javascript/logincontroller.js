@@ -9,7 +9,6 @@ $(window).load(function() {
     		else if (view.type=='password') return this.password(view);
     	},
     	email: function(view){
-//    		return true;
     		email = $.trim(view.value);
     		if (email==null || email.match('^[^@]+@[^@\.]+\.[^@\.]+$')==null){
     			if (this.alertView)
@@ -19,7 +18,6 @@ $(window).load(function() {
     		return true;
     	},
     	password: function(view){
-//    		return true;
     		password = $.trim(view.value);
     		if (password==null || password==''){
     			if (this.alertView)
@@ -31,13 +29,11 @@ $(window).load(function() {
     });
     
     Jminee.loginController = Ember.Controller.create({
-    	keepLogIn: false,
+    	keepLogIn: true,
+    	checkEmailExistDone: false,
     	isEmailValid: false,
     	isPasswordValid: false,
     	login: function(){
-    		if (!this.isEmailValid || !this.isPasswordValid) return;
-    		if (Jminee.loginAlertView.relatedView==Jminee.loginView)
-				  Jminee.loginAlertView.removeFromParent();
     		$.ajax({
 		     	url: '/login_handler',
 		     	data: {login: Jminee.loginController.email, password: Jminee.loginController.password}, 
@@ -47,7 +43,7 @@ $(window).load(function() {
     			success: function(resp){
     				if (!resp.success)
     					//TODO: change error message
-    					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code);
+    					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code, "alert-error");
     				else {
     					//TODO: update account info
     					Jminee.userInfo.setInfo(resp.userInfo);
@@ -58,7 +54,26 @@ $(window).load(function() {
     				return resp;
     			},
     			error: function(resp){
-    				Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!');
+    				Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!', "alert-error");
+    			} 
+		    });
+    	},
+    	signin: function(){
+    		$.ajax({
+		     	url: '/registration',
+		     	data: {email_address: Jminee.loginController.email, password: Jminee.loginController.password}, 
+    			dataType: 'json',
+    			success: function(resp){
+    				if (!resp.success)
+    					//TODO: change error message
+    					Jminee.loginAlertView.show(Jminee.loginView, 'Error code '+resp.error_code, "alert-error");
+    				else {
+    					Jminee.loginAlertView.show(Jminee.loginView, Jminee.Message2User.RegistrationSucceeded(resp.email), "alert-warning");    					    				
+    				}	
+    				return resp;
+    			},
+    			error: function(resp){
+    				Jminee.loginAlertView.show(Jminee.loginView, 'Error connecting server!', "alert-error");
     			} 
 		    });
     	},

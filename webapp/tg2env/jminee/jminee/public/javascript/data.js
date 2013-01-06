@@ -30,4 +30,14 @@ $(window).load(function() {
     });
 
     Jminee.Topic = Ember.Object.extend();
+    
+    Jminee.Message2User = {
+    		NEWUSER: "Great you are a new user! Please make sure you <strong>remember your password</strong>.",
+    		WRONGEMAILFORMAT: "You enter a wrong email format!",
+    		RegistrationSucceeded: function(email){
+    			var server="http://www."+email.split('@')[1];
+    			return 'Please check the confirmation email at <a href="'+server+
+    			'">'+server+'</a>';
+    		}
+    };
 });

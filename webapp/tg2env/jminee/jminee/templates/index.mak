@@ -22,7 +22,7 @@
         
 
         <link type="text/css" rel="stylesheet" href="/css/styles.css">
-        <script src="/javascript/creation.js" type="text/javascript"></script>
+        <script src="/javascript/data.js" type="text/javascript"></script>
         <script src="/javascript/subjectcontrollers.js" type="text/javascript"></script>
         <script src="/javascript/topiccontrollers.js" type="text/javascript"></script>
         <script src="/javascript/topicnavcontrollers.js" type="text/javascript"></script>
@@ -38,8 +38,7 @@
         <script src="/javascript/subjectviews.js" type="text/javascript"></script>
         <script src="/javascript/composeviews.js" type="text/javascript"></script>
         <script src="/javascript/loginviews.js" type="text/javascript"></script>       
-        <script src="/javascript/views.js" type="text/javascript"></script>        
-        <script src="/javascript/data.js" type="text/javascript"></script>        
+        <script src="/javascript/views.js" type="text/javascript"></script>                      
     </head>
 
     <body>
