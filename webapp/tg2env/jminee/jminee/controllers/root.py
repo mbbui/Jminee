@@ -8,6 +8,7 @@ from repoze.what import predicates
 from jminee.controllers.secure import SecureController
 from jminee.controllers.registration import RegistrationController
 from jminee.controllers.topic import TopicController
+from jminee.controllers.notification import NotificationController
 from jminee.model import DBSession, metadata
 from tgext.admin.tgadminconfig import TGAdminConfig
 from tgext.admin.controller import AdminController
@@ -39,6 +40,7 @@ class RootController(BaseController):
     registration = RegistrationController()
     topic = TopicController()
     error = ErrorController()    
+    notification = NotificationController()
     
     #@expose('json')
     @expose('jminee.templates.index')
