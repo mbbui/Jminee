@@ -29,6 +29,7 @@ log = logging.getLogger(__name__)
 class NotificationController(BaseController):
     
     @expose()
-    def email_notification(self, **kw):
+    def email_notification(self, *args, **kw):
+        print args
         print kw
     
