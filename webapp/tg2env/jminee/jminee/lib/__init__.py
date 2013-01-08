@@ -51,6 +51,18 @@ def send_email(to_addr, from_addr, subject, body):
     if turbomail and config.get('mail.on'):
         msg = turbomail.Message(from_addr, to_addr, subject)
         msg.plain = body
-        turbomail.enqueue(msg)
+        turbomail.send(msg)
     else:
         _plain_send_mail(from_addr, to_addr, subject, body)
+        
+def send_email2(to_addr, from_addr, subject, plain, rich):
+    # Using turbomail if it exists, 'dumb' method otherwise
+    if turbomail and config.get('mail.on'):
+        msg = turbomail.Message(from_addr, to_addr, subject)
+        if rich:
+            msg.rich = rich
+        msg.plain = plain
+        turbomail.send(msg)
+    else:
+        ##TODO: should raise exception here
+        pass        
