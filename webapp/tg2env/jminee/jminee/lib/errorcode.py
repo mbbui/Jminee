@@ -19,3 +19,7 @@ class ErrorCode(object):
     CREATSUBJECTFAILED = 8
     OTHERS = 100 
     
+class ExceptionProcessing(object):
+    def gotException(self, e, log):
+        #TODO: send email notification to the right person
+        log.exception('Got exception: %s'%e)
