@@ -43,7 +43,7 @@
           </div>
   	</div>	
 	<p style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;color:#666666; text-decoration: none">
-		% if type=='new_topic':
+		% if type in ('new_topic','add_member'):
 			${user_name | n} invited you to join a topic on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>
 		% elif type=='new_subject':
 			${user_name | n} added a new subject to your followed topics on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>			
