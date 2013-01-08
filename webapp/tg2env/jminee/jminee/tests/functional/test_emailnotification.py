@@ -11,5 +11,5 @@ class TestEmailNotification(TestController):
     def testSendEmail(self):
         notif = UserNotification(**dict(type='new_topic', user_name='friends@jminee.com',
                                         topic='Testing email notification',
-                                      registered_users=['bduybach@yahoo.com']))
+                                      registered_users=['bduybach@yahoo.com', 'bachbui@gmail.com']))
         NotificationController().send_newtopic_notif(notif)
