@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <body >
-<div style="text-decoration: none">
 	<div style="*position: relative; *z-index: 2; margin-bottom: 20px; overflow: visible;
   			color: #999999;">
   		<div style="min-height: 40px;
