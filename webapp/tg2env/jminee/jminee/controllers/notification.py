@@ -23,7 +23,7 @@ from jminee.controllers.registration import RegistrationController
 from jminee.controllers.topic import TopicController
 from jminee.model import DBSession, metadata
 
-from jminee.lib import send_email
+from jminee.lib import send_email2
 from jminee.lib.base import BaseController
 from jminee.controllers.error import ErrorController
 from jminee.lib.errorcode import ErrorCode, ExceptionProcessing
