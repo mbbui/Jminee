@@ -61,22 +61,14 @@ class NotificationController(BaseController):
         return dict(kw)
     
     def send_newtopic_notif(self, notif):
-        email_data = {'sender':config['registration.email_sender'],
-                      'subject':_('%s invited you to join topic "%s" on Jminee '
-                                  %(notif.user_name, notif.topic)),
-                      'body':'''
-You are invited to join topic <a href="%s">"%s"</a> created by %s
-''' % (self.got_url(), notif.topic, notif.user_name)}
+        richmail = Template(filename='jminee/templates/emailnotification.mak')
+        plainmail = '{user_name} invited you to join topic "{topic}" on Jminee (http://www.jminee.com)'\
+                        .format(**notif)  
         
-        richmail = Template(filename='jminee/templates/emailnotification.mak')\
-                        .render(user_name=notif.user_name, topic=notif.topic)
-        plainmail = '%s invited you to join topic "%s" on Jminee (http://www.jminee.com)'\
-                        %(notif.user_name, notif.topic)  
-                            
+#        print richmail.render(**notif)
         for user in notif.registered_users:
-#            send_email(user, email_data['sender'], email_data['subject'], email_data['body'])
-            send_email2(user, email_data['sender'], email_data['subject'], plainmail, richmail)
-#            print richmail
+            send_email2(user, email_data['sender'], email_data['subject'], plainmail, richmail.render(**notif))
+
     
     def got_url(self):
         return "http://www.jminee.com:8080/"

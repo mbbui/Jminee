@@ -43,22 +43,45 @@
           </div>
   	</div>	
 	<p style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;color:#666666; text-decoration: none">
-		${user_name | n} invited you to join a topic on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>
+		% if type=='new_topic':
+			${user_name | n} invited you to join a topic on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>
+		% elif type=='new_subject':
+			${user_name | n} added a new subject to your followed topics on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>			
+		% elif type=='new_comment':
+			${user_name | n} added a new comment
+		% endif
 	</p>	
 	<ul style="padding: 10px 15px; margin: 0 0 20px; list-style: none; background-color: #f5f5f5;
   				-webkit-border-radius: 4px 0px 0px 4px; -moz-border-radius: 4px 0px 0px 4px; 
   				border-radius: 4px 0px 0px 4px;">
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;"> 
-			<a href="#" style="text-decoration: none">Topic</a>
+			<a href="#" style="text-decoration: none">${topic | n}</a>
 			<span style="padding: 0 5px; color: #ccc;">></span>		
 		</li>
+		% if type=='new_subject':
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;">
-			<a href="#" style="text-decoration: none">${topic | n} </a>
+			<a href="#" style="text-decoration: none">${subject | n} </a>
 			<span style="padding: 0 5px; color: #ccc;">></span>	
 		</li>
+		% endif
 	</ul>
+	% if type=='new_comment':
+	<div style="min-height: 20px;
+		  padding: 19px;
+		  margin-bottom: 20px;
+		  background-color: #f5f5f5;
+		  border: 1px solid #e3e3e3;
+		  -webkit-border-radius: 4px;
+		     -moz-border-radius: 4px;
+		          border-radius: 4px;
+		  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);">
+		  Comment: ${comment | n}
+	</div>
+	%endif
 </body>
 </html>
 
