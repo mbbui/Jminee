@@ -60,16 +60,16 @@ class NotificationController(BaseController):
     def error(self, *args, **kw):        
         return dict(kw)
     
-    def send_newtopic_notif(self, notif):
+    def send_topic_notif(self, notif):
         sender = config['registration.email_sender']
         if notif['type'] in ('new_topic','add_member'):
             subject='{user_name} invited you to join topic "{topic}" on Jminee'.format(**notif)
         elif notif['type']=='new_subject':
-            subject='{user_name} created subject "{subject}" on topic "{topic}" on Jminee'.format(**notif)
+            subject='{user_name} created subject "{subject}" in topic "{topic}" on Jminee'.format(**notif)
         elif notif['type']=='new_comment':
-            subject='{user_name} commented on subject "{subject}" of topic "{topic}" on Jminee'.format(**notif)
+            subject='{user_name} commented in "{topic} > {subject}" on Jminee'.format(**notif)
                 
-        richmail = Template(filename='jminee/templates/emailnotification.mak')
+        richmail = Template(filename='jminee/templates/topicnotification.mak')
         plainmail = '{user_name} invited you to join topic "{topic}" on Jminee (http://www.jminee.com)'\
                         .format(**notif)  
         
