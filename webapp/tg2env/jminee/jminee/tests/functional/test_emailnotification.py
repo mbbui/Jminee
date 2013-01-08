@@ -16,12 +16,12 @@ class TestEmailNotification(TestController):
         notif = dict(type='new_topic', user_name='friends@jminee.com',
                         topic='Testing email notification',
                         registered_users=['bduybach@yahoo.com', 'bachbui@gmail.com'])
-        NotificationController().send_newtopic_notif(notif)
+        NotificationController().send_topic_notif(notif)
         
         notif = dict(type='new_subject', user_name='friends@jminee.com',
                         topic='Testing email notification', subject='First subject',
                         registered_users=['bduybach@yahoo.com', 'bachbui@gmail.com'])
-        NotificationController().send_newtopic_notif(notif)
+        NotificationController().send_topic_notif(notif)
         
         notif = dict(type='new_comment', user_name='friends@jminee.com',
                         topic='Testing email notification', subject='First subject',
