@@ -74,8 +74,8 @@ You are invited to join topic <a href="%s">"%s"</a> created by %s
                             
         for user in notif.registered_users:
 #            send_email(user, email_data['sender'], email_data['subject'], email_data['body'])
-            #send_email2(user, email_data['sender'], email_data['subject'], plainmail, richmail)
-            print richmail
+            send_email2(user, email_data['sender'], email_data['subject'], plainmail, richmail)
+#            print richmail
     
     def got_url(self):
         return "http://www.jminee.com:8080/"
