@@ -68,7 +68,8 @@ class NotificationController(BaseController):
 You are invited to join topic <a href="%s">"%s"</a> created by %s
 ''' % (self.got_url(), notif.topic, notif.user_name)}
         
-        richmail = Template(filename='jminee/templates/emailnotification.mak').render(user_name=notif.user_name)
+        richmail = Template(filename='jminee/templates/emailnotification.mak')\
+                        .render(user_name=notif.user_name, topic=notif.topic)
         plainmail = '%s invited you to join topic "%s" on Jminee (http://www.jminee.com)'\
                         %(notif.user_name, notif.topic)  
                             
