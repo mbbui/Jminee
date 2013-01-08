@@ -28,4 +28,4 @@ class TestEmailNotification(TestController):
                         comment='Perform a string formatting operation. The string on which this method is called can contain literal text or replacement fields delimited by braces {}. Each replacement field contains either the numeric index of a positional argument, or the name of a keyword argument. Returns a copy of the string where each replacement field is replaced with the string value of the corresponding argument.',
                         registered_users=['bduybach@yahoo.com', 'bachbui@gmail.com'])
         
-        NotificationController().send_newtopic_notif(notif)
+        NotificationController().send_topic_notif(notif)
