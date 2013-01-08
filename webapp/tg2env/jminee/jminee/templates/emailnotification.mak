@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body >
+<div style="text-decoration: none">
 	<div style="*position: relative; *z-index: 2; margin-bottom: 20px; overflow: visible;
   			color: #999999;">
   		<div style="min-height: 40px;
@@ -33,33 +34,35 @@
 				  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);">
           	<div style="width: auto;">
           		<a style="display: block;
-  float: left;
-  padding: 10px 20px 10px;
-  margin-left: -20px;
-  font-size: 20px;
-  font-weight: 200;
-  color: #777777;
-  text-shadow: 0 1px 0 #ffffff; color: #999999;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);" href="#">
+					  float: left;
+					  padding: 10px 20px 10px;
+					  margin-left: -20px;
+					  font-size: 20px;
+					  font-weight: 200;
+					  color: #777777;
+					  text-shadow: 0 1px 0 #ffffff; color: #999999;
+					  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+					  href="#">
   					Jminee
   				</a>
-  			
           	</div>
           </div>
   	</div>	
-	<p style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;color:#666666;">
-		${user_name | n} invited you to join a topic on <a href="http://www.jminee.com">Jminee</a>
+	<p style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;color:#666666; text-decoration: none">
+		${user_name | n} invited you to join a topic on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>
 	</p>	
 	<ul style="padding: 10px 15px; margin: 0 0 20px; list-style: none; background-color: #f5f5f5;
   				-webkit-border-radius: 4px 0px 0px 4px; -moz-border-radius: 4px 0px 0px 4px; 
   				border-radius: 4px 0px 0px 4px;">
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;"> 
-			<a href="#">Topic</a><span style="padding: 0 5px; color: #ccc;">></span>		
+			<a href="#" style="text-decoration: none">Topic</a>
+			<span style="padding: 0 5px; color: #ccc;">></span>		
 		</li>
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;">
-			<a href="#">${topic | n} </a>	
+			<a href="#" style="text-decoration: none">${topic | n} </a>
+			<span style="padding: 0 5px; color: #ccc;">></span>	
 		</li>
 	</ul>
 </body>
