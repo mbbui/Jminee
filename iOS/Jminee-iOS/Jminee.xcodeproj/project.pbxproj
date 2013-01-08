@@ -1,0 +1,1017 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5FE1C84D1693CAA5008EE5CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C84C1693CAA5008EE5CD /* UIKit.framework */; };
+		5FE1C84F1693CAA5008EE5CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C84E1693CAA5008EE5CD /* Foundation.framework */; };
+		5FE1C8511693CAA5008EE5CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C8501693CAA5008EE5CD /* CoreGraphics.framework */; };
+		5FE1C8571693CAA5008EE5CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C8551693CAA5008EE5CD /* InfoPlist.strings */; };
+		5FE1C8591693CAA5008EE5CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8581693CAA5008EE5CD /* main.m */; };
+		5FE1C85D1693CAA5008EE5CD /* JAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C85C1693CAA5008EE5CD /* JAppDelegate.m */; };
+		5FE1C85F1693CAA5008EE5CD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C85E1693CAA5008EE5CD /* Default.png */; };
+		5FE1C8611693CAA5008EE5CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C8601693CAA5008EE5CD /* Default@2x.png */; };
+		5FE1C8631693CAA5008EE5CD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C8621693CAA5008EE5CD /* Default-568h@2x.png */; };
+		5FE1C8661693CAA5008EE5CD /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C8641693CAA5008EE5CD /* MainStoryboard_iPhone.storyboard */; };
+		5FE1C8691693CAA5008EE5CD /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C8671693CAA5008EE5CD /* MainStoryboard_iPad.storyboard */; };
+		5FE1C8741693CAA5008EE5CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C8731693CAA5008EE5CD /* SenTestingKit.framework */; };
+		5FE1C8751693CAA5008EE5CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C84C1693CAA5008EE5CD /* UIKit.framework */; };
+		5FE1C8761693CAA5008EE5CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C84E1693CAA5008EE5CD /* Foundation.framework */; };
+		5FE1C87E1693CAA5008EE5CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5FE1C87C1693CAA5008EE5CD /* InfoPlist.strings */; };
+		5FE1C8811693CAA5008EE5CD /* JmineeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8801693CAA5008EE5CD /* JmineeTests.m */; };
+		5FE1C8AB1693CDBA008EE5CD /* JAbstractViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8AA1693CDBA008EE5CD /* JAbstractViewController~iphone.m */; };
+		5FE1C8AE1693CF75008EE5CD /* JLoginViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8AD1693CF75008EE5CD /* JLoginViewController~iphone.m */; };
+		5FE1C8B11693CF98008EE5CD /* JRegistrationViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8B01693CF98008EE5CD /* JRegistrationViewController~iphone.m */; };
+		5FE1C8B41693D003008EE5CD /* JResetPasswordViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8B31693D003008EE5CD /* JResetPasswordViewController~iphone.m */; };
+		5FE1C8B71693D02F008EE5CD /* JTopicsViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8B61693D02F008EE5CD /* JTopicsViewController~iphone.m */; };
+		5FE1C8BA1693D05E008EE5CD /* JMessagesViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8B91693D05E008EE5CD /* JMessagesViewController~iphone.m */; };
+		5FE1C8BD1693D081008EE5CD /* JMessageDetailViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8BC1693D081008EE5CD /* JMessageDetailViewController~iphone.m */; };
+		5FE1C8C01693D0A1008EE5CD /* JCreateTopicViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8BF1693D0A1008EE5CD /* JCreateTopicViewController~iphone.m */; };
+		5FE1C8C31693D0C2008EE5CD /* JCreateMessageViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8C21693D0C2008EE5CD /* JCreateMessageViewController~iphone.m */; };
+		5FE1C8C71693D110008EE5CD /* JErrorDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8C61693D110008EE5CD /* JErrorDisplay.m */; };
+		5FE1C8D31693D16F008EE5CD /* JCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8D21693D16F008EE5CD /* JCacheManager.m */; };
+		5FE1C8D61693D180008EE5CD /* JUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8D51693D180008EE5CD /* JUserModel.m */; };
+		5FE1C8D91693D18E008EE5CD /* JTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8D81693D18E008EE5CD /* JTopicModel.m */; };
+		5FE1C8DC1693D19C008EE5CD /* JMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8DB1693D19C008EE5CD /* JMessageModel.m */; };
+		5FE1C8DF1693D1BA008EE5CD /* JAbstractRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8DE1693D1BA008EE5CD /* JAbstractRequest.m */; };
+		5FE1C8E21693D1CF008EE5CD /* JLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8E11693D1CF008EE5CD /* JLoginRequest.m */; };
+		5FE1C8E51693D1E4008EE5CD /* JRegistrationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8E41693D1E4008EE5CD /* JRegistrationRequest.m */; };
+		5FE1C8E81693D201008EE5CD /* JResetPasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8E71693D201008EE5CD /* JResetPasswordRequest.m */; };
+		5FE1C8EB1693D214008EE5CD /* JGetTopicsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8EA1693D214008EE5CD /* JGetTopicsRequest.m */; };
+		5FE1C8EE1693D23B008EE5CD /* JCreateTopicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8ED1693D23B008EE5CD /* JCreateTopicRequest.m */; };
+		5FE1C8F41693D262008EE5CD /* JSetTopicImageURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8F31693D262008EE5CD /* JSetTopicImageURLRequest.m */; };
+		5FE1C8F71693D282008EE5CD /* JGetMessagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8F61693D282008EE5CD /* JGetMessagesRequest.m */; };
+		5FE1C8FA1693D297008EE5CD /* JCreateMessageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8F91693D297008EE5CD /* JCreateMessageRequest.m */; };
+		5FE1C8FE1693D6ED008EE5CD /* JDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C8FD1693D6ED008EE5CD /* JDateTime.m */; };
+		5FE1C9001693DBCC008EE5CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C8FF1693DBCC008EE5CD /* Security.framework */; };
+		5FE1C9031693DC45008EE5CD /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9021693DC45008EE5CD /* KeychainItemWrapper.m */; };
+		5FE1C9051693DC5A008EE5CD /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9021693DC45008EE5CD /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5FE1C90D1693E1B3008EE5CD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C90C1693E1B3008EE5CD /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5FE1C90E1693E1B3008EE5CD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C90C1693E1B3008EE5CD /* Reachability.m */; };
+		5FE1C9101693E940008EE5CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C90F1693E940008EE5CD /* SystemConfiguration.framework */; };
+		5FE1C9BD1697830F008EE5CD /* JGetSubjectsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9BC1697830F008EE5CD /* JGetSubjectsRequest.m */; };
+		5FE1C9C1169783DA008EE5CD /* JSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9C0169783DA008EE5CD /* JSubjectModel.m */; };
+		5FE1C9C616978796008EE5CD /* JSubjectsViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9C516978796008EE5CD /* JSubjectsViewController~iphone.m */; };
+		5FE1C9C916979122008EE5CD /* JCreateSubjectViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9C816979122008EE5CD /* JCreateSubjectViewController~iphone.m */; };
+		5FE1C9CD16979150008EE5CD /* JCreateSubjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9CC16979150008EE5CD /* JCreateSubjectRequest.m */; };
+		5FE1C9D616979461008EE5CD /* JWhatsJmineeViewController~iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1C9D516979461008EE5CD /* JWhatsJmineeViewController~iphone.m */; };
+		5FE1C9E016989EB9008EE5CD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE1C9DF16989EB9008EE5CD /* QuartzCore.framework */; };
+		5FF9AADB1699042100A7A602 /* JWhatsJmineeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9AADA1699042100A7A602 /* JWhatsJmineeCell.m */; };
+		5FF9AAE3169908D500A7A602 /* JTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF9AAE2169908D500A7A602 /* JTopicCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5FE1C8771693CAA5008EE5CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FE1C83F1693CAA4008EE5CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FE1C8471693CAA5008EE5CD;
+			remoteInfo = Jminee;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5FE1C8481693CAA5008EE5CD /* Jminee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jminee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FE1C84C1693CAA5008EE5CD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5FE1C84E1693CAA5008EE5CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5FE1C8501693CAA5008EE5CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5FE1C8541693CAA5008EE5CD /* Jminee-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Jminee-Info.plist"; sourceTree = "<group>"; };
+		5FE1C8561693CAA5008EE5CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5FE1C8581693CAA5008EE5CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5FE1C85A1693CAA5008EE5CD /* Jminee-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jminee-Prefix.pch"; sourceTree = "<group>"; };
+		5FE1C85B1693CAA5008EE5CD /* JAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JAppDelegate.h; sourceTree = "<group>"; };
+		5FE1C85C1693CAA5008EE5CD /* JAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JAppDelegate.m; sourceTree = "<group>"; };
+		5FE1C85E1693CAA5008EE5CD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5FE1C8601693CAA5008EE5CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5FE1C8621693CAA5008EE5CD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5FE1C8651693CAA5008EE5CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		5FE1C8681693CAA5008EE5CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		5FE1C8721693CAA5008EE5CD /* JmineeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JmineeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FE1C8731693CAA5008EE5CD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5FE1C87B1693CAA5008EE5CD /* JmineeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JmineeTests-Info.plist"; sourceTree = "<group>"; };
+		5FE1C87D1693CAA5008EE5CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5FE1C87F1693CAA5008EE5CD /* JmineeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JmineeTests.h; sourceTree = "<group>"; };
+		5FE1C8801693CAA5008EE5CD /* JmineeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JmineeTests.m; sourceTree = "<group>"; };
+		5FE1C8A91693CDBA008EE5CD /* JAbstractViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JAbstractViewController~iphone.h"; path = "ViewControllers/iPhone/Abstract/JAbstractViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8AA1693CDBA008EE5CD /* JAbstractViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JAbstractViewController~iphone.m"; path = "ViewControllers/iPhone/Abstract/JAbstractViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8AC1693CF75008EE5CD /* JLoginViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JLoginViewController~iphone.h"; path = "ViewControllers/iPhone/LoginView/JLoginViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8AD1693CF75008EE5CD /* JLoginViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JLoginViewController~iphone.m"; path = "ViewControllers/iPhone/LoginView/JLoginViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8AF1693CF98008EE5CD /* JRegistrationViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JRegistrationViewController~iphone.h"; path = "ViewControllers/iPhone/RegistrationView/JRegistrationViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8B01693CF98008EE5CD /* JRegistrationViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JRegistrationViewController~iphone.m"; path = "ViewControllers/iPhone/RegistrationView/JRegistrationViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8B21693D003008EE5CD /* JResetPasswordViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JResetPasswordViewController~iphone.h"; path = "ViewControllers/iPhone/ResetPassword/JResetPasswordViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8B31693D003008EE5CD /* JResetPasswordViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JResetPasswordViewController~iphone.m"; path = "ViewControllers/iPhone/ResetPassword/JResetPasswordViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8B51693D02F008EE5CD /* JTopicsViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JTopicsViewController~iphone.h"; path = "ViewControllers/iPhone/TopicsView/JTopicsViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8B61693D02F008EE5CD /* JTopicsViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JTopicsViewController~iphone.m"; path = "ViewControllers/iPhone/TopicsView/JTopicsViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8B81693D05E008EE5CD /* JMessagesViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JMessagesViewController~iphone.h"; path = "ViewControllers/iPhone/Messages/JMessagesViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8B91693D05E008EE5CD /* JMessagesViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JMessagesViewController~iphone.m"; path = "ViewControllers/iPhone/Messages/JMessagesViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8BB1693D081008EE5CD /* JMessageDetailViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JMessageDetailViewController~iphone.h"; path = "ViewControllers/iPhone/MessageDetailView/JMessageDetailViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8BC1693D081008EE5CD /* JMessageDetailViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JMessageDetailViewController~iphone.m"; path = "ViewControllers/iPhone/MessageDetailView/JMessageDetailViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8BE1693D0A1008EE5CD /* JCreateTopicViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JCreateTopicViewController~iphone.h"; path = "ViewControllers/iPhone/CreateTopicView/JCreateTopicViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8BF1693D0A1008EE5CD /* JCreateTopicViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JCreateTopicViewController~iphone.m"; path = "ViewControllers/iPhone/CreateTopicView/JCreateTopicViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8C11693D0C2008EE5CD /* JCreateMessageViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JCreateMessageViewController~iphone.h"; path = "ViewControllers/iPhone/CreateMessageView/JCreateMessageViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C8C21693D0C2008EE5CD /* JCreateMessageViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JCreateMessageViewController~iphone.m"; path = "ViewControllers/iPhone/CreateMessageView/JCreateMessageViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C8C51693D110008EE5CD /* JErrorDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JErrorDisplay.h; path = Classes/ErrorDisplay/JErrorDisplay.h; sourceTree = "<group>"; };
+		5FE1C8C61693D110008EE5CD /* JErrorDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JErrorDisplay.m; path = Classes/ErrorDisplay/JErrorDisplay.m; sourceTree = "<group>"; };
+		5FE1C8CB1693D13D008EE5CD /* JProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JProtocols.h; path = Classes/ProjectConstants/JProtocols.h; sourceTree = "<group>"; };
+		5FE1C8CE1693D150008EE5CD /* JConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JConstants.h; path = Classes/ProjectConstants/JConstants.h; sourceTree = "<group>"; };
+		5FE1C8D11693D16F008EE5CD /* JCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCacheManager.h; path = Classes/Data/CacheManager/JCacheManager.h; sourceTree = "<group>"; };
+		5FE1C8D21693D16F008EE5CD /* JCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCacheManager.m; path = Classes/Data/CacheManager/JCacheManager.m; sourceTree = "<group>"; };
+		5FE1C8D41693D180008EE5CD /* JUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JUserModel.h; path = Classes/Models/User/JUserModel.h; sourceTree = "<group>"; };
+		5FE1C8D51693D180008EE5CD /* JUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JUserModel.m; path = Classes/Models/User/JUserModel.m; sourceTree = "<group>"; };
+		5FE1C8D71693D18E008EE5CD /* JTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTopicModel.h; path = Classes/Models/Topic/JTopicModel.h; sourceTree = "<group>"; };
+		5FE1C8D81693D18E008EE5CD /* JTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTopicModel.m; path = Classes/Models/Topic/JTopicModel.m; sourceTree = "<group>"; };
+		5FE1C8DA1693D19C008EE5CD /* JMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMessageModel.h; path = Classes/Models/Message/JMessageModel.h; sourceTree = "<group>"; };
+		5FE1C8DB1693D19C008EE5CD /* JMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMessageModel.m; path = Classes/Models/Message/JMessageModel.m; sourceTree = "<group>"; };
+		5FE1C8DD1693D1BA008EE5CD /* JAbstractRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JAbstractRequest.h; path = Classes/Requests/Abstract/JAbstractRequest.h; sourceTree = "<group>"; };
+		5FE1C8DE1693D1BA008EE5CD /* JAbstractRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JAbstractRequest.m; path = Classes/Requests/Abstract/JAbstractRequest.m; sourceTree = "<group>"; };
+		5FE1C8E01693D1CF008EE5CD /* JLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JLoginRequest.h; path = Classes/Requests/LoginRequest/JLoginRequest.h; sourceTree = "<group>"; };
+		5FE1C8E11693D1CF008EE5CD /* JLoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JLoginRequest.m; path = Classes/Requests/LoginRequest/JLoginRequest.m; sourceTree = "<group>"; };
+		5FE1C8E31693D1E4008EE5CD /* JRegistrationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRegistrationRequest.h; path = Classes/Requests/RegistrationRequest/JRegistrationRequest.h; sourceTree = "<group>"; };
+		5FE1C8E41693D1E4008EE5CD /* JRegistrationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRegistrationRequest.m; path = Classes/Requests/RegistrationRequest/JRegistrationRequest.m; sourceTree = "<group>"; };
+		5FE1C8E61693D201008EE5CD /* JResetPasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JResetPasswordRequest.h; path = Classes/Requests/PasswordReset/JResetPasswordRequest.h; sourceTree = "<group>"; };
+		5FE1C8E71693D201008EE5CD /* JResetPasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JResetPasswordRequest.m; path = Classes/Requests/PasswordReset/JResetPasswordRequest.m; sourceTree = "<group>"; };
+		5FE1C8E91693D214008EE5CD /* JGetTopicsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGetTopicsRequest.h; path = Classes/Requests/GetTopicsRequest/JGetTopicsRequest.h; sourceTree = "<group>"; };
+		5FE1C8EA1693D214008EE5CD /* JGetTopicsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGetTopicsRequest.m; path = Classes/Requests/GetTopicsRequest/JGetTopicsRequest.m; sourceTree = "<group>"; };
+		5FE1C8EC1693D23B008EE5CD /* JCreateTopicRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCreateTopicRequest.h; path = Classes/Requests/CreateTopicRequest/JCreateTopicRequest.h; sourceTree = "<group>"; };
+		5FE1C8ED1693D23B008EE5CD /* JCreateTopicRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCreateTopicRequest.m; path = Classes/Requests/CreateTopicRequest/JCreateTopicRequest.m; sourceTree = "<group>"; };
+		5FE1C8F21693D262008EE5CD /* JSetTopicImageURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSetTopicImageURLRequest.h; path = Classes/Requests/SetTopicImageURL/JSetTopicImageURLRequest.h; sourceTree = "<group>"; };
+		5FE1C8F31693D262008EE5CD /* JSetTopicImageURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSetTopicImageURLRequest.m; path = Classes/Requests/SetTopicImageURL/JSetTopicImageURLRequest.m; sourceTree = "<group>"; };
+		5FE1C8F51693D282008EE5CD /* JGetMessagesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGetMessagesRequest.h; path = Classes/Requests/GetMessagesRequest/JGetMessagesRequest.h; sourceTree = "<group>"; };
+		5FE1C8F61693D282008EE5CD /* JGetMessagesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGetMessagesRequest.m; path = Classes/Requests/GetMessagesRequest/JGetMessagesRequest.m; sourceTree = "<group>"; };
+		5FE1C8F81693D297008EE5CD /* JCreateMessageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCreateMessageRequest.h; path = Classes/Requests/CreateMessageRequest/JCreateMessageRequest.h; sourceTree = "<group>"; };
+		5FE1C8F91693D297008EE5CD /* JCreateMessageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCreateMessageRequest.m; path = Classes/Requests/CreateMessageRequest/JCreateMessageRequest.m; sourceTree = "<group>"; };
+		5FE1C8FC1693D6ED008EE5CD /* JDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDateTime.h; path = Classes/Models/Topic/DateTime/JDateTime.h; sourceTree = "<group>"; };
+		5FE1C8FD1693D6ED008EE5CD /* JDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDateTime.m; path = Classes/Models/Topic/DateTime/JDateTime.m; sourceTree = "<group>"; };
+		5FE1C8FF1693DBCC008EE5CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5FE1C9011693DC45008EE5CD /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		5FE1C9021693DC45008EE5CD /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		5FE1C90B1693E1B3008EE5CD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		5FE1C90C1693E1B3008EE5CD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		5FE1C90F1693E940008EE5CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5FE1C9BB1697830F008EE5CD /* JGetSubjectsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGetSubjectsRequest.h; path = Classes/Requests/GetSubjects/JGetSubjectsRequest.h; sourceTree = "<group>"; };
+		5FE1C9BC1697830F008EE5CD /* JGetSubjectsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGetSubjectsRequest.m; path = Classes/Requests/GetSubjects/JGetSubjectsRequest.m; sourceTree = "<group>"; };
+		5FE1C9BF169783DA008EE5CD /* JSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSubjectModel.h; path = Classes/Models/Subject/JSubjectModel.h; sourceTree = "<group>"; };
+		5FE1C9C0169783DA008EE5CD /* JSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSubjectModel.m; path = Classes/Models/Subject/JSubjectModel.m; sourceTree = "<group>"; };
+		5FE1C9C416978796008EE5CD /* JSubjectsViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JSubjectsViewController~iphone.h"; path = "ViewControllers/iPhone/JSubjectsView/JSubjectsViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C9C516978796008EE5CD /* JSubjectsViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JSubjectsViewController~iphone.m"; path = "ViewControllers/iPhone/JSubjectsView/JSubjectsViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C9C716979122008EE5CD /* JCreateSubjectViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JCreateSubjectViewController~iphone.h"; path = "ViewControllers/iPhone/CreateSubject/JCreateSubjectViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C9C816979122008EE5CD /* JCreateSubjectViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JCreateSubjectViewController~iphone.m"; path = "ViewControllers/iPhone/CreateSubject/JCreateSubjectViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C9CB16979150008EE5CD /* JCreateSubjectRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCreateSubjectRequest.h; path = Classes/Requests/CreateSubject/JCreateSubjectRequest.h; sourceTree = "<group>"; };
+		5FE1C9CC16979150008EE5CD /* JCreateSubjectRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCreateSubjectRequest.m; path = Classes/Requests/CreateSubject/JCreateSubjectRequest.m; sourceTree = "<group>"; };
+		5FE1C9D416979461008EE5CD /* JWhatsJmineeViewController~iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JWhatsJmineeViewController~iphone.h"; path = "ViewControllers/iPhone/WhatsJminee/JWhatsJmineeViewController~iphone.h"; sourceTree = "<group>"; };
+		5FE1C9D516979461008EE5CD /* JWhatsJmineeViewController~iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JWhatsJmineeViewController~iphone.m"; path = "ViewControllers/iPhone/WhatsJminee/JWhatsJmineeViewController~iphone.m"; sourceTree = "<group>"; };
+		5FE1C9DF16989EB9008EE5CD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5FF9AAD91699042100A7A602 /* JWhatsJmineeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWhatsJmineeCell.h; path = ViewControllers/iPhone/WhatsJminee/WhatsJmineeCell/JWhatsJmineeCell.h; sourceTree = "<group>"; };
+		5FF9AADA1699042100A7A602 /* JWhatsJmineeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWhatsJmineeCell.m; path = ViewControllers/iPhone/WhatsJminee/WhatsJmineeCell/JWhatsJmineeCell.m; sourceTree = "<group>"; };
+		5FF9AAE1169908D500A7A602 /* JTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTopicCell.h; path = ViewControllers/iPhone/TopicsView/TopicCell/JTopicCell.h; sourceTree = "<group>"; };
+		5FF9AAE2169908D500A7A602 /* JTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTopicCell.m; path = ViewControllers/iPhone/TopicsView/TopicCell/JTopicCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5FE1C8451693CAA5008EE5CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C9E016989EB9008EE5CD /* QuartzCore.framework in Frameworks */,
+				5FE1C9101693E940008EE5CD /* SystemConfiguration.framework in Frameworks */,
+				5FE1C9001693DBCC008EE5CD /* Security.framework in Frameworks */,
+				5FE1C84D1693CAA5008EE5CD /* UIKit.framework in Frameworks */,
+				5FE1C84F1693CAA5008EE5CD /* Foundation.framework in Frameworks */,
+				5FE1C8511693CAA5008EE5CD /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FE1C86E1693CAA5008EE5CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C8741693CAA5008EE5CD /* SenTestingKit.framework in Frameworks */,
+				5FE1C8751693CAA5008EE5CD /* UIKit.framework in Frameworks */,
+				5FE1C8761693CAA5008EE5CD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5FE1C83D1693CAA4008EE5CD = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8521693CAA5008EE5CD /* Jminee */,
+				5FE1C8791693CAA5008EE5CD /* JmineeTests */,
+				5FE1C84B1693CAA5008EE5CD /* Frameworks */,
+				5FE1C8491693CAA5008EE5CD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5FE1C8491693CAA5008EE5CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8481693CAA5008EE5CD /* Jminee.app */,
+				5FE1C8721693CAA5008EE5CD /* JmineeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5FE1C84B1693CAA5008EE5CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9DF16989EB9008EE5CD /* QuartzCore.framework */,
+				5FE1C90F1693E940008EE5CD /* SystemConfiguration.framework */,
+				5FE1C8FF1693DBCC008EE5CD /* Security.framework */,
+				5FE1C84C1693CAA5008EE5CD /* UIKit.framework */,
+				5FE1C84E1693CAA5008EE5CD /* Foundation.framework */,
+				5FE1C8501693CAA5008EE5CD /* CoreGraphics.framework */,
+				5FE1C8731693CAA5008EE5CD /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FE1C8521693CAA5008EE5CD /* Jminee */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C88E1693CB04008EE5CD /* JProjectConstants */,
+				5FE1C8991693CB3A008EE5CD /* JErrorDisplay */,
+				5FE1C8C41693D0EF008EE5CD /* JModels */,
+				5FE1C88F1693CB0D008EE5CD /* Data */,
+				5FE1C88D1693CAFB008EE5CD /* JRequest */,
+				5FE1C88B1693CAC0008EE5CD /* iPhoneViewControllers */,
+				5FE1C8641693CAA5008EE5CD /* MainStoryboard_iPhone.storyboard */,
+				5FE1C88A1693CABE008EE5CD /* iPadViewControllers */,
+				5FE1C8671693CAA5008EE5CD /* MainStoryboard_iPad.storyboard */,
+				5FE1C88C1693CAE1008EE5CD /* AppDelegate */,
+				5FE1C8531693CAA5008EE5CD /* Supporting Files */,
+			);
+			path = Jminee;
+			sourceTree = "<group>";
+		};
+		5FE1C8531693CAA5008EE5CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8541693CAA5008EE5CD /* Jminee-Info.plist */,
+				5FE1C8551693CAA5008EE5CD /* InfoPlist.strings */,
+				5FE1C8581693CAA5008EE5CD /* main.m */,
+				5FE1C85A1693CAA5008EE5CD /* Jminee-Prefix.pch */,
+				5FE1C85E1693CAA5008EE5CD /* Default.png */,
+				5FE1C8601693CAA5008EE5CD /* Default@2x.png */,
+				5FE1C8621693CAA5008EE5CD /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5FE1C8791693CAA5008EE5CD /* JmineeTests */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C87F1693CAA5008EE5CD /* JmineeTests.h */,
+				5FE1C8801693CAA5008EE5CD /* JmineeTests.m */,
+				5FE1C87A1693CAA5008EE5CD /* Supporting Files */,
+			);
+			path = JmineeTests;
+			sourceTree = "<group>";
+		};
+		5FE1C87A1693CAA5008EE5CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C87B1693CAA5008EE5CD /* JmineeTests-Info.plist */,
+				5FE1C87C1693CAA5008EE5CD /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5FE1C88A1693CABE008EE5CD /* iPadViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8A21693CD59008EE5CD /* To Do */,
+			);
+			name = iPadViewControllers;
+			sourceTree = "<group>";
+		};
+		5FE1C88B1693CAC0008EE5CD /* iPhoneViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8A91693CDBA008EE5CD /* JAbstractViewController~iphone.h */,
+				5FE1C8AA1693CDBA008EE5CD /* JAbstractViewController~iphone.m */,
+				5FE1C8A11693CD56008EE5CD /* JLoginView */,
+				5FE1C89F1693CD53008EE5CD /* JRegistrationView */,
+				5FE1C8A01693CD54008EE5CD /* JResetPasswordView */,
+				5FE1C89E1693CD51008EE5CD /* JTopicsView */,
+				5FE1C89D1693CD50008EE5CD /* JMessagesView */,
+				5FE1C89C1693CD4E008EE5CD /* JMessageDetailView */,
+				5FE1C89B1693CD4C008EE5CD /* JCreateTopicView */,
+				5FE1C89A1693CD4A008EE5CD /* JCreateMessageView */,
+				5FE1C9C216978722008EE5CD /* JSubjectsView */,
+				5FE1C9C316978729008EE5CD /* JCreateSubjectView */,
+				5FE1C9D21697943A008EE5CD /* JWhatsJmineeView */,
+			);
+			name = iPhoneViewControllers;
+			sourceTree = "<group>";
+		};
+		5FE1C88C1693CAE1008EE5CD /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C85B1693CAA5008EE5CD /* JAppDelegate.h */,
+				5FE1C85C1693CAA5008EE5CD /* JAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5FE1C88D1693CAFB008EE5CD /* JRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8DD1693D1BA008EE5CD /* JAbstractRequest.h */,
+				5FE1C8DE1693D1BA008EE5CD /* JAbstractRequest.m */,
+				5FE1C90A1693E14D008EE5CD /* Reachability */,
+				5FE1C8981693CB34008EE5CD /* JLoginRequest */,
+				5FE1C8971693CB32008EE5CD /* JRegistrationRequest */,
+				5FE1C8961693CB2E008EE5CD /* JResetPasswordRequest */,
+				5FE1C8951693CB29008EE5CD /* JGetTopicsRequest */,
+				5FE1C8941693CB27008EE5CD /* JCreateTopicRequest */,
+				5FE1C8931693CB25008EE5CD /* JSetTopicImageURLRequest */,
+				5FE1C8921693CB23008EE5CD /* JGetMessagesRequest */,
+				5FE1C8911693CB1F008EE5CD /* JCreateMessageRequest */,
+				5FE1C9B9169782F1008EE5CD /* JGetSubjectsRequest */,
+				5FE1C9CA16979126008EE5CD /* JCreateSubjectRequest */,
+			);
+			name = JRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C88E1693CB04008EE5CD /* JProjectConstants */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8CB1693D13D008EE5CD /* JProtocols.h */,
+				5FE1C8CE1693D150008EE5CD /* JConstants.h */,
+			);
+			name = JProjectConstants;
+			sourceTree = "<group>";
+		};
+		5FE1C88F1693CB0D008EE5CD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8901693CB17008EE5CD /* JCacheManager */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		5FE1C8901693CB17008EE5CD /* JCacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8D11693D16F008EE5CD /* JCacheManager.h */,
+				5FE1C8D21693D16F008EE5CD /* JCacheManager.m */,
+			);
+			name = JCacheManager;
+			sourceTree = "<group>";
+		};
+		5FE1C8911693CB1F008EE5CD /* JCreateMessageRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8F81693D297008EE5CD /* JCreateMessageRequest.h */,
+				5FE1C8F91693D297008EE5CD /* JCreateMessageRequest.m */,
+			);
+			name = JCreateMessageRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8921693CB23008EE5CD /* JGetMessagesRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8F51693D282008EE5CD /* JGetMessagesRequest.h */,
+				5FE1C8F61693D282008EE5CD /* JGetMessagesRequest.m */,
+			);
+			name = JGetMessagesRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8931693CB25008EE5CD /* JSetTopicImageURLRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8F21693D262008EE5CD /* JSetTopicImageURLRequest.h */,
+				5FE1C8F31693D262008EE5CD /* JSetTopicImageURLRequest.m */,
+			);
+			name = JSetTopicImageURLRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8941693CB27008EE5CD /* JCreateTopicRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8EC1693D23B008EE5CD /* JCreateTopicRequest.h */,
+				5FE1C8ED1693D23B008EE5CD /* JCreateTopicRequest.m */,
+			);
+			name = JCreateTopicRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8951693CB29008EE5CD /* JGetTopicsRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8E91693D214008EE5CD /* JGetTopicsRequest.h */,
+				5FE1C8EA1693D214008EE5CD /* JGetTopicsRequest.m */,
+			);
+			name = JGetTopicsRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8961693CB2E008EE5CD /* JResetPasswordRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8E61693D201008EE5CD /* JResetPasswordRequest.h */,
+				5FE1C8E71693D201008EE5CD /* JResetPasswordRequest.m */,
+			);
+			name = JResetPasswordRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8971693CB32008EE5CD /* JRegistrationRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8E31693D1E4008EE5CD /* JRegistrationRequest.h */,
+				5FE1C8E41693D1E4008EE5CD /* JRegistrationRequest.m */,
+			);
+			name = JRegistrationRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8981693CB34008EE5CD /* JLoginRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8E01693D1CF008EE5CD /* JLoginRequest.h */,
+				5FE1C8E11693D1CF008EE5CD /* JLoginRequest.m */,
+			);
+			name = JLoginRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C8991693CB3A008EE5CD /* JErrorDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8C51693D110008EE5CD /* JErrorDisplay.h */,
+				5FE1C8C61693D110008EE5CD /* JErrorDisplay.m */,
+			);
+			name = JErrorDisplay;
+			sourceTree = "<group>";
+		};
+		5FE1C89A1693CD4A008EE5CD /* JCreateMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8C11693D0C2008EE5CD /* JCreateMessageViewController~iphone.h */,
+				5FE1C8C21693D0C2008EE5CD /* JCreateMessageViewController~iphone.m */,
+			);
+			name = JCreateMessageView;
+			sourceTree = "<group>";
+		};
+		5FE1C89B1693CD4C008EE5CD /* JCreateTopicView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8BE1693D0A1008EE5CD /* JCreateTopicViewController~iphone.h */,
+				5FE1C8BF1693D0A1008EE5CD /* JCreateTopicViewController~iphone.m */,
+			);
+			name = JCreateTopicView;
+			sourceTree = "<group>";
+		};
+		5FE1C89C1693CD4E008EE5CD /* JMessageDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8BB1693D081008EE5CD /* JMessageDetailViewController~iphone.h */,
+				5FE1C8BC1693D081008EE5CD /* JMessageDetailViewController~iphone.m */,
+			);
+			name = JMessageDetailView;
+			sourceTree = "<group>";
+		};
+		5FE1C89D1693CD50008EE5CD /* JMessagesView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8B81693D05E008EE5CD /* JMessagesViewController~iphone.h */,
+				5FE1C8B91693D05E008EE5CD /* JMessagesViewController~iphone.m */,
+			);
+			name = JMessagesView;
+			sourceTree = "<group>";
+		};
+		5FE1C89E1693CD51008EE5CD /* JTopicsView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8B51693D02F008EE5CD /* JTopicsViewController~iphone.h */,
+				5FE1C8B61693D02F008EE5CD /* JTopicsViewController~iphone.m */,
+				5FF9AAE01699089B00A7A602 /* JTopicCell */,
+			);
+			name = JTopicsView;
+			sourceTree = "<group>";
+		};
+		5FE1C89F1693CD53008EE5CD /* JRegistrationView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8AF1693CF98008EE5CD /* JRegistrationViewController~iphone.h */,
+				5FE1C8B01693CF98008EE5CD /* JRegistrationViewController~iphone.m */,
+			);
+			name = JRegistrationView;
+			sourceTree = "<group>";
+		};
+		5FE1C8A01693CD54008EE5CD /* JResetPasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8B21693D003008EE5CD /* JResetPasswordViewController~iphone.h */,
+				5FE1C8B31693D003008EE5CD /* JResetPasswordViewController~iphone.m */,
+			);
+			name = JResetPasswordView;
+			sourceTree = "<group>";
+		};
+		5FE1C8A11693CD56008EE5CD /* JLoginView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8AC1693CF75008EE5CD /* JLoginViewController~iphone.h */,
+				5FE1C8AD1693CF75008EE5CD /* JLoginViewController~iphone.m */,
+			);
+			name = JLoginView;
+			sourceTree = "<group>";
+		};
+		5FE1C8A21693CD59008EE5CD /* To Do */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "To Do";
+			sourceTree = "<group>";
+		};
+		5FE1C8C41693D0EF008EE5CD /* JModels */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8CA1693D117008EE5CD /* JUser */,
+				5FE1C8C91693D115008EE5CD /* JTopic */,
+				5FE1C8C81693D113008EE5CD /* JMessage */,
+				5FE1C9BE169783C5008EE5CD /* JSubject */,
+				5FE1C8FB1693D6D7008EE5CD /* DateTime */,
+			);
+			name = JModels;
+			sourceTree = "<group>";
+		};
+		5FE1C8C81693D113008EE5CD /* JMessage */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8DA1693D19C008EE5CD /* JMessageModel.h */,
+				5FE1C8DB1693D19C008EE5CD /* JMessageModel.m */,
+			);
+			name = JMessage;
+			sourceTree = "<group>";
+		};
+		5FE1C8C91693D115008EE5CD /* JTopic */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8D71693D18E008EE5CD /* JTopicModel.h */,
+				5FE1C8D81693D18E008EE5CD /* JTopicModel.m */,
+			);
+			name = JTopic;
+			sourceTree = "<group>";
+		};
+		5FE1C8CA1693D117008EE5CD /* JUser */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8D41693D180008EE5CD /* JUserModel.h */,
+				5FE1C8D51693D180008EE5CD /* JUserModel.m */,
+				5FE1C9041693DC4A008EE5CD /* KeychaimItemWrapper */,
+			);
+			name = JUser;
+			sourceTree = "<group>";
+		};
+		5FE1C8FB1693D6D7008EE5CD /* DateTime */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C8FC1693D6ED008EE5CD /* JDateTime.h */,
+				5FE1C8FD1693D6ED008EE5CD /* JDateTime.m */,
+			);
+			name = DateTime;
+			sourceTree = "<group>";
+		};
+		5FE1C9041693DC4A008EE5CD /* KeychaimItemWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9011693DC45008EE5CD /* KeychainItemWrapper.h */,
+				5FE1C9021693DC45008EE5CD /* KeychainItemWrapper.m */,
+			);
+			name = KeychaimItemWrapper;
+			sourceTree = "<group>";
+		};
+		5FE1C90A1693E14D008EE5CD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C90B1693E1B3008EE5CD /* Reachability.h */,
+				5FE1C90C1693E1B3008EE5CD /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		5FE1C9B9169782F1008EE5CD /* JGetSubjectsRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9BB1697830F008EE5CD /* JGetSubjectsRequest.h */,
+				5FE1C9BC1697830F008EE5CD /* JGetSubjectsRequest.m */,
+			);
+			name = JGetSubjectsRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C9BE169783C5008EE5CD /* JSubject */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9BF169783DA008EE5CD /* JSubjectModel.h */,
+				5FE1C9C0169783DA008EE5CD /* JSubjectModel.m */,
+			);
+			name = JSubject;
+			sourceTree = "<group>";
+		};
+		5FE1C9C216978722008EE5CD /* JSubjectsView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9C416978796008EE5CD /* JSubjectsViewController~iphone.h */,
+				5FE1C9C516978796008EE5CD /* JSubjectsViewController~iphone.m */,
+			);
+			name = JSubjectsView;
+			sourceTree = "<group>";
+		};
+		5FE1C9C316978729008EE5CD /* JCreateSubjectView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9C716979122008EE5CD /* JCreateSubjectViewController~iphone.h */,
+				5FE1C9C816979122008EE5CD /* JCreateSubjectViewController~iphone.m */,
+			);
+			name = JCreateSubjectView;
+			sourceTree = "<group>";
+		};
+		5FE1C9CA16979126008EE5CD /* JCreateSubjectRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9CB16979150008EE5CD /* JCreateSubjectRequest.h */,
+				5FE1C9CC16979150008EE5CD /* JCreateSubjectRequest.m */,
+			);
+			name = JCreateSubjectRequest;
+			sourceTree = "<group>";
+		};
+		5FE1C9D21697943A008EE5CD /* JWhatsJmineeView */ = {
+			isa = PBXGroup;
+			children = (
+				5FE1C9D416979461008EE5CD /* JWhatsJmineeViewController~iphone.h */,
+				5FE1C9D516979461008EE5CD /* JWhatsJmineeViewController~iphone.m */,
+				5FF9AAD7169903EF00A7A602 /* WhatsJmineeCell */,
+			);
+			name = JWhatsJmineeView;
+			sourceTree = "<group>";
+		};
+		5FF9AAD7169903EF00A7A602 /* WhatsJmineeCell */ = {
+			isa = PBXGroup;
+			children = (
+				5FF9AAD91699042100A7A602 /* JWhatsJmineeCell.h */,
+				5FF9AADA1699042100A7A602 /* JWhatsJmineeCell.m */,
+			);
+			name = WhatsJmineeCell;
+			sourceTree = "<group>";
+		};
+		5FF9AAE01699089B00A7A602 /* JTopicCell */ = {
+			isa = PBXGroup;
+			children = (
+				5FF9AAE1169908D500A7A602 /* JTopicCell.h */,
+				5FF9AAE2169908D500A7A602 /* JTopicCell.m */,
+			);
+			name = JTopicCell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5FE1C8471693CAA5008EE5CD /* Jminee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5FE1C8841693CAA5008EE5CD /* Build configuration list for PBXNativeTarget "Jminee" */;
+			buildPhases = (
+				5FE1C8441693CAA5008EE5CD /* Sources */,
+				5FE1C8451693CAA5008EE5CD /* Frameworks */,
+				5FE1C8461693CAA5008EE5CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jminee;
+			productName = Jminee;
+			productReference = 5FE1C8481693CAA5008EE5CD /* Jminee.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5FE1C8711693CAA5008EE5CD /* JmineeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5FE1C8871693CAA5008EE5CD /* Build configuration list for PBXNativeTarget "JmineeTests" */;
+			buildPhases = (
+				5FE1C86D1693CAA5008EE5CD /* Sources */,
+				5FE1C86E1693CAA5008EE5CD /* Frameworks */,
+				5FE1C86F1693CAA5008EE5CD /* Resources */,
+				5FE1C8701693CAA5008EE5CD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5FE1C8781693CAA5008EE5CD /* PBXTargetDependency */,
+			);
+			name = JmineeTests;
+			productName = JmineeTests;
+			productReference = 5FE1C8721693CAA5008EE5CD /* JmineeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5FE1C83F1693CAA4008EE5CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = J;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Robert Pieta";
+			};
+			buildConfigurationList = 5FE1C8421693CAA4008EE5CD /* Build configuration list for PBXProject "Jminee" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5FE1C83D1693CAA4008EE5CD;
+			productRefGroup = 5FE1C8491693CAA5008EE5CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5FE1C8471693CAA5008EE5CD /* Jminee */,
+				5FE1C8711693CAA5008EE5CD /* JmineeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5FE1C8461693CAA5008EE5CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C8571693CAA5008EE5CD /* InfoPlist.strings in Resources */,
+				5FE1C85F1693CAA5008EE5CD /* Default.png in Resources */,
+				5FE1C8611693CAA5008EE5CD /* Default@2x.png in Resources */,
+				5FE1C8631693CAA5008EE5CD /* Default-568h@2x.png in Resources */,
+				5FE1C8661693CAA5008EE5CD /* MainStoryboard_iPhone.storyboard in Resources */,
+				5FE1C8691693CAA5008EE5CD /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FE1C86F1693CAA5008EE5CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C87E1693CAA5008EE5CD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5FE1C8701693CAA5008EE5CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5FE1C8441693CAA5008EE5CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C8591693CAA5008EE5CD /* main.m in Sources */,
+				5FE1C85D1693CAA5008EE5CD /* JAppDelegate.m in Sources */,
+				5FE1C8AB1693CDBA008EE5CD /* JAbstractViewController~iphone.m in Sources */,
+				5FE1C8AE1693CF75008EE5CD /* JLoginViewController~iphone.m in Sources */,
+				5FE1C8B11693CF98008EE5CD /* JRegistrationViewController~iphone.m in Sources */,
+				5FE1C8B41693D003008EE5CD /* JResetPasswordViewController~iphone.m in Sources */,
+				5FE1C8B71693D02F008EE5CD /* JTopicsViewController~iphone.m in Sources */,
+				5FE1C8BA1693D05E008EE5CD /* JMessagesViewController~iphone.m in Sources */,
+				5FE1C8BD1693D081008EE5CD /* JMessageDetailViewController~iphone.m in Sources */,
+				5FE1C8C01693D0A1008EE5CD /* JCreateTopicViewController~iphone.m in Sources */,
+				5FE1C8C31693D0C2008EE5CD /* JCreateMessageViewController~iphone.m in Sources */,
+				5FE1C8C71693D110008EE5CD /* JErrorDisplay.m in Sources */,
+				5FE1C8D31693D16F008EE5CD /* JCacheManager.m in Sources */,
+				5FE1C8D61693D180008EE5CD /* JUserModel.m in Sources */,
+				5FE1C8D91693D18E008EE5CD /* JTopicModel.m in Sources */,
+				5FE1C8DC1693D19C008EE5CD /* JMessageModel.m in Sources */,
+				5FE1C8DF1693D1BA008EE5CD /* JAbstractRequest.m in Sources */,
+				5FE1C8E21693D1CF008EE5CD /* JLoginRequest.m in Sources */,
+				5FE1C8E51693D1E4008EE5CD /* JRegistrationRequest.m in Sources */,
+				5FE1C8E81693D201008EE5CD /* JResetPasswordRequest.m in Sources */,
+				5FE1C8EB1693D214008EE5CD /* JGetTopicsRequest.m in Sources */,
+				5FE1C8EE1693D23B008EE5CD /* JCreateTopicRequest.m in Sources */,
+				5FE1C8F41693D262008EE5CD /* JSetTopicImageURLRequest.m in Sources */,
+				5FE1C8F71693D282008EE5CD /* JGetMessagesRequest.m in Sources */,
+				5FE1C8FA1693D297008EE5CD /* JCreateMessageRequest.m in Sources */,
+				5FE1C8FE1693D6ED008EE5CD /* JDateTime.m in Sources */,
+				5FE1C9051693DC5A008EE5CD /* KeychainItemWrapper.m in Sources */,
+				5FE1C90D1693E1B3008EE5CD /* Reachability.m in Sources */,
+				5FE1C9BD1697830F008EE5CD /* JGetSubjectsRequest.m in Sources */,
+				5FE1C9C1169783DA008EE5CD /* JSubjectModel.m in Sources */,
+				5FE1C9C616978796008EE5CD /* JSubjectsViewController~iphone.m in Sources */,
+				5FE1C9C916979122008EE5CD /* JCreateSubjectViewController~iphone.m in Sources */,
+				5FE1C9CD16979150008EE5CD /* JCreateSubjectRequest.m in Sources */,
+				5FE1C9D616979461008EE5CD /* JWhatsJmineeViewController~iphone.m in Sources */,
+				5FF9AADB1699042100A7A602 /* JWhatsJmineeCell.m in Sources */,
+				5FF9AAE3169908D500A7A602 /* JTopicCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FE1C86D1693CAA5008EE5CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE1C8811693CAA5008EE5CD /* JmineeTests.m in Sources */,
+				5FE1C9031693DC45008EE5CD /* KeychainItemWrapper.m in Sources */,
+				5FE1C90E1693E1B3008EE5CD /* Reachability.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5FE1C8781693CAA5008EE5CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5FE1C8471693CAA5008EE5CD /* Jminee */;
+			targetProxy = 5FE1C8771693CAA5008EE5CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5FE1C8551693CAA5008EE5CD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5FE1C8561693CAA5008EE5CD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5FE1C8641693CAA5008EE5CD /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5FE1C8651693CAA5008EE5CD /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		5FE1C8671693CAA5008EE5CD /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5FE1C8681693CAA5008EE5CD /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		5FE1C87C1693CAA5008EE5CD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5FE1C87D1693CAA5008EE5CD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5FE1C8821693CAA5008EE5CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5FE1C8831693CAA5008EE5CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5FE1C8851693CAA5008EE5CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jminee/Jminee-Prefix.pch";
+				INFOPLIST_FILE = "Jminee/Jminee-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5FE1C8861693CAA5008EE5CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jminee/Jminee-Prefix.pch";
+				INFOPLIST_FILE = "Jminee/Jminee-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5FE1C8881693CAA5008EE5CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jminee.app/Jminee";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jminee/Jminee-Prefix.pch";
+				INFOPLIST_FILE = "JmineeTests/JmineeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5FE1C8891693CAA5008EE5CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jminee.app/Jminee";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jminee/Jminee-Prefix.pch";
+				INFOPLIST_FILE = "JmineeTests/JmineeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5FE1C8421693CAA4008EE5CD /* Build configuration list for PBXProject "Jminee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5FE1C8821693CAA5008EE5CD /* Debug */,
+				5FE1C8831693CAA5008EE5CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5FE1C8841693CAA5008EE5CD /* Build configuration list for PBXNativeTarget "Jminee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5FE1C8851693CAA5008EE5CD /* Debug */,
+				5FE1C8861693CAA5008EE5CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5FE1C8871693CAA5008EE5CD /* Build configuration list for PBXNativeTarget "JmineeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5FE1C8881693CAA5008EE5CD /* Debug */,
+				5FE1C8891693CAA5008EE5CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5FE1C83F1693CAA4008EE5CD /* Project object */;
+}
