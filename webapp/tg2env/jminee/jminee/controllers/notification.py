@@ -62,7 +62,7 @@ class NotificationController(BaseController):
     
     def send_newtopic_notif(self, notif):
         sender = config['registration.email_sender']
-        if notif['type'] in ('new topic','add_member'):
+        if notif['type'] in ('new_topic','add_member'):
             subject='{user_name} invited you to join topic "{topic}" on Jminee'.format(**notif)
         elif notif['type']=='new_subject':
             subject='{user_name} created subject "{subject}" on topic "{topic}" on Jminee'.format(**notif)
