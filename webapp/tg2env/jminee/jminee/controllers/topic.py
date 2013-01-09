@@ -4,6 +4,9 @@ from types import NoneType
 import pylons
 import traceback, sys
 import re
+import simplejson as js
+
+from boto.sns import SNSConnection
 
 from routes import url_for
 from tg import expose, redirect, validate, config, request
@@ -95,8 +98,12 @@ class TopicController(BaseController):
             DBSession.flush()
             
             #send notification to users
-            #members
+            notif=dict(type='new_topic',topic=topic.title,registered_users=members,
+                       user_name=request.identity['user'].user_name)
             
+            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY+3oeZVog9EeuCl5y"))
+            sns.publish(config.get('sqs_user_notification'),js.dump(notif))
+
             main_res = dict()
             #if there is subject to be created, then create it, return error_code if failed
             if kw.has_key('subject'):
