@@ -164,8 +164,7 @@ $(window).load(function() {
 			var content = {title: this.topic};
 			
 			if (!Jminee.empty(this.members))
-				content.members = this.members;
-			
+				content.members = this.members.replace(";",",").replace(" ","").split(',');				
 			if (!Jminee.empty(this.logourl))
 				content.logourl = this.logourl;
 			

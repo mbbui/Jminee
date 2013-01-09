@@ -49,6 +49,8 @@ class TopicController(BaseController):
         topic = Topic()
         topic.creator_id = request.identity['user'].user_id
         
+        log.debug("Query string: %s"%kw)
+        
         if kw.has_key('title'):
             topic.title = kw['title'] 
         else:
@@ -68,15 +70,15 @@ class TopicController(BaseController):
             if isinstance(kw['members'], list):
                members = kw['members']
             elif kw['members']!='' and isinstance(kw['members'], unicode):
-                members = [kw['members']]
-        
+                members = [kw['members']]        
         try:
             # check if each member is in the User table
             # if not add him to nonexists list
             nonregistered_users = []
-            registered_users = DBSession.query(User.email_address, User.user_id).filter(User.email_address.in_(members)).all()
+            registered_users = DBSession.query(User.email_address, User.user_id)\
+                                .filter(User.email_address.in_(members)).all()
             registered_email_address = [user[0] for user in registered_users]
-            registered_user_id = [user[1] for user in registered_users]
+            registered_user_ids = [user[1] for user in registered_users]
             
             log.debug(registered_users)
             if len(registered_users)!=len(members):
@@ -85,7 +87,7 @@ class TopicController(BaseController):
                         log.info("User %s is not in the database"%user)
                         nonregistered_users.append(user)   
             
-            for member_id in registered_user_id:
+            for member_id in registered_user_ids:
                 if member_id == topic.creator_id:
                     continue
                 
@@ -289,11 +291,12 @@ class TopicController(BaseController):
             member_emails = [member[1] for member in members]
             
             #send notification to users
-            notif=dict(type='new_subject',topic=topic.title,subject=subject.title,
-                       registered_users=member_emails,user_name=request.identity['user'].user_name)
-            log.info('Sending SNS notification: %s'%notif)
-            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY"))
-            sns.publish(config.get('sqs_user_notification'),js.dumps(notif))
+            if len(member_emails)>0:
+                notif=dict(type='new_subject',topic=topic.title,subject=subject.title,
+                           registered_users=member_emails,user_name=request.identity['user'].user_name)
+                log.info('Sending SNS notification: %s'%notif)
+                sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY"))
+                sns.publish(config.get('sqs_user_notification'),js.dumps(notif))
 
             return dict(success=True, subject=dict(uid=subject.uid, time=subject.time))
                         
