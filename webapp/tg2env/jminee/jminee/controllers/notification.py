@@ -42,7 +42,7 @@ class NotificationController(BaseController):
             body = json.loads(request.body)
             if body['Type'] == 'Notification':
                 notif = json.loads(body['Message'])
-                if notif.type in ('new-topic', 'new-subject', 'new-comment', 'add_member'):    
+                if notif['type'] in ('new-topic', 'new-subject', 'new-comment', 'add_member'):    
                     self.send_topic_notif(notif)
                 
         except Exception as e:
