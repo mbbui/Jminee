@@ -20,6 +20,7 @@ class ErrorCode(object):
     OTHERS = 100 
     
 class ExceptionProcessing(object):
-    def gotException(self, e, log):
+    @classmethod
+    def gotException(cls, e, log):
         #TODO: send email notification to the right person
         log.exception('Got exception: %s'%e)

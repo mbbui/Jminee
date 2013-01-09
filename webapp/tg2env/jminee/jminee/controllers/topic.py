@@ -94,6 +94,9 @@ class TopicController(BaseController):
             DBSession.add(topic)
             DBSession.flush()
             
+            #send notification to users
+            #members
+            
             main_res = dict()
             #if there is subject to be created, then create it, return error_code if failed
             if kw.has_key('subject'):
