@@ -96,14 +96,7 @@ class TopicController(BaseController):
                         
             DBSession.add(topic)
             DBSession.flush()
-            
-            #send notification to users
-            notif=dict(type='new_topic',topic=topic.title,registered_users=members,
-                       user_name=request.identity['user'].user_name)
-            
-            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY+3oeZVog9EeuCl5y"))
-            sns.publish(config.get('sqs_user_notification'),js.dump(notif))
-
+                        
             main_res = dict()
             #if there is subject to be created, then create it, return error_code if failed
             if kw.has_key('subject'):
@@ -114,7 +107,15 @@ class TopicController(BaseController):
                     
                 if res['success']==False:
                     main_res['error_code'] = ErrorCode.CREATSUBJECTFAILED
-                
+            
+            #TODO: check main_res before sending notification
+            #send notification to users
+            notif=dict(type='new_topic',topic=topic.title,registered_users=members,
+                       user_name=request.identity['user'].user_name)
+            log.info('Sending SNS notification: %s'%notif)
+            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY"))
+            sns.publish(config.get('sqs_user_notification'),js.dumps(notif))
+    
             if len(nonregistered_users):
                 main_res.update(dict(success=True,
                             topic=dict(uid=topic.uid, time=topic.time), 
@@ -123,7 +124,7 @@ class TopicController(BaseController):
                 main_res.update(dict(success=True,
                         topic=dict(uid=topic.uid, time=topic.time, 
                                    creator_id=topic.creator_id, update_time=topic.time,
-                                   title=topic.title, logourl=topic.logourl)))
+                                   title=topic.title, logourl=topic.logourl)))            
             return main_res
         except Exception as e:
             log.exception("Got exception: %s"%e)
@@ -250,27 +251,50 @@ class TopicController(BaseController):
                 DBSession.add(comment)
                 DBSession.flush()
             
-            #update member_subject database
-            members = DBSession.query(MemberTopic).\
-                            filter(MemberTopic.topic_id==kw['topic_id']).all()
             
-            for member in members:
-                if member==creator and comment:
-                    member_subject = MemberSubject(member_id = member.member_id,
+            #add creator to member_subject
+            if comment:
+                member_subject = MemberSubject(member_id = creator.member_id,
                                            subject_id = subject.uid,
-                                           last_read = comment.uid)
-                else:
-                    member_subject = MemberSubject(member_id = member.member_id,
-                                               subject_id = subject.uid,
-                                               last_read = 0) 
+                                           last_read = comment.uid)                
+            else:
+                member_subject = MemberSubject(member_id = creator.member_id,
+                                           subject_id = subject.uid,
+                                           last_read = 0)
+            subject.members.append(member_subject)
+            
+#            registered_users = DBSession.query(User.email_address).filter(User.email_address.in_(members)).all()
+            members = DBSession.query(MemberTopic.member_id,User.email_address).\
+                           filter(MemberTopic.topic_id==kw['topic_id'],
+                                  MemberTopic.member_id!=creator.member_id, 
+                                  MemberTopic.deleted == False).\
+                           join(User).\
+                           all()
+            
+            #add other members to member_subject table
+            member_ids = [member[0] for member in members]               
+            for member_id in member_ids:
+                member_subject = MemberSubject(member_id = member_id,
+                                           subject_id = subject.uid,
+                                           last_read = 0) 
                 subject.members.append(member_subject)
             
+                        
             topic = DBSession.query(Topic).\
                             filter(Topic.uid==kw['topic_id']).first()
             #TODO: need to rename/rethink this time vars
             topic.update_time = subject.time                
-                            
             log.info("User %s creates subject %s"%(creator.member_id, subject))
+            
+            member_emails = [member[1] for member in members]
+            
+            #send notification to users
+            notif=dict(type='new_subject',topic=topic.title,subject=subject.title,
+                       registered_users=member_emails,user_name=request.identity['user'].user_name)
+            log.info('Sending SNS notification: %s'%notif)
+            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY"))
+            sns.publish(config.get('sqs_user_notification'),js.dumps(notif))
+
             return dict(success=True, subject=dict(uid=subject.uid, time=subject.time))
                         
         except Exception as e:
@@ -321,7 +345,7 @@ class TopicController(BaseController):
         try:
             #check if user is a member of this topic
             user_id = request.identity['user'].user_id
-            user = DBSession.query(MemberSubject).\
+            user = DBSession.query(MemberTopic).\
                            filter(MemberTopic.topic_id==kw['topic_id'], 
                                   MemberTopic.member_id==user_id).\
                            first()   
@@ -384,12 +408,34 @@ class TopicController(BaseController):
             DBSession.add(comment)
             DBSession.flush()
             
+            #TODO: should not query then update, should only update
             topic = DBSession.query(Topic).\
                             filter(Topic.uid==kw['topic_id']).first()
             #TODO: need to rethink this time var, how about subject update_time
             topic.update_time = comment.time                
                             
             log.info("User %s creates comment %s"%(comment.creator_id, comment))
+            
+            subject_title = DBSession.query(Subject.title).\
+                            filter(Subject.uid==kw['subject_id']).first()[0]
+                            
+            members = DBSession.query(User.email_address).\
+                           filter(MemberTopic.topic_id==kw['topic_id'],
+                                  MemberTopic.member_id!=creator.member_id, 
+                                  MemberTopic.deleted==False,
+                                  MemberSubject.subject_id==kw['subject_id'],
+                                  MemberSubject.muted==False).\
+                           join(MemberTopic,MemberSubject).\
+                           all()
+            member_emails = [member[0] for member in members]
+                           
+            #send notification to users
+            notif=dict(type='new_comment',topic=topic.title,subject=subject_title,comment=comment.content,
+                       registered_users=member_emails,user_name=request.identity['user'].user_name)
+            log.info('Sending SNS notification: %s'%notif)
+            sns=SNSConnection(config.get('AWS_ACCESS_KEY_ID'), config.get("AWS_SECRET_ACCESS_KEY"))
+            sns.publish(config.get('sqs_user_notification'),js.dumps(notif))
+
             return dict(success=True, comment=dict(uid=comment.uid, time=comment.time))
                         
         except Exception as e:
