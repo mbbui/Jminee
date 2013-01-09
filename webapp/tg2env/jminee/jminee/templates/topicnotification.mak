@@ -54,13 +54,15 @@
 	<ul style="padding: 10px 15px; margin: 0 0 20px; list-style: none; background-color: #f5f5f5;
   				-webkit-border-radius: 4px 0px 0px 4px; -moz-border-radius: 4px 0px 0px 4px; 
   				border-radius: 4px 0px 0px 4px;">
-		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
+		<li style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;
+					display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;"> 
 			<a href="http://www.jminee.com:8080" style="text-decoration: none">${topic | n}</a>
 			<span style="padding: 0 5px; color: #ccc;">></span>		
 		</li>
 		% if type in ('new_subject', 'new_comment'):
-		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
+		<li style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;
+					display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;">
 			<a href="http://www.jminee.com:8080" style="text-decoration: none">${subject | n} </a>
 			<span style="padding: 0 5px; color: #ccc;">></span>	
@@ -78,7 +80,8 @@
 		          border-radius: 4px;
 		  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 		     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-		          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);">
+		          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		  font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px">
 		  <a href="http://www.jminee.com:8080" style="text-decoration: none">Comment </a>: ${comment | n}
 	</div>
 	%endif
