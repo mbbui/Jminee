@@ -36,7 +36,7 @@
 					  text-shadow: 0 1px 0 #ffffff; color: #999999;
 					  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 					  text-decoration: none;"
-					  href="#">
+					  href="http://www.jminee.com:8080">
   					Jminee
   				</a>
           	</div>
@@ -44,7 +44,7 @@
   	</div>	
 	<p style="font-family:helvetica, arial, sans-serif;font-size:14px;line-height:24px;color:#666666; text-decoration: none">
 		% if type in ('new_topic','add_member'):
-			${user_name | n} invited you to join a topic on <a href="http://www.jminee.com" style="text-decoration: none">Jminee</a>
+			${user_name | n} invited you to join a topic on <a href="http://www.jminee.com:8080" style="text-decoration: none">Jminee</a>
 		% elif type=='new_subject':
 			${user_name | n} added a new subject to 			
 		% elif type=='new_comment':
@@ -56,13 +56,13 @@
   				border-radius: 4px 0px 0px 4px;">
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;"> 
-			<a href="#" style="text-decoration: none">${topic | n}</a>
+			<a href="http://www.jminee.com:8080" style="text-decoration: none">${topic | n}</a>
 			<span style="padding: 0 5px; color: #ccc;">></span>		
 		</li>
 		% if type in ('new_subject', 'new_comment'):
 		<li style="display: inline-block; *display: inline; text-shadow: 0 1px 0 #ffffff;
   					*zoom: 1;">
-			<a href="#" style="text-decoration: none">${subject | n} </a>
+			<a href="http://www.jminee.com:8080" style="text-decoration: none">${subject | n} </a>
 			<span style="padding: 0 5px; color: #ccc;">></span>	
 		</li>
 		% endif
@@ -79,7 +79,7 @@
 		  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 		     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 		          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);">
-		  <a href="#" style="text-decoration: none">Comment </a>: ${comment | n}
+		  <a href="http://www.jminee.com:8080" style="text-decoration: none">Comment </a>: ${comment | n}
 	</div>
 	%endif
 </body>

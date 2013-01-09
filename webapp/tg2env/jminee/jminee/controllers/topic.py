@@ -70,18 +70,19 @@ class TopicController(BaseController):
         try:
             # check if each member is in the User table
             # if not add him to nonexists list
-            nonexisting_users = []
-            existing_users = DBSession.query(User.user_id).filter(User.email_address.in_(members)).all()
-            existing_users = [user[0] for user in existing_users]
+            nonregistered_users = []
+            registered_users = DBSession.query(User.email_address, User.user_id).filter(User.email_address.in_(members)).all()
+            registered_email_address = [user[0] for user in registered_users]
+            registered_user_id = [user[1] for user in registered_users]
             
-            log.debug(existing_users)
-            if len(existing_users)!=len(members):
+            log.debug(registered_users)
+            if len(registered_users)!=len(members):
                 for user in members:
-                    if user not in existing_users:
+                    if user not in registered_email_address:
                         log.info("User %s is not in the database"%user)
-                        nonexisting_users.append(user)   
+                        nonregistered_users.append(user)   
             
-            for member_id in existing_users:
+            for member_id in registered_user_id:
                 if member_id == topic.creator_id:
                     continue
                 
@@ -104,10 +105,10 @@ class TopicController(BaseController):
                 if res['success']==False:
                     main_res['error_code'] = ErrorCode.CREATSUBJECTFAILED
                 
-            if len(nonexisting_users):
+            if len(nonregistered_users):
                 main_res.update(dict(success=True,
                             topic=dict(uid=topic.uid, time=topic.time), 
-                            nonexisting_users=nonexisting_users))
+                            nonregistered_users=nonregistered_users))
             else:
                 main_res.update(dict(success=True,
                         topic=dict(uid=topic.uid, time=topic.time, 

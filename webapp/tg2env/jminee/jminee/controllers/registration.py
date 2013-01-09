@@ -99,7 +99,6 @@ Please click on this link to confirm your registration
         except Exception as e:
             log.exception('Got exception')
             return dict(success=False, error_code=ErrorCode.OTHERS)
-        return dict(success=True)   
     
     @expose('jminee.templates.index')
 #    @validate(dict(code=UnicodeString(not_empty=True),

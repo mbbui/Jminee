@@ -32,10 +32,6 @@ __all__ = ['NotificationController']
 
 log = logging.getLogger(__name__)
 
-class UserNotification(object):
-    def __init__(self, **not_str): 
-        self.__dict__.update(not_str)      
-    
               
 class NotificationController(BaseController):
     
@@ -43,23 +39,14 @@ class NotificationController(BaseController):
     def user_notification(self):
         try:
             body = json.loads(request.body)
-            notif = UserNotification(**json.loads(body['Message']))
-            if notif.type=='new-topic':
-                self.send_newtopic_notif(notif)
-            elif notif.type=='new-subject':
-                self.send_newsubject_notif(notif)                
-            elif notif.type=='new-comment':
-                self.send_newcomment_notif(notif)
-            elif notif.type=='invitation':    
-                self.send_newtopic_notif(notif)
+            log.log("Notification: %s"%request.body)
+            notif = json.loads(body['Message'])
+            if notif.type in ('new-topic', 'new-subject', 'new-comment', 'add_member'):    
+                self.send_topic_notif(notif)
                 
         except Exception as e:
             ExceptionProcessing.gotException(self, e, log)
-    
-    @expose('jminee.templates.error')
-    def error(self, *args, **kw):        
-        return dict(kw)
-    
+       
     def send_topic_notif(self, notif):
         sender = config['registration.email_sender']
         if notif['type'] in ('new_topic','add_member'):
