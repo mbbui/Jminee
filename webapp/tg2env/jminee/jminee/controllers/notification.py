@@ -38,7 +38,7 @@ class NotificationController(BaseController):
     @expose()
     def user_notification(self):
         try:
-            log.log("Notification: %s"%str(request.body))
+            log.info("Notification: %s"%str(request.body))
             body = json.loads(request.body)
             if body['Type'] == 'Notification':
                 notif = json.loads(body['Message'])
