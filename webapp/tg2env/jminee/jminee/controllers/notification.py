@@ -62,9 +62,9 @@ class NotificationController(BaseController):
                         .format(**notif)  
         
 #        print richmail.render(**notif)
-        for receiver in notif['registered_users']:
-            log.info("Send notification %s to %s"%(notif, receiver))
-            send_email2(receiver, sender, subject, plainmail, richmail.render(**notif))
+#        for receiver in notif['registered_users']:
+        log.info("Sending email notification %s to %s"%(notif, receiver))
+        send_email2(notif['registered_users'], sender, subject, plainmail, richmail.render(**notif))
 
     
     def got_url(self):
