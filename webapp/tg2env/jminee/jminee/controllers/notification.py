@@ -38,11 +38,11 @@ class NotificationController(BaseController):
     @expose()
     def user_notification(self):
         try:
-            log.info("Notification: %s"%str(request.body))
+            log.info("Notification: %s"%request.body)
             body = json.loads(request.body)
             if body['Type'] == 'Notification':
                 notif = json.loads(body['Message'])
-                if notif['type'] in ('new-topic', 'new-subject', 'new-comment', 'add_member'):    
+                if notif['type'] in ('new_topic', 'new_subject', 'new_comment', 'add_member'):
                     self.send_topic_notif(notif)
                 
         except Exception as e:
@@ -63,6 +63,7 @@ class NotificationController(BaseController):
         
 #        print richmail.render(**notif)
         for receiver in notif['registered_users']:
+            log.info("Send notification %s to %s"%(notif, receiver))
             send_email2(receiver, sender, subject, plainmail, richmail.render(**notif))
 
     
