@@ -52,7 +52,7 @@ $(window).load(function() {
 	});
 	
 	Jminee.AddMembersView = Ember.TextField.extend(Jminee.viewWithAlert, {
-		placeholder:"Members...",
+		placeholder:"Member emails...",
 		alertView: Jminee.createTopicAlertView,
 		alertText: 'You are the only member of this topic.',
 		alertType: 'alert-info'
