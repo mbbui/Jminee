@@ -79,11 +79,11 @@ Please click on this link to confirm your registration
             reset.reset = datetime.now()
         
             DBSession.flush()
-            
+            return dict(success=True)
         except Exception as e:
             log.exception('Got exception')
             return dict(success=False, error_code=ErrorCode.OTHERS)
-        return dict(success=True)    
+            
     
     @expose('json')
     @validate(dict(email=Email(not_empty=True)))      

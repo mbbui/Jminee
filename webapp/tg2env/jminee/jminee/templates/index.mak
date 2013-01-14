@@ -6,11 +6,9 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<link type="text/css" rel="stylesheet" href="/css/styles.css">
-        <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.min.css">
+		<!-- <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.min.css"> -->
         <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-        
+        <link type="text/css" rel="stylesheet" href="/css/styles.css">
 
         <script type="text/javascript" src="/javascript/jquery-1.7.2.js"></script>
         <script type="text/javascript" src="/javascript/handlebars-1.0.rc.1.js"></script>

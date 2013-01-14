@@ -52,6 +52,33 @@ $(window).load(function() {
 //    			
 //    	}.observes('Jminee.isLogin')
     });
+    
+    Jminee.changeMemberController = Ember.Controller.create({
+    	submit: function(hookup){
+        		$.ajax({
+    		     	url: '/topic/get_comments',
+    		     	data: {},
+        			dataType: 'json',
+        			context: hookup,
+        			success: hookup.submitDone,
+        			error: hookup.submitDone, 
+    		    });   
+    		
+    	}
+    });
+    
+    Jminee.changeLogoController = Ember.Controller.create({
+    	submit: function(hookup){
+    		$.ajax({
+		     	url: '/topic/get_topics',
+		     	data: {},
+    			dataType: 'json',
+    			context: hookup,
+    			success: hookup.submitDone,
+    			error: hookup.submitDone, 
+		    });   		
+	}
+    });
         
 });
 

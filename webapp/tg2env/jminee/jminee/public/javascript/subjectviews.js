@@ -22,6 +22,9 @@ $(window).load(function() {
 		}),
 		commentView: Jminee.CommentReviewView.create({tableBinding: 'Jminee.commentController.table',
 			inputView: Jminee.CommentInputView.create({textSpan: 'span8', controller: Jminee.commentController})}),
-		childViews:['contentView', 'commentView']
+		childViews:['contentView', 'commentView'],
+		isVisible: function(){
+			return (Jminee.topicNavController.contentType=='subject');
+		}.property('Jminee.topicNavController.contentType'),
 	});
 });

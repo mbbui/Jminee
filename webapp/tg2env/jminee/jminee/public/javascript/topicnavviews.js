@@ -35,7 +35,7 @@ $(window).load(function() {
 	
 	Jminee.composeButtonView = Ember.View.create({
 		tagName: 'button',
-		classNames: ['toolbox', 'btn', 'btn-small'],
+		classNames: ['nav-toolbox', 'btn', 'btn-small'],
 		template: Ember.Handlebars.compile('<img width=25 src="/images/icons/addtopic.png">'),
 //		template: Ember.Handlebars.compile('Create topic'),
 		eventManager: Ember.Object.create({
@@ -47,7 +47,7 @@ $(window).load(function() {
 	
 	Jminee.searchBoxView = Ember.View.create({
 		tagName: 'form',
-		classNames: ['toolbox', 'pull-right'],
+		classNames: ['nav-toolbox', 'pull-right'],
 		layout: Ember.Handlebars.compile('<input type="text" class="input-large search-query" placeholder="Search...">')		
 	});
 	

@@ -40,4 +40,7 @@ $(window).load(function() {
     			'">'+server+'</a>';
     		}
     };
+    
+    Jminee.ENTERKEY = 13;
+    Jminee.ESCAPEKEY = 27;
 });

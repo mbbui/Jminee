@@ -3937,6 +3937,7 @@ input[type="submit"].btn.btn-mini {
   -moz-border-radius-bottomleft: 4px;
 }
 
+	
 .nav-tabs.nav-stacked > li > a:hover {
   z-index: 2;
   border-color: #ddd;

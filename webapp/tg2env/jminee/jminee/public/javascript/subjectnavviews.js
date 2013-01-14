@@ -58,6 +58,11 @@ $(window).load(function() {
 		tagName: 'div',
 		classNames: ['span3'],
 		childViews: [Jminee.subjectNavView],
+		
+		isVisible: function(){
+			return (Jminee.topicNavController.contentType=='subject');
+		}.property('Jminee.topicNavController.contentType'),
+		
 		didInsertElement: function(){
 			this.get('childViews').removeObject(Jminee.subjectAlertView);
 		}

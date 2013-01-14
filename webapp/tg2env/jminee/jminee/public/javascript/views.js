@@ -2,18 +2,13 @@ $(window).load(function() {
 	if (typeof window.Jminee === 'undefined') {
 	    window.Jminee = Ember.Application.create();
 	}
-			
+	
 	/*********************************************	
 	/*		content view
 	/*********************************************/	
 	Jminee.contentView = Ember.ContainerView.create({
 			classNames: ['row'],
-			contentViewsDict:{'topic':[Jminee.topicListContainer], 'subject':[Jminee.subjectNavContainer, Jminee.subjectContentContainer]},
-			contentTypeBinding: 'Jminee.topicNavController.contentType',
-			changeChildView: function(){
-				while(this.get('childViews').popObject());
-				this.get('childViews').pushObjects(this.contentViewsDict[this.contentType]); 
-			}.observes('contentType')
+			childViews: [Jminee.topicListContainer,Jminee.subjectNavContainer, Jminee.subjectContentContainer],
 	});
 	
 	Jminee.mainView = Ember.ContainerView.create({
