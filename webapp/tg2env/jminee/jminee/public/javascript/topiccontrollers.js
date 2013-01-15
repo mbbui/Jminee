@@ -56,12 +56,12 @@ $(window).load(function() {
     Jminee.changeMemberController = Ember.Controller.create({
     	submit: function(hookup){
         		$.ajax({
-    		     	url: '/topic/get_comments',
-    		     	data: {},
+    		     	url: '/topic/add_members',
+    		     	data: this.members,
         			dataType: 'json',
         			context: hookup,
-        			success: hookup.submitDone,
-        			error: hookup.submitDone, 
+        			success: hookup.submitDoneSuccess,
+        			error: hookup.submitDoneError, 
     		    });   
     		
     	}

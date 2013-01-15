@@ -171,7 +171,7 @@ a.toolbox_icon:hover {
 
 .popover-nav > li {
 	float: none;
-	margin-bottom: -1px;
+	margin-bottom: 0px;
 	margin-right: 0px;
 	color: #08C;
 	padding-top: 8px;
@@ -181,8 +181,7 @@ a.toolbox_icon:hover {
 	border: 1px solid transparent;
 	border-radius: 4px 4px 4px 4px;
 		-webkit-border-radius: 4px 4px 4px 4px;
-		-moz-border-radius: 4px 4px 4px 4px;	
-	line-height: 14px;
+		-moz-border-radius: 4px 4px 4px 4px;		
 	display: block;
 }
 
@@ -197,23 +196,18 @@ a.toolbox_icon:hover {
   border-color: transparent;
   cursor: default;
   background-color: #ffffff;  
-  line-height: 14px;
 }
 
-.popover-nav > li.divider {
-  *width: 100%;
-  height: 1px;
-  margin: 0px 1px;
-  padding: 0px;
-  /* *margin: -5px 0 5px; */
-  overflow: hidden;
-  background-color: #e5e5e5;
-  border-bottom: 1px solid #ffffff;
+.popover-nav > li > div {
+  padding: 4px 6px;    	
+  line-height: 24px;
 }
 
 .popover-nav > li > input {
-  display: block;	
-  margin-bottom: 5px;
+	padding: 4px 6px;
+	line-height: 22px;  		
+  display: block;
+  margin: 0px;	
   color: #000000;
   width: 100%;
   height: 100%;
@@ -235,7 +229,7 @@ a.toolbox_icon:hover {
 
 .alert {
   padding: 8px 35px 8px 14px;
-  margin-bottom: 0px;
+  margin: 5px;
   color: #c09853;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   background-color: #fcf8e3;

@@ -1,7 +1,7 @@
 window.closeOnOutClick = [];
 
 $(window).click(function() {
-	if (window.activeTopicTool && !window.disable){
+	if (window.activeTopicTool){
 		window.activeTopicTool.close();
 		window.activeTopicTool=null;
 	}	
@@ -13,16 +13,28 @@ $(window).load(function() {
 	}
 	
 	Jminee.waitingView = Ember.View.create({
-		classNames: ['waiting']
+		classNames: ['waiting'],
+		isVisible: false,
+		click: function(){
+			if(!this.get('allowClick'))
+				event.stopPropagation();
+			else{
+//				Jminee.waitingView.removeFromParent();
+				this.set('isVisible', false);
+			}
+		}
 	});
 	
-	Jminee.globalDisable = function(){
-		window.disable = true;
-		Jminee.waitingView.appendTo("body");
+	Jminee.waitingView.appendTo("body");
+	
+	Jminee.globalDisable = function(allowClick){
+		this.waitingView.allowClick = allowClick;
+		Jminee.waitingView.set('isVisible', true);
+//		Jminee.waitingView.appendTo("body");
 	};
 	Jminee.globalEnable = function(){
-		window.disable = false;
-		Jminee.waitingView.removeFromParent();
+		Jminee.waitingView.set('isVisible', false);
+//		Jminee.waitingView.removeFromParent();
 	};
 	/*********************************************	
 	/*		topic view
@@ -69,8 +81,11 @@ $(window).load(function() {
 				this.get("inputView").setState('submit');									
 			} 
 			else if (event.keyCode==Jminee.ESCAPEKEY){
-				this.set('inputcss', false);
-				this.get('inputView').set('value','');
+				if (this.get('inputcss')==true){
+					this.set('inputcss', false);
+					this.get('inputView').set('value','');
+					event.stopPropagation();
+				}
 				this.set('alert', false);
 			}
 		},
@@ -94,7 +109,7 @@ $(window).load(function() {
 					this.tmpValue = this.value;
 					this.set('value', '');
 					this.set('placeholder', 'Submitting...');
-					Jminee.globalDisable();
+					Jminee.globalDisable(false);
 				}
 				else if (state=='fail'){
 					this.set('value', this.tmpValue);
@@ -104,21 +119,23 @@ $(window).load(function() {
 				else if (state=='success'){
 					this.set('placeholder', "Done!");
 					window.timeoutElement = this;
-//					this.set('isVisible', false);
-//					this.set('placeholder', this.get("defaultPlaceholder"));
-					Jminee.globalEnable();
 					setTimeout(function(){
+						Jminee.globalEnable();
 						window.timeoutElement.set('isVisible', false);
 					},1000);
 				}
 			},
-			submitDone: function(resp){
+			submitDoneSuccess: function(resp){
 				if (resp.success)
 					this.setState('success');
 				else{
 					this.setState('fail');
 					this.get('parentView').set('alert', true);
 				}					
+			},
+			submitDoneError: function(resp){
+				this.setState('fail');
+				this.get('parentView').set('alert', true);									
 			},
 			keyPress: function(){
 				this.get('parentView').set('alert', false);
@@ -131,7 +148,7 @@ $(window).load(function() {
 				'{{#if view.changemember}}\
 					{{view view.InputView viewName="inputView" placeholder="Member emails..."\
 						defaultPlaceholder="Member emails..."\
-						valueBinding="Jminee.changeMemberController.value"\
+						valueBinding="Jminee.changeMemberController.members"\
 						}}\
 					{{#view Ember.View viewName="textView"\
 						isVisibleBinding="view.textcss"\
@@ -142,16 +159,14 @@ $(window).load(function() {
 				{{#if view.changelogo}}\
 					{{view view.InputView viewName="inputView"  placeholder="Logo URL..."\
 						defaultPlaceholder="Logo URL..."\
-						valueBinding="Jminee.changeLogoController.value"}}\
+						valueBinding="Jminee.changeLogoController.logourl"}}\
 					{{#view Ember.View viewName="textView"\
 						isVisibleBinding="view.textcss"\
 						textBinding="view.text"}}\
 						Change logo\
 					{{/view}}\
 				{{/if}}\
-				{{#view viewName="alertView" isVisibleBinding="view.alert"}}\
-					<div class="alert alert-error">Error connecting to the server</div>\
-				{{/view}}'
+				'
 		),
 	});
 	
@@ -166,12 +181,16 @@ $(window).load(function() {
 	Jminee.ConfigPopover = Ember.View.extend({
 		classNames: ['config-popover', 'popover', 'bottom'],
 		text: "Change",
+		alert: false,
 		template: Ember.Handlebars.compile(
 				'<div class="arrow"></div>\
 				<div class="popover-content">\
 					<ul class="popover-nav">\
-				  		{{view Jminee.TopicToolMenu changemember=true controllerBinding="Jminee.changeMemberController"}}\
-						{{view Jminee.TopicToolMenu changelogo=true controllerBinding="Jminee.changeLogoController"}}\
+				  		{{view Jminee.TopicToolMenu changemember=true controllerBinding="Jminee.changeMemberController" alertBinding="view.alert"}}\
+						{{view Jminee.TopicToolMenu changelogo=true controllerBinding="Jminee.changeLogoController" alertBinding="view.alert"}}\
+						{{#view viewName="alertView" isVisibleBinding="view.alert"}}\
+							<div class="alert alert-error">Sorry server error!</div>\
+						{{/view}}\
 				  	</ul>\
 				</div>')
 	});
@@ -200,6 +219,7 @@ $(window).load(function() {
 				{{/view}}\
 				'),
 		click: function(event){
+			
 			event.stopPropagation();
 			if (this.activeTool){
 				this.get('activeTool').set('active',false);
@@ -211,10 +231,14 @@ $(window).load(function() {
 				window.activeTopicTool.close();				
 			}						
 			window.activeTopicTool=this;
+			Jminee.globalDisable(true);
+			this.$().focus();
 		},
 		close: function(){
 			this.activeTool.close();
 			this.activeTool = null;
+			window.activeTopicTool=null;
+			Jminee.globalEnable();
 		},
 		show: function(){
 			if (!window.activeTopicTool)
@@ -223,7 +247,12 @@ $(window).load(function() {
 		hide: function(){
 			if (!this.config.get('active')&&!this.quickview.get('active'))
 				this.set('isVisible', false);
-		}		
+		},		
+		keyUp: function(event){
+			if (event.keyCode==Jminee.ESCAPEKEY){
+				this.close();
+			}
+		},
 	});
 	
 	Jminee.TopicView = Ember.View.extend({
